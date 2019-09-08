@@ -9,9 +9,10 @@ export default class SignUpScreen extends React.Component{
   constructor(props){
     super(props);
     this.state={
+      name: "",
       email: "",
-      password: "",
-      name: ""
+      password: ""
+     
 
     }
   }
@@ -20,7 +21,7 @@ export default class SignUpScreen extends React.Component{
     title: "SignUp",
     header: null
 };
-signupUser= (name, email, password) =>{
+signupUser= (name, email, password) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
@@ -34,7 +35,7 @@ signupUser= (name, email, password) =>{
     })
   })
   .catch(error =>{
-    alert(error.message)
+    alert(error.message);
   })
 }
 
@@ -53,25 +54,23 @@ signupUser= (name, email, password) =>{
         </View>
         <Form style= {styles.form}>
         <Item floatingLabel>
-            <Label>Name</Label>
-            <input
+            <Label>name</Label>
+            <Input            
             autoCorrect={false}
             autoCapitalize="none"
-            keyboardType="name-phone-pad"
+            keyboardType="default"
             onChangeText={name => this.setState({name})}
             />
-
           </Item>
 
           <Item floatingLabel>
-            <Label>Email</Label>
-            <input
+            <Label>email</Label>
+            <Input            
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={email => this.setState({email})}
             />
-
           </Item>
           <Item floatingLabel>
             <Label>password</Label>
@@ -79,7 +78,7 @@ signupUser= (name, email, password) =>{
             secureTextEntry={true}
             autoCorrect={false}
             autoCapitalize="none"
-            keyboardType="default"
+            keyboardType="email-address"
             onChangeText={password => this.setState({password})}
             />
           </Item>

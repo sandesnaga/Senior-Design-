@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
-import * as firebase from "firebase"
+import * as firebase from "firebase";
 import {Form, Item, Input, Label, Button} from "native-base"
 
 
@@ -19,6 +19,18 @@ export default class SignInScreen extends React.Component{
     title: "SighIn",
     header: null
 }
+
+sighInUser = (email, password)=>{
+  firebase
+  .auth()
+  .signInWithEmailAndPassword(email, password)
+  .then( () => {
+    this.props.navigation.replace("Home");
+  } )
+  .catch(error =>{
+    alert(error.message)
+  })
+}
   render(){
     return (
       <KeyboardAvoidingView style={styles.container}
@@ -32,16 +44,17 @@ export default class SignInScreen extends React.Component{
           
         </View>
         <Form style= {styles.form}>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <input
+        <Item floatingLabel>
+            <Label>email</Label>
+            <Input            
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={email => this.setState({email})}
             />
-
           </Item>
+
+         
           <Item floatingLabel>
             <Label>password</Label>
             <Input
@@ -55,7 +68,9 @@ export default class SignInScreen extends React.Component{
           <Button style={styles.button}
           full
           rounded
-          onPress={()=>{          
+          onPress={()=>{     
+            this.sighInUser(this.state.email, this.state.password);
+
 
           }}>
             <Text style={styles.buttonText}>Sign In</Text></Button>

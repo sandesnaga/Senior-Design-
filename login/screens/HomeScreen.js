@@ -35,7 +35,7 @@ signOutUser = ( ) =>{
   firebase
   .auth()
   .signOut()
-  .then(() => {console.log("signout")})
+  .then(() => {console.log("signedout")})
   .catch( error => {
     alert(error.message);
   })
@@ -61,6 +61,7 @@ render(){
         rounded
         success
         onPress={()=>{
+          this.signOutUser();
 
         }}
         >
