@@ -1,87 +1,157 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Button,
+  ScrollView
+} from "react-native";
 import * as firebase from "firebase";
-import {Button} from "native-base"
+import Search from "./src/components/Search";
+import { SafeAreaView } from "react-navigation";
+import { storeUrl } from "expo/build/StoreReview/StoreReview";
+import { wrap } from "bytebuffer";
+//import icons from 'react-native-vector-icons/Ionicons'
 
-export default class HomeScreen extends React.Component{
-  constructor(props){
+export default class HomeScreen extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
-      name:"",
+      name: "",
       email: ""
-    }
+    };
   }
-  
+
   static navigationOptions = {
     title: "Home",
     header: null
-}
+  };
 
-componentDidMount(){
-  firebase.auth().onAuthStateChanged(authenticate => {
-    if(authenticate){
-      this.setState({
-        email: authenticate.email,
-        name: authenticate.displayName
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
+
+  signOutUser = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        console.log("signedout");
       })
-    }
-    else{
-      this.props.navigation.replace("SignIn");
-    }
-  })
-}
+      .catch(error => {
+        alert(error.message);
+      });
+  };
 
-signOutUser = ( ) =>{
-  firebase
-  .auth()
-  .signOut()
-  .then(() => {console.log("signedout")})
-  .catch( error => {
-    alert(error.message);
-  })
-}
-
-
-render(){
+  render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.topContainer}>
         <View style={styles.logoconainer}>
-        <Image
-          style={{width:  160, height:80}}
-          source={require("../assets/logo.png")}
+          <Image
+            style={{ width: 160, height: 80 }}
+            source={require("../assets/logo.png")}
           />
-        </View>
-        <View style={styles.userDetails}>
-          <Text> Hey {this.state.name}</Text>
-          <Text> You are signed in as:  {this.state.email}</Text>
-        </View>
-        <Button
-        style={styles.button}
-        full 
-        rounded
-        success
-        onPress={()=>{
-          this.signOutUser();
+          <View style={styles.userDetails}>
+            <Text> Hey {this.state.name},</Text>
+            <Text> You are signed in as: {this.state.email}</Text>
 
-        }}
-        >
-          <Text style={styles.buttonText}>Sign Out</Text>
-        </Button>
-      </View>
+            <Search></Search>
+          </View>
+        </View>
+
+        <Button
+          title="Logout"
+          style={styles.button}
+          full
+          rounded
+          success
+          onPress={() => {
+            this.signOutUser();
+          }}
+        ></Button>
+
+        <View style={styles.bottomContainer}>
+          <View style={styles.bottomContainerElements}>
+          <Image
+              source={require("../assets/icons/addItem.png")}             
+            />
+            <Text>Add Item</Text>
+
+          </View>
+          <View style={styles.bottomContainerElements}>
+            <Image
+              source={require("../assets/icons/allocateSpace.png")}
+            />
+            <Text>Allocate Space</Text>
+          </View>
+          <View style={styles.bottomContainerElements}>
+            <Image
+              source={require("../assets/icons/itemsList.png")}
+            />
+            <Text>Items List</Text>
+          </View>
+          <View style={styles.bottomContainerElements}>
+            <Image
+              source={require("../assets/icons/manualEntry.png")}
+            />
+            <Text>Manual entry</Text>
+          </View>
+          <View style={styles.bottomContainerElements}>
+
+            <Image
+              source={require("../assets/icons/scanItem.png")}
+            />
+            <Text>Scan Item</Text>
+          </View>
+          <View style={styles.bottomContainerElements}>
+
+            <Image
+              source={require("../assets/icons/settings.png")}
+            />
+            <Text>Settings</Text>
+          </View>
+        </View>
+      </SafeAreaView>
     );
   }
-  
 }
 
 const styles = StyleSheet.create({
-  container: {
+  topContainer: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    margin: 20
+    //alignItems: "center",
+    // margin: 20,
+    //marginHorizontal: 20
+    flexDirection: "column"
+  },
+  bottomContainer: {
+    flex: 3,
+    flexDirection: "row",
+    //alignItems: 'center',
+    justifyContent: "center",
+    flexWrap: "wrap"
+  },
+  bottomContainerElements: {
+    height: "30%",
+    width: "45%",
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   logoContainer: {
     alignItems: "center",
+    height: "10%",
+    backgroundColor: "blue",
     marginTop: 100,
     marginBottom: 100
   },

@@ -12,8 +12,6 @@ export default class SignUpScreen extends React.Component{
       name: "",
       email: "",
       password: ""
-     
-
     }
   }
 
@@ -54,7 +52,7 @@ signupUser= (name, email, password) => {
         </View>
         <Form style= {styles.form}>
         <Item floatingLabel>
-            <Label>name</Label>
+            <Label>Name</Label>
             <Input            
             autoCorrect={false}
             autoCapitalize="none"
@@ -64,7 +62,7 @@ signupUser= (name, email, password) => {
           </Item>
 
           <Item floatingLabel>
-            <Label>email</Label>
+            <Label>Email</Label>
             <Input            
             autoCorrect={false}
             autoCapitalize="none"
