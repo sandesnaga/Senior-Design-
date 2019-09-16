@@ -29,6 +29,25 @@ export default class HomeScreen extends React.Component {
     header: null
   };
 
+  gotoAddItem = () => {
+    this.props.navigation.replace("AddingItem");
+}
+itemsList = ()=> {
+  this.props.navigation.replace("ItemList");
+}
+manualEntry = () => {
+  this.props.navigation.replace("ManualEntry");
+}
+scanInventory = ()=>{
+  this.props.navigation.replace("ScanInventory");
+}
+allocateSpace = ()=>{
+  this.props.navigation.replace("AllocateSpace");
+}
+settings = ()=>{
+  this.props.navigation.replace("Settings");
+}
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
@@ -89,7 +108,7 @@ export default class HomeScreen extends React.Component {
         <View style={styles.bottomContainer}>
         <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-              onPress = {this.onPress}
+              onPress = {this.gotoAddItem}
             >
           <Image
               source={require("../assets/icons/addItem.png")}             
@@ -100,7 +119,7 @@ export default class HomeScreen extends React.Component {
           
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-            onPress = {this.onPress}>
+            onPress = {this.allocateSpace}>
             <Image
               source={require("../assets/icons/allocateSpace.png")}
             />
@@ -109,7 +128,7 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-            onPress = {this.onPress}>
+            onPress = {this.itemsList}>
             <Image
               source={require("../assets/icons/itemsList.png")}
             />
@@ -118,7 +137,7 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-            onPress = {this.onPress}>            
+            onPress = {this.manualEntry}>            
               <Image source={require("../assets/icons/manualEntry.png")}
             />
             <Text>Manual entry</Text>
@@ -127,7 +146,7 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-            onPress = {this.onPress}>
+            onPress = {this.scanInventory}>
             <Image source={require("../assets/icons/scanItem.png")}
             />
             <Text>Scan Item</Text>
@@ -135,7 +154,7 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity
-            onPress = {this.onPress}>           
+            onPress = {this.settings}>           
               <Image source={require("../assets/icons/settings.png")}
             />
             <Text>Settings</Text>

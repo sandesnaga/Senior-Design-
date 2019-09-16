@@ -16,7 +16,7 @@ export default class SignInScreen extends React.Component{
     }
   }
   static navigationOptions = {
-    title: "SighIn",
+    title: "SignIn",
     header: null
 }
 
