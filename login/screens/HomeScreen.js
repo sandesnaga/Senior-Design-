@@ -5,7 +5,8 @@ import {
   View,
   Image,
   Button,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
@@ -53,10 +54,15 @@ export default class HomeScreen extends React.Component {
       });
   };
 
+  onPress = () => {
+    alert('clicked');
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.topContainer}>
         <View style={styles.logoconainer}>
+         
           <Image
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
@@ -81,44 +87,59 @@ export default class HomeScreen extends React.Component {
         ></Button>
 
         <View style={styles.bottomContainer}>
-          <View style={styles.bottomContainerElements}>
+        <View style={styles.bottomContainerElements}>
+            <TouchableOpacity
+              onPress = {this.onPress}
+            >
           <Image
               source={require("../assets/icons/addItem.png")}             
             />
             <Text>Add Item</Text>
-
+            </TouchableOpacity>
           </View>
+          
           <View style={styles.bottomContainerElements}>
+            <TouchableOpacity
+            onPress = {this.onPress}>
             <Image
               source={require("../assets/icons/allocateSpace.png")}
             />
             <Text>Allocate Space</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
+            <TouchableOpacity
+            onPress = {this.onPress}>
             <Image
               source={require("../assets/icons/itemsList.png")}
             />
             <Text>Items List</Text>
+            </TouchableOpacity >
           </View>
           <View style={styles.bottomContainerElements}>
-            <Image
-              source={require("../assets/icons/manualEntry.png")}
+            <TouchableOpacity
+            onPress = {this.onPress}>            
+              <Image source={require("../assets/icons/manualEntry.png")}
             />
             <Text>Manual entry</Text>
+            </TouchableOpacity>
+
           </View>
           <View style={styles.bottomContainerElements}>
-
-            <Image
-              source={require("../assets/icons/scanItem.png")}
+            <TouchableOpacity
+            onPress = {this.onPress}>
+            <Image source={require("../assets/icons/scanItem.png")}
             />
             <Text>Scan Item</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
-
-            <Image
-              source={require("../assets/icons/settings.png")}
+            <TouchableOpacity
+            onPress = {this.onPress}>           
+              <Image source={require("../assets/icons/settings.png")}
             />
             <Text>Settings</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
