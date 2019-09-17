@@ -53,9 +53,9 @@ export default class ScanInventoryScreen extends React.Component {
 
         {scanned && (
           <Button title={'Tap to Scan Again'} onPress={() => this.setState({ scanned: false })} />
-        )}{scanned && (
-          <Button title={'Done'} onPress={()=> {
-            this.props.navigation.navigate("Home");
+        )}
+        {scanned && (
+          <Button title={'Done'} onPress={()=> {this.props.navigation.navigate("Home");
           }} />
         )}
       </View>

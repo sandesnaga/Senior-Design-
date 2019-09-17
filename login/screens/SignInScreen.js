@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
 import * as firebase from "firebase";
-import {Form, Item, Input, Label, Button} from "native-base"
+import {Form, Item, Input, Label, Button, Icon} from "native-base"
 
 
 
@@ -9,10 +9,23 @@ export default class SignInScreen extends React.Component{
   
   constructor(props){
     super(props);
+    super();
     this.state = {
       email: "",
-      password: ""
+      password:"",
+      showpass:true,
+      press:false
 
+    }
+  }
+  
+  showpass=()=>{
+    if(this.state.press==false){
+      this.setState({showpass:false, press:true})
+    }
+    else
+    {
+      this.setState({showpass:true, press:false}) 
     }
   }
   static navigationOptions = {
@@ -34,7 +47,7 @@ sighInUser = (email, password)=>{
   render(){
     return (
       <KeyboardAvoidingView style={styles.container}
-      behavior="position" enabled
+      behavior="padding" enabled
       >
         <View style = {styles.logoContainer}>
           <Image
@@ -45,8 +58,12 @@ sighInUser = (email, password)=>{
         </View>
         <Form style= {styles.form}>
         <Item floatingLabel>
-            <Label>email</Label>
-            <Input            
+            <Label  style={styles.labelstyle}>Email</Label>
+            <Icon name={"md-person"} size={28} color={'rgba(255,255,255,0,7)'}
+              style={styles.inputicon}>
+            </Icon>
+            <Input
+            left={20}            
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="email-address"
@@ -54,17 +71,26 @@ sighInUser = (email, password)=>{
             />
           </Item>
 
-         
+         <View>
           <Item floatingLabel>
-            <Label>password</Label>
+            <Label style={styles.labelstyle}>Password</Label>
+            <Icon name ={"md-lock"} size={28} color={'rgba(255,255,255,0.7)'}
+              style={styles.inputicon}></Icon>
             <Input
-            secureTextEntry={true}
+            left={20}
+            secureTextEntry={this.state.showpass}
             autoCorrect={false}
             autoCapitalize="none"
             keyboardType="default"
             onChangeText={password => this.setState({password})}
             />
-          </Item>
+          
+              </Item>
+              <TouchableOpacity  style={styles.btnEye}
+                  onPress={this.showpass.bind(this)}>
+                  <Icon name={this.state.press==false ? "md-eye":"md-eye-off"} size={28} ></Icon>
+              </TouchableOpacity>  
+              </View>
           <Button style={styles.button}
           full
           rounded
@@ -82,7 +108,7 @@ sighInUser = (email, password)=>{
           onPress={()=> {
             this.props.navigation.navigate("SignUp");
           }}>
-              <Text>Create a new Account?</Text>
+              <Text style={styles.accounttext}>Create a new Account?</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -94,25 +120,51 @@ sighInUser = (email, password)=>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   logoContainer: {
     alignItems: "center",
-    marginTop: 100,
-    marginBottom: 100
+    marginTop: 10,
+    marginBottom: 10
   },
   form: {
-    padding: 20,
-    width: "100%",
-    marginBottom: 30
+    padding: 5,
+    width: "100%"
   },
   button: {
-    marginTop: 20
+    marginTop: 10,
+        padding: 20,
+        width: '100%',
+        backgroundColor: '#00aeef',
+        borderRadius: 4,
+        alignItems: 'center',
   },
   buttonText: {
     color: "#fff"
   },
   footer: {
     alignItems: "center"
-  }
+  },
+  inputicon: {
+  position:'absolute',
+    top: 17,
+    left:1,
+    color: '#2C3335'
+  },
+  labelstyle:{
+    left: 20
+  },
+  btnEye:{
+    position:'absolute',
+    top:17,
+    right:37,
+    color:'#2C3335' 
+
+  },
+  accounttext:{
+    color:'#00aeef',
+    fontWeight:'bold',
+  },
 });
