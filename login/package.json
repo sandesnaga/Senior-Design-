@@ -19,10 +19,12 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-search-bar": "^3.4.3",
+    "react-native-simple-radio-button": "^2.7.3",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^4.0.0",
-    "react-navigation-stack": "^1.5.1"
+    "react-navigation-stack": "^1.5.1",
+    "reinput": "^3.7.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^6.0.0"

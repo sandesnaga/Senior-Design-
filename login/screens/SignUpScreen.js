@@ -181,7 +181,10 @@ const styles = StyleSheet.create({
   },
   form: {
     padding: 5,
-    width: "100%"
+    width: "100%",
+    marginTop: 20,
+    marginBottom: 10,
+    marginRight:20,
   },
   button: {
     marginTop: 10,
