@@ -85,10 +85,7 @@ export default class AddShelfScreen extends React.Component {
             </View>
             <View style={styles.button}>
               <Button success style={styles.buttonitem}><Text style={styles.buttonText}>create</Text></Button>
-              <Button danger  onPress={()=>{
-                this.props.navigation.navigate("Home");
-              }}
-              style={styles.buttonitem}><Text style={styles.buttonText}>cancel</Text></Button>
+              <Button danger style={styles.buttonitem}><Text style={styles.buttonText}>cancel</Text></Button>
             </View>
 
           

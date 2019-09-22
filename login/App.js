@@ -12,6 +12,7 @@ import ItemsListScreen from "./screens/ItemsListScreen";
 import ManualEntryScreen from "./screens/ManualEntryScreen";
 import ScanInventoryScreen from "./screens/ScanInventoryScreen";
 import SettingScreen from "./screens/SettingScreen";
+import AddShelfScreen from "./screens/AddShelfScreen";
 
 
 import {createAppContainer } from "react-navigation";
@@ -43,6 +44,7 @@ const MainNavigator = createStackNavigator(
     ManualEntry: {screen: ManualEntryScreen},
     ScanInventory: {screen: ScanInventoryScreen},
     Settings: {screen: SettingScreen},
+    AddShelf : {screen: AddShelfScreen}
 
 
   },
