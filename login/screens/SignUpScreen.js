@@ -11,7 +11,8 @@ export default class SignUpScreen extends React.Component{
     super(props);
     this.state={
       name: "",
-      DOB: "",
+      
+      date: "",
       email: "",
       password: "",
       showpass:true,
@@ -79,7 +80,7 @@ signupUser= (name, DOB,email, password) => {
             />
           </Item>
           <Item style={styles.form}>
-            <DatePicker
+            {/* <DatePicker
             top={20}
             style={{width: '90%'}}
             DOB={this.state.DOB}
@@ -104,7 +105,31 @@ signupUser= (name, DOB,email, password) => {
             }}
             onDateChange={(DOB) => {this.showDateTimePicker
               this.setState({DOB})}}
-          />
+          /> */}
+          <DatePicker
+        style={{width:200, justifyContent:'center',flex:1}}
+        date={this.state.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="1916-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {this.setState({date: date})}}
+      />
           </Item>
           <Item floatingLabel>
             <Label  style={styles.labelstyle}>Email</Label>
