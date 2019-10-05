@@ -39,7 +39,8 @@ export default class ManualEntryScreem extends React.Component {
       itemName: "",
       itemDescription: "",
       itemQuantity: "",
-      pin: ""
+      pin: "", 
+      Date: ""
     };
   }
 
@@ -99,34 +100,31 @@ export default class ManualEntryScreem extends React.Component {
             <Text
               style = {{paddingBottom:5}}>Please select the pre remainder time.</Text>
             
-              <DatePicker
-                top={20}
-                style={{ width: "90%" }}
-                DOB={this.state.DOB}
-                mode="date"
-                placeholder="Remainder"
-                format="YYYY-MM-DD"
-                minDate="1900-05-01"
-                maxDate="2019"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0
-                  },
-                  dateInput: {
-                    marginLeft: 60
-                  }
-                  // ... You can check the source to find the other keys.
-                }}
-                onDateChange={DOB => {
-                  this.showDateTimePicker;
-                  this.setState({ DOB });
-                }}
-              />
+            <DatePicker
+        style={{width:200, justifyContent:'center'}}
+        date={this.state.date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="1916-05-01"
+        maxDate="2016-06-01"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => {this.setState({date: date})}}
+      
+      />
               <RadioForm
           style={styles.radioForm}
           radio_props={expirationChoices}
