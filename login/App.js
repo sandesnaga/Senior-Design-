@@ -19,16 +19,15 @@ import {createStackNavigator } from "react-navigation-stack"
 
 
 var firebaseConfig = {
-  apiKey: "AIzaSyDTAjbwIVZmH4IQzDsWEMxozQfOcKfRYbU",
-  authDomain: "react-native-001-a1f49.firebaseapp.com",
-  databaseURL: "https://react-native-001-a1f49.firebaseio.com",
-  projectId: "react-native-001-a1f49",
+  apiKey: "AIzaSyDA4EsnzczJGTe9LFD07CJ_ioLiKuYEwP8",
+  authDomain: "pocketshelf-80c0b.firebaseapp.com",
+  databaseURL: "https://pocketshelf-80c0b.firebaseio.com",
+  projectId: "pocketshelf-80c0b",
   storageBucket: "",
-  messagingSenderId: "569782961777",
-  appId: "1:569782961777:web:c24fe204a35712de25bdd0"
-};
-
-firebase.initializeApp(firebaseConfig);
+  messagingSenderId: "568679507924",
+  appId: "1:568679507924:web:0e071e4ad18451a8305841"
+ };
+ firebase.initializeApp(firebaseConfig);
 
 
 const MainNavigator = createStackNavigator(
