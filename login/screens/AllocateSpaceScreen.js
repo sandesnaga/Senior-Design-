@@ -1,116 +1,219 @@
-import React from "react";
+import React from 'react';
 import {
-  StyleSheet,
-  Text,
+  StyleSheet, 
+  Text, 
   View,
   Image,
-  Button,
-  ScrollView,
-  TouchableOpacity
-} from "react-native";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
-import { storeUrl } from "expo/build/StoreReview/StoreReview";
-import { wrap } from "bytebuffer";
-//import icons from 'react-native-vector-icons/Ionicons'
-
+  TouchableOpacity,TextInput}
+   from 'react-native';
+   import {Button} from "native-base"
+   import * as firebase from "firebase";
+   
+   
 export default class AllocateSpaceScreen extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
-    this.state = {
-      name: "",
-      email: ""
+    this.state= {
+      location:'',
+      Name:'',
+      numColumn:'',
+      numRow: ''
     };
   }
 
+componentDidMount() {
+  firebase.auth().onAuthStateChanged(authenticate => {
+    if (authenticate) {
+      this.setState({
+        email: authenticate.email,
+        name: authenticate.displayName,
+        dob: authenticate.born,
+        
+      });
+    } else {
+      this.props.navigation.replace("SignIn");
+    }
+  });
+}
+ 
+allocatespace = (location, Name, numColumn, numRow)=>{
+  for(var i=1;i<=numColumn,i++){
+    
+  }
+  var locationref = firebase.database().ref("allocated_space");
+  //push allocate space to database
+  var newlocationref = locationref.push();
+  newlocationref.set({
+    location: location,
+    Name: Name,
+    Column:numColumn,
+    Row:numRow,
+    time: Date.now() 
+  })
+  this.setState({
+    location:'---',
+    Name:'---',
+    numColumn:'---',
+    numRow:'---'
+  })
+}
   static navigationOptions = {
     title: "AllocateSpace",
     header: null
   };
 
- 
-
   
-  
-  
-  render() {
+  render(){
     return (
-      <SafeAreaView style={styles.topContainer}>
-        <View style={styles.logoconainer}>
-         
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
-          />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
+      <View style={styles.container}>
+        <View style={styles.headingView}
+        ><Text style={{fontSize: 20,
+          fontWeight: "bold",
+          color: "grey" }}>Add Shelf</Text>
+        </View> 
+            <View style={{paddingVertical:15, flex: 1}}>
 
-            <Search></Search>
-          </View>
-        </View>
+            <View style={styles.locationView}>     
+              <View >
+                <Text style={styles.caption}>Location:</Text>
+              </View>
+              <View><TextInput style={styles.inputstyles}
+                            placeholder="where in house"
+                            onChangeText={location => this.setState({location})}/>
+                             
+              </View>
 
-        <Button
-          title="This is AllocateSpace"
-          style={styles.button}
-          full
-          rounded
-          success
+            </View> 
+
+
+            <View style={styles.locationView}>     
+              <View >
+                <Text style={styles.caption}>Name:</Text>
+              </View>
+              <View><TextInput style={styles.inputstyles}
+                            placeholder="Name of 
+                            Shelf"
+                            onChangeText={Name => this.setState({Name})}/>
+                             
+              </View>
+
+            </View> 
+
+
+            <View style={styles.locationView}>     
+              <View >
+                <Text style={styles.caption}>No of Column:</Text>
+              </View>
+              <View>
+                <TextInput style={styles.inputstyles}
+                            placeholder="# of column"
+                            onChangeText={numColumn => this.setState({numColumn})}/>
+                             
+              </View>
+
+            </View> 
+
+
+            <View style={styles.locationView}>     
+              <View >
+                <Text style={styles.caption}>No of Rows:</Text>
+              </View>
+              <View><TextInput style={styles.inputstyles}
+                            placeholder="
+                            # of row"
+                            onChangeText={numRow => this.setState({numRow})}/>
+                            
+              </View>
+
+            </View> 
+
+                  
+            </View>
+            <View style={styles.button}>
+              <Button success style={styles.buttonitem} 
+              onPress={()=>{this.allocatespace(
+                this.state.location,
+                this.state.Name,
+                this.state.numColumn,
+                this.state.numRow
+                )}
+                
+                }><Text style={styles.buttonText}>create</Text></Button>
+              <Button danger  onPress={()=>
+                this.props.navigation.navigate("Home")
+
+              }
+              style={styles.buttonitem}>
+                <Text style={styles.buttonText}>cancel</Text></Button>
+            </View>
+
           
-        ></Button>
-
-<Button style={styles.button}
-          title="toHome"
-          full
-          rounded
-          onPress={()=> {
-            this.props.navigation.navigate("Home");
-          }}
-          ><Text style={styles.buttonText}>Back</Text></Button>
-</SafeAreaView>
-
-          
-          
+              
+      </View>
     );
   }
+  
 }
 
 const styles = StyleSheet.create({
-  topContainer: {
-    flex: 1,
-    //alignItems: "center",
-    // margin: 20,
-    //marginHorizontal: 20
-    flexDirection: "column"
+  container: {
+    flex: 1, 
+    paddingTop: 30,
+      
   },
-  bottomContainer: {
-    flex: 3,
-    flexDirection: "row",
-    //alignItems: 'center',
+  headingView:{
+    height: 40,    
     justifyContent: "center",
-    flexWrap: "wrap"
-  },
-  bottomContainerElements: {
-    height: "30%",
-    width: "45%",
-    margin: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  logoContainer: {
     alignItems: "center",
-    height: "10%",
-    backgroundColor: "blue",
-    marginTop: 100,
-    marginBottom: 100
+        
   },
-  userDetails: {},
+  
+  locationView:{
+    
+    flexDirection: "row",
+    justifyContent: "space-between",  
+    alignItems:"center",  
+    paddingLeft: 25,
+    paddingRight: 25,
+     paddingVertical: 5
 
-  button: {
-    marginTop: 20
   },
-  buttonText: {
-    color: "#fff"
+  caption:{
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+  },
+  inputstyles:{
+    borderColor: "grey",
+    borderWidth: 1.5,
+    borderRadius: 5,
+    minWidth: 200,
+    height: 40,
+    paddingLeft: 10
+  },
+  button:{
+    
+    justifyContent: "center", 
+    alignItems: "center", 
+    marginBottom: 20  
+   
+
+  },
+  buttonitem:{
+    width: 200,
+    justifyContent: "center",  
+    marginBottom: 20,
+    borderRadius: 10
+
+  },
+
+  
+  buttonText:{
+    fontSize:25, 
+    color:"#fff"
+
   }
+
+  
+  
 });

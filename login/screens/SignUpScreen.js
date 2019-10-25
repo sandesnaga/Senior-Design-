@@ -10,13 +10,14 @@ export default class SignUpScreen extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      name: "",
-      
+      name: "", 
       date: "",
       email: "",
       password: "",
       showpass:true,
       press:false,
+      today:''
+     
     }
   }
   showpass=()=>{
@@ -28,13 +29,23 @@ export default class SignUpScreen extends React.Component{
       this.setState({showpass:true, press:false}) 
     }
   }
-  
+  componentDidMount() {
+    var that = this;
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    that.setState({
+      //Setting the value of the date time
+      today:
+        year + '-' + month + '-' + date,
+    });
+  }
 
   static navigationOptions = {
     title: "SignUp",
     header: null
 };
-signupUser= (name, DOB,email, password) => {
+signupUser= (name, date,email, password) => {
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
@@ -42,7 +53,7 @@ signupUser= (name, DOB,email, password) => {
     return authenticate.user
     .updateProfile({
       displayName: name,
-      dateofBirth: DOB,
+      date: date,
     })
     .then(()=>{
       this.props.navigation.replace("Home");
@@ -75,45 +86,19 @@ signupUser= (name, DOB,email, password) => {
             left={20}           
             autoCorrect={false}
             autoCapitalize="none"
-            keyboardType="default"
+            keyboardType="name-phone-pad"
             onChangeText={name => this.setState({name})}
             />
           </Item>
           <Item style={styles.form}>
-            {/* <DatePicker
-            top={20}
-            style={{width: '90%'}}
-            DOB={this.state.DOB}
-            mode="date"
-            placeholder="Date Of Birth"
-            format="YYYY-MM-DD"
-            minDate="1900-05-01"
-            maxDate="2019"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 60
-              }
-              // ... You can check the source to find the other keys.
-            }}
-            onDateChange={(DOB) => {this.showDateTimePicker
-              this.setState({DOB})}}
-          /> */}
           <DatePicker
         style={{width:200, justifyContent:'center',flex:1}}
-        date={this.state.date}
+       date={this.state.date}
         mode="date"
-        placeholder="select date"
+        placeholder="Date of birth"
         format="YYYY-MM-DD"
         minDate="1916-05-01"
-        maxDate="2016-06-01"
+        maxDate= {this.state.today}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -128,7 +113,7 @@ signupUser= (name, DOB,email, password) => {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={date => {this.setState({date})}}
       />
           </Item>
           <Item floatingLabel>
@@ -168,17 +153,21 @@ signupUser= (name, DOB,email, password) => {
           onPress={()=>{
             this.signupUser(
               this.state.name,
-              this.state.DOB,
+              this.state.date,
               this.state.email,
-              this.state.password
+              this.state.password,
+            
             )
+            console.log("dob="+ this.date);
            }}
           ><Text style={styles.buttonText}>Sign In</Text></Button>
+         
         </Form>
         <View style={styles.footer}>
           <Text>OR</Text>
           <TouchableOpacity
           onPress={()=> {
+            
             this.props.navigation.navigate("SignIn");
           }}>
               <Text style={styles.accounttext}>Already Have an Account?</Text>

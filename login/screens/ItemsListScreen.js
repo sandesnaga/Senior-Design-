@@ -19,11 +19,26 @@ export default class ItemsListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      email: ""
+      name:'',
+      email:'',
+      dob:'',
     };
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          dob: authenticate.born,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
   static navigationOptions = {
     title: "ItemList",
     header: null

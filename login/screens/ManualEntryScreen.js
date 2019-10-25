@@ -40,10 +40,27 @@ export default class ManualEntryScreem extends React.Component {
       itemDescription: "",
       itemQuantity: "",
       pin: "", 
-      Date: ""
+      Date: "",
+      name:'',
+      email:'',
+      dob:'',
     };
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          dob: authenticate.born,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
   static navigationOptions = {
     title: "ManualEntry",
     header: null

@@ -26,7 +26,6 @@ var firebaseConfig = {
   projectId: "pocketshelf-80c0b",
   storageBucket: "",
   messagingSenderId: "568679507924",
-  appId: "1:568679507924:web:0e071e4ad18451a8305841"
  };
  firebase.initializeApp(firebaseConfig);
 

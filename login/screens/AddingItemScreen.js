@@ -7,6 +7,7 @@ import {
   TouchableOpacity,TextInput}
    from 'react-native';
    import {Button} from "native-base"
+   import * as firebase from "firebase";
    
    
 export default class AddShelfScreen extends React.Component {
@@ -24,7 +25,7 @@ export default class AddShelfScreen extends React.Component {
     title: "AddShelfScreen",
     header: null
   };
-
+  
   render(){
     return (
       <View style={styles.container}>

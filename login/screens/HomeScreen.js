@@ -20,7 +20,8 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       name: "",
-      email: ""
+      email: "",
+      dob:"00-00-0000"
     };
   }
 
@@ -53,7 +54,9 @@ settings = ()=>{
       if (authenticate) {
         this.setState({
           email: authenticate.email,
-          name: authenticate.displayName
+          name: authenticate.displayName,
+          dob: authenticate.date,
+          
         });
       } else {
         this.props.navigation.replace("SignIn");
@@ -67,6 +70,7 @@ settings = ()=>{
       .signOut()
       .then(() => {
         console.log("signedout");
+        console.log("dob="+ this.state.dob);
       })
       .catch(error => {
         alert(error.message);
@@ -89,7 +93,7 @@ settings = ()=>{
           <View style={styles.userDetails}>
             <Text> Hey {this.state.name},</Text>
             <Text> You are signed in as: {this.state.email}</Text>
-
+            <Text> Date of birth: {this.state.dob}</Text>
             <Search></Search>
           </View>
         </View>

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,TextInput}
    from 'react-native';
    import {Button} from "native-base"
-   
+   import * as firebase from "firebase";
    
 export default class AddShelfScreen extends React.Component {
   constructor(props){
@@ -16,7 +16,10 @@ export default class AddShelfScreen extends React.Component {
       location:'',
       Name:'',
       numColumr:'',
-      numRow: ''
+      numRow: '',
+      name:'',
+      email:'',
+      dob:'',
     };
   }
 
@@ -24,7 +27,20 @@ export default class AddShelfScreen extends React.Component {
     title: "AddShelfScreen",
     header: null
   };
-
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          dob: authenticate.born,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
   render(){
     return (
       <View style={styles.container}>
