@@ -17,51 +17,65 @@ export default class AllocateSpaceScreen extends React.Component {
       location:'',
       Name:'',
       numColumn:'',
-      numRow: ''
+      numRow: '',
+      uid:''
     };
   }
 
-componentDidMount() {
-  firebase.auth().onAuthStateChanged(authenticate => {
-    if (authenticate) {
-      this.setState({
-        email: authenticate.email,
-        name: authenticate.displayName,
-        dob: authenticate.born,
-        
-      });
-    } else {
-      this.props.navigation.replace("SignIn");
-    }
-  });
-}
+  
  
 allocatespace = (location, Name, numColumn, numRow)=>{
-  for(var i=1;i<=numColumn,i++){
-    
-  }
+  var user = firebase.auth().currentUser;
+  var name, email, photoUrl, uid, emailVerified;
+
+if (user != null) {
+  name = user.displayName;
+  email = user.email;
+  emailVerified = user.emailVerified;
+  uid = user.uid;
+}
+  var i;
   var locationref = firebase.database().ref("allocated_space");
   //push allocate space to database
-  var newlocationref = locationref.push();
-  newlocationref.set({
-    location: location,
-    Name: Name,
-    Column:numColumn,
-    Row:numRow,
-    time: Date.now() 
-  })
+  for(i=1;i<=numColumn;i++){
+    for(var j =1;j<=numRow;j++)
+    {
+      var newlocationref = locationref.push();
+      newlocationref.set({
+        location: location,
+        Name: Name,
+        Column:i,
+        Row:j,
+        time: Date.now(),
+        uid: uid, 
+      })
+    }
+  }
   this.setState({
-    location:'---',
-    Name:'---',
-    numColumn:'---',
-    numRow:'---'
+    location:'',
+    Name:'',
+    numColumn:'',
+    numRow:''
   })
 }
   static navigationOptions = {
     title: "AllocateSpace",
     header: null
   };
-
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          uid: userInfo.uid,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
   
   render(){
     return (
