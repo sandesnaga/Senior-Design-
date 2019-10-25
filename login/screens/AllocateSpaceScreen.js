@@ -26,12 +26,9 @@ export default class AllocateSpaceScreen extends React.Component {
  
 allocatespace = (location, Name, numColumn, numRow)=>{
   var user = firebase.auth().currentUser;
-  var name, email, photoUrl, uid, emailVerified;
+  var uid;
 
 if (user != null) {
-  name = user.displayName;
-  email = user.email;
-  emailVerified = user.emailVerified;
   uid = user.uid;
 }
   var i;
