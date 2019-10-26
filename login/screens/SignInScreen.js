@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
 import * as firebase from "firebase";
 import {Form, Item, Input, Label, Button, Icon} from "native-base"
+import { userInfo } from 'os';
 
 
 
@@ -43,6 +44,20 @@ sighInUser = (email, password)=>{
   .catch(error =>{
     alert(error.message)
   })
+}
+componentDidMount() {
+  firebase.auth().onAuthStateChanged(authenticate => {
+    if (authenticate) {
+      this.setState({
+        email: authenticate.email,
+        name: authenticate.displayName,
+        uid: userInfo.uid,
+        
+      });
+    } else {
+      this.props.navigation.replace("SignIn");
+    }
+  });
 }
   render(){
     return (

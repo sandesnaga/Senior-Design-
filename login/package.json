@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
     "react-native-datepicker": "^1.7.2",
+    "react-native-flash-message": "^0.1.15",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-search-bar": "^3.4.3",
     "react-native-simple-radio-button": "^2.7.3",

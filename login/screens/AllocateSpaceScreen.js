@@ -4,10 +4,11 @@ import {
   Text, 
   View,
   Image,
-  TouchableOpacity,TextInput}
+  TouchableOpacity,TextInput, Alert}
    from 'react-native';
    import {Button} from "native-base"
    import * as firebase from "firebase";
+   import { showMessage, hideMessage } from "react-native-flash-message";
    
    
 export default class AllocateSpaceScreen extends React.Component {
@@ -54,6 +55,7 @@ if (user != null) {
     numColumn:'',
     numRow:''
   })
+  
 }
   static navigationOptions = {
     title: "AllocateSpace",
@@ -76,6 +78,7 @@ if (user != null) {
   
   render(){
     return (
+      
       <View style={styles.container}>
         <View style={styles.headingView}
         ><Text style={{fontSize: 20,
@@ -146,8 +149,11 @@ if (user != null) {
                 this.state.location,
                 this.state.Name,
                 this.state.numColumn,
-                this.state.numRow
-                )}
+                this.state.numRow,
+                this.props.navigation.navigate("Home")
+                ),
+                Alert.alert("Shelf Status","Success");
+              }
                 
                 }><Text style={styles.buttonText}>create</Text></Button>
               <Button danger  onPress={()=>
