@@ -10,34 +10,20 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
+import QRgen from "./QRgen";
 import { SafeAreaView } from "react-navigation";
-import { storeUrl } from "expo/build/StoreReview/StoreReview";
-import { wrap } from "bytebuffer";
+
 //import icons from 'react-native-vector-icons/Ionicons'
 
 export default class SettingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:'',
-      email:'',
-      dob:'',   
+      name: "",
+      email: ""
     };
   }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(authenticate => {
-      if (authenticate) {
-        this.setState({
-          email: authenticate.email,
-          name: authenticate.displayName,
-          dob: authenticate.born,
-          
-        });
-      } else {
-        this.props.navigation.replace("SignIn");
-      }
-    });
-  }
+
   static navigationOptions = {
     title: "Settings",
     header: null
@@ -81,6 +67,8 @@ export default class SettingScreen extends React.Component {
             this.props.navigation.navigate("Home");
           }}
           ><Text style={styles.buttonText}>Back</Text></Button>
+
+<QRgen></QRgen>
 </SafeAreaView>
 
           

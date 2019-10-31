@@ -1,4 +1,5 @@
 import React from "react";
+import QRCode from 'react-native-qrcode';
 import {
   StyleSheet,
   Text,
@@ -14,8 +15,8 @@ import {
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import { SafeAreaView } from "react-navigation";
-import { storeUrl } from "expo/build/StoreReview/StoreReview";
-import { wrap } from "bytebuffer";
+//import { storeUrl } from "expo/build/StoreReview/StoreReview";
+//import { wrap } from "bytebuffer";
 import DatePicker from 'react-native-datepicker'
 import RadioForm, {
   RadioButton,
@@ -78,7 +79,6 @@ export default class ManualEntryScreem extends React.Component {
           <View style={styles.userDetails}>
             <Text> Hey {this.state.name},</Text>
             <Text> You are signed in as: {this.state.email}</Text>
-
             <Search></Search>
           </View>
         </View>
@@ -142,7 +142,7 @@ export default class ManualEntryScreem extends React.Component {
         onDateChange={(date) => {this.setState({date: date})}}
       
       />
-              <RadioForm
+          <RadioForm
           style={styles.radioForm}
           radio_props={expirationChoices}
           onPress={value => {}}
@@ -159,7 +159,6 @@ export default class ManualEntryScreem extends React.Component {
             
           </View>
         </KeyboardAvoidingView>
-
         <Button
           style={styles.button}
           title="toHome"

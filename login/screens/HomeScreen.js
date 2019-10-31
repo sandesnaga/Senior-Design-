@@ -5,14 +5,13 @@ import {
   View,
   Image,
   Button,
-  ScrollView,
   TouchableOpacity
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import { SafeAreaView } from "react-navigation";
-import { storeUrl } from "expo/build/StoreReview/StoreReview";
-import { wrap } from "bytebuffer";
+//import { storeUrl } from "expo/build/StoreReview/StoreReview";
+//import { wrap } from "bytebuffer";
 //import icons from 'react-native-vector-icons/Ionicons'
 
 export default class HomeScreen extends React.Component {

@@ -19,7 +19,8 @@ export default class AllocateSpaceScreen extends React.Component {
       Name:'',
       numColumn:'',
       numRow: '',
-      uid:''
+      uid:'',
+      isAvailable:''
     };
   }
 
@@ -32,10 +33,9 @@ allocatespace = (location, Name, numColumn, numRow)=>{
 if (user != null) {
   uid = user.uid;
 }
-  var i;
   var locationref = firebase.database().ref("allocated_space");
   //push allocate space to database
-  for(i=1;i<=numColumn;i++){
+  for(var i=1;i<=numColumn;i++){
     for(var j =1;j<=numRow;j++)
     {
       var newlocationref = locationref.push();
@@ -45,7 +45,8 @@ if (user != null) {
         Column:i,
         Row:j,
         time: Date.now(),
-        uid: uid, 
+        uid: uid,
+        isAvailable:'Yes' 
       })
     }
   }
@@ -67,7 +68,6 @@ if (user != null) {
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-          uid: userInfo.uid,
           
         });
       } else {
@@ -105,8 +105,7 @@ if (user != null) {
                 <Text style={styles.caption}>Name:</Text>
               </View>
               <View><TextInput style={styles.inputstyles}
-                            placeholder="Name of 
-                            Shelf"
+                            placeholder="Name of Shelf"
                             onChangeText={Name => this.setState({Name})}/>
                              
               </View>
@@ -133,8 +132,7 @@ if (user != null) {
                 <Text style={styles.caption}>No of Rows:</Text>
               </View>
               <View><TextInput style={styles.inputstyles}
-                            placeholder="
-                            # of row"
+                            placeholder="# of row"
                             onChangeText={numRow => this.setState({numRow})}/>
                             
               </View>
