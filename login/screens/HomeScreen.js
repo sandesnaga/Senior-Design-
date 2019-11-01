@@ -50,6 +50,7 @@ settings = ()=>{
 }
 
   componentDidMount() {
+    var self=this;
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
@@ -57,11 +58,21 @@ settings = ()=>{
           name: authenticate.displayName,
         });
         var user = firebase.auth().currentUser;
-        var uid = user.uid;
-        const rootRef= firebase.database().ref();
-        const oneref= rootRef.child('user_more_info').orderByChild('uid').equalTo(uid);
-        console.log(oneref.DOB);
-        
+  var uid = user.uid;
+ 
+  var doblist= firebase.database().ref('user_more_info');
+  doblist.on('value',dataSnapShot=>{
+    if(dataSnapShot.val()){
+      let dobobj = Object.values(dataSnapShot.val());
+      for(var i=0;i<dataSnapShot.numChildren();i++){
+      if(dobobj[i].uid==uid)
+      {
+        self.updatedob(dobobj[i].DOB);
+ 
+      }
+    }
+    }
+  })
       } else {
         this.props.navigation.replace("SignIn");
       }
@@ -69,6 +80,17 @@ settings = ()=>{
     
   }
   componentWillUnmount(){}
+
+  
+ updatedob =(dob)=>{
+  console.log(this.state.dob);
+  this.setState({dob:dob});
+  console.log(this.state.dob);
+  
+ }
+
+
+
   signOutUser = () => {
     firebase
       .auth()
