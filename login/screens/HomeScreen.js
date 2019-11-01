@@ -5,25 +5,15 @@ import {
   View,
   Image,
   Button,
-<<<<<<< HEAD
-  TouchableOpacity,
-  StatusBar
-} from "react-native";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
-import { Appbar } from 'react-native-paper';
-
-=======
   TouchableOpacity
 } from 'react-native';
 import * as firebase from 'firebase';
 import Search from './src/components/Search';
 import { SafeAreaView } from 'react-navigation';
+import {Appbar} from "react-native-paper"
 //import { storeUrl } from "expo/build/StoreReview/StoreReview";
 //import { wrap } from "bytebuffer";
 //import icons from 'react-native-vector-icons/Ionicons'
->>>>>>> 27dc9e2612fa2fe8ba17ffbe19330c495fbc7e10
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -31,12 +21,8 @@ export default class HomeScreen extends React.Component {
     this.state = {
       name: "",
       email: "",
-<<<<<<< HEAD
-      dob: "00-00-0000"
-=======
       dob:"00-00-0000",
       uid:''
->>>>>>> 27dc9e2612fa2fe8ba17ffbe19330c495fbc7e10
     };
   }
 
@@ -71,10 +57,7 @@ export default class HomeScreen extends React.Component {
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-<<<<<<< HEAD
-          dob: authenticate.date
-=======
->>>>>>> 27dc9e2612fa2fe8ba17ffbe19330c495fbc7e10
+
         });
         var user = firebase.auth().currentUser;
   var uid = user.uid;
