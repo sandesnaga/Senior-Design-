@@ -6,10 +6,10 @@ import {
   Image,
   Button,
   TouchableOpacity
-} from "react-native";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
+} from 'react-native';
+import * as firebase from 'firebase';
+import Search from './src/components/Search';
+import { SafeAreaView } from 'react-navigation';
 //import { storeUrl } from "expo/build/StoreReview/StoreReview";
 //import { wrap } from "bytebuffer";
 //import icons from 'react-native-vector-icons/Ionicons'
@@ -20,7 +20,8 @@ export default class HomeScreen extends React.Component {
     this.state = {
       name: "",
       email: "",
-      dob:"00-00-0000"
+      dob:"00-00-0000",
+      uid:''
     };
   }
 
@@ -54,15 +55,20 @@ settings = ()=>{
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-          dob: authenticate.date,
-          
         });
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
+        const rootRef= firebase.database().ref();
+        const oneref= rootRef.child('user_more_info').orderByChild('uid').equalTo(uid);
+        console.log(oneref.DOB);
+        
       } else {
         this.props.navigation.replace("SignIn");
       }
     });
+    
   }
-
+  componentWillUnmount(){}
   signOutUser = () => {
     firebase
       .auth()

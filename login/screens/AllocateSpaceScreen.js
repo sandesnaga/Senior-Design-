@@ -75,7 +75,7 @@ if (user != null) {
       }
     });
   }
-  
+  componentWillUnmount(){}
   render(){
     return (
       
