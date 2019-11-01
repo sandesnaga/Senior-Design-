@@ -1,29 +1,26 @@
 import React from "react";
-import QRCode from 'react-native-qrcode';
+import QRCode from "react-native-qrcode";
 import {
   StyleSheet,
   Text,
   View,
   Image,
-  Item,
   Button,
-  ScrollView,
-  KeyboardAvoidingView,
   TextInput,
-  TouchableOpacity
+  StatusBar
 } from "react-native";
+import { Appbar } from "react-native-paper";
+
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import { SafeAreaView } from "react-navigation";
-//import { storeUrl } from "expo/build/StoreReview/StoreReview";
-//import { wrap } from "bytebuffer";
-import DatePicker from 'react-native-datepicker'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DatePicker from "react-native-datepicker";
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
-
 
 //import icons from 'react-native-vector-icons/Ionicons'
 
@@ -40,11 +37,11 @@ export default class ManualEntryScreem extends React.Component {
       itemName: "",
       itemDescription: "",
       itemQuantity: "",
-      pin: "", 
+      pin: "",
       Date: "",
-      name:'',
-      email:'',
-      dob:'',
+      name: "",
+      email: "",
+      dob: ""
     };
   }
 
@@ -54,8 +51,7 @@ export default class ManualEntryScreem extends React.Component {
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-          dob: authenticate.born,
-          
+          dob: authenticate.born
         });
       } else {
         this.props.navigation.replace("SignIn");
@@ -67,11 +63,11 @@ export default class ManualEntryScreem extends React.Component {
     header: null
   };
 
-  
   render() {
     return (
       <SafeAreaView style={styles.topContainer}>
         <View style={styles.logoconainer}>
+          {/*
           <Image
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
@@ -81,17 +77,21 @@ export default class ManualEntryScreem extends React.Component {
             <Text> You are signed in as: {this.state.email}</Text>
             <Search></Search>
           </View>
+          */}
         </View>
-
-        <Button
-          title="This is Manual Entry"
-          style={styles.button}
-          full
-          rounded
-          success
-        ></Button>
-        <KeyboardAvoidingView behavior="padding" style={styles.form}>
-          <View></View>
+        <KeyboardAwareScrollView style={styles.form}>
+          <View style={{ flex: 1 }}>
+            
+            <Appbar.Header>
+              <Appbar.BackAction
+                onPress={() => {
+                  this.props.navigation.navigate("Home");
+                }}
+              />
+              <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+            </Appbar.Header>
+        
+          </View>
           <View>
             <Text>Item Name</Text>
             <TextInput
@@ -114,51 +114,50 @@ export default class ManualEntryScreem extends React.Component {
               onchangeText={() => "#"}
             ></TextInput>
 
-            <Text
-              style = {{paddingBottom:5}}>Please select the pre remainder time.</Text>
-            
+            <Text style={{ paddingBottom: 5 }}>
+              Please select the pre remainder time.
+            </Text>
+
             <DatePicker
-        style={{width:200, justifyContent:'center'}}
-        date={this.state.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="1916-05-01"
-        maxDate="2016-06-01"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-          // ... You can check the source to find the other keys.
-        }}
-        onDateChange={(date) => {this.setState({date: date})}}
-      
-      />
-          <RadioForm
-          style={styles.radioForm}
-          radio_props={expirationChoices}
-          onPress={value => {}}
-          formHorizontal={true}
-        ></RadioForm>
-        <Text>Secure your location with pin(Optional).</Text>
-        <TextInput
+              style={{ width: 200, justifyContent: "center" }}
+              date={this.state.date}
+              mode="date"
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              minDate="1916-05-01"
+              maxDate="2016-06-01"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+                // ... You can check the source to find the other keys.
+              }}
+              onDateChange={date => {
+                this.setState({ date: date });
+              }}
+            />
+            <RadioForm
+              style={styles.radioForm}
+              radio_props={expirationChoices}
+              onPress={value => {}}
+              formHorizontal={true}
+            ></RadioForm>
+            <Text>Secure your location with pin(Optional).</Text>
+            <TextInput
               style={styles.input}
               placeholder="Please enter pin for your item"
               onchangeText={() => "#"}
             ></TextInput>
-
-         
-            
           </View>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
         <Button
           style={styles.button}
           title="toHome"
@@ -178,9 +177,6 @@ export default class ManualEntryScreem extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    //alignItems: "center",
-    // margin: 20,
-    //marginHorizontal: 20
     flexDirection: "column"
   },
   bottomContainer: {
@@ -235,12 +231,11 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   form: {
-    flex: 1,
-    justifyContent: 'space-between'
+    flex: 1
   },
   radioForm: {
     marginTop: 20,
     //padding: 7,
-    justifyContent:'center'
+    justifyContent: "center"
   }
 });
