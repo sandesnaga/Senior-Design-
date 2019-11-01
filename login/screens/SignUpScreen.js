@@ -16,7 +16,9 @@ export default class SignUpScreen extends React.Component{
       password: "",
       showpass:true,
       press:false,
-      today:''
+      today:'',
+      DOB:'',
+      uid:''
      
     }
   }
@@ -46,6 +48,7 @@ export default class SignUpScreen extends React.Component{
     header: null
 };
 signupUser= (name, date,email, password) => {
+  var userref = firebase.database().ref("user_more_info");
   firebase
   .auth()
   .createUserWithEmailAndPassword(email, password)
@@ -53,9 +56,16 @@ signupUser= (name, date,email, password) => {
     return authenticate.user
     .updateProfile({
       displayName: name,
-      date: date,
+      
     })
     .then(()=>{
+      var user = firebase.auth().currentUser;
+      var uid = user.uid;
+      var newuserref = userref.push();
+      newuserref.set({
+        uid: uid,
+        DOB:date,
+      })
       this.props.navigation.replace("Home");
     })
   })
