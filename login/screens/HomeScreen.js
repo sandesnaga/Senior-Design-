@@ -85,10 +85,7 @@ export default class HomeScreen extends React.Component {
 
   
  updatedob =(dob)=>{
-  console.log(this.state.dob);
   this.setState({dob:dob});
-  console.log(this.state.dob);
-  
  }
 
 
@@ -120,7 +117,7 @@ export default class HomeScreen extends React.Component {
         />
         <Appbar.Content
           title= {this.state.name}
-          subtitle="Subtitle"
+          subtitle={"Your DOB "+this.state.dob}
         />
       </Appbar.Header>
         
