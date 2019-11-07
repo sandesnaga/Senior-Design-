@@ -85,9 +85,7 @@ export default class HomeScreen extends React.Component {
 
 
   updatedob = dob => {
-    console.log(this.state.dob);
     this.setState({ dob: dob });
-    console.log(this.state.dob);
   };
 
   signOutUser = () => {
@@ -111,7 +109,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.topContainer}>
         <Appbar.Header>
-          <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+          <Appbar.Content title={this.state.name} subtitle={this.state.dob} />
           <Appbar.Action icon="logout" onPress={this.signOutUser} />
         </Appbar.Header>
 
@@ -123,7 +121,7 @@ export default class HomeScreen extends React.Component {
                 name="plus"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               {/* <Image source={require("../assets/icons/addItem.png")} /> */}
               <Text style={styles.textStyle}>Add Item</Text>
@@ -137,7 +135,7 @@ export default class HomeScreen extends React.Component {
                 name="columns"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               <Text style={styles.textStyle}>Allocate Space</Text>
             </TouchableOpacity>
@@ -149,7 +147,7 @@ export default class HomeScreen extends React.Component {
                 name="database"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               <Text style={styles.textStyle}>Items List</Text>
             </TouchableOpacity>
@@ -161,7 +159,7 @@ export default class HomeScreen extends React.Component {
                 name="edit"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               <Text style={styles.textStyle}>Manual entry</Text>
             </TouchableOpacity>
@@ -173,7 +171,7 @@ export default class HomeScreen extends React.Component {
                 name="qrcode"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               <Text style={styles.textStyle}>Scan Item</Text>
             </TouchableOpacity>
@@ -185,7 +183,7 @@ export default class HomeScreen extends React.Component {
                 name="cogs"
                 type="font-awesome"
                 color="#6200ee"
-                size="60"
+                size= {60}
               />
               <Text style={styles.textStyle}>Settings</Text>
             </TouchableOpacity>

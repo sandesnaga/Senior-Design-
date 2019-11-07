@@ -2,13 +2,16 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-
+import { Appbar } from "react-native-paper";
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as firebase from "firebase";
 
 export default class ScanInventoryScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
+    email:'',
+    name:''
   };
 
   static navigationOptions = {
@@ -16,9 +19,17 @@ export default class ScanInventoryScreen extends React.Component {
     header: null
   };
   async componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName
+        });
+      }
+    })
     this.getPermissionsAsync();
   }
-
+    
   getPermissionsAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
@@ -40,6 +51,14 @@ export default class ScanInventoryScreen extends React.Component {
       return <Text>No access to camera</Text>;
     }
     return (
+      <View style={styles.topContainer}>
+      <Appbar.Header>
+        <Appbar.Content title={this.state.name} subtitle={this.state.email} />
+        <Appbar.BackAction onPress={() => {
+                this.props.navigation.navigate("Home")
+            }} />
+        <Appbar.Action icon="logout" onPress={this.signOutUser} />
+      </Appbar.Header>
       <View
         style={{
           flex: 1,
@@ -59,6 +78,7 @@ export default class ScanInventoryScreen extends React.Component {
           }} />
         )}
       </View>
+      </View>
     );
   }
 
@@ -67,3 +87,11 @@ export default class ScanInventoryScreen extends React.Component {
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 }
+
+const styles = StyleSheet.create({
+  topContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#e6e7e8"
+  },
+})

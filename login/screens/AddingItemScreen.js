@@ -18,10 +18,26 @@ export default class AddShelfScreen extends React.Component {
       location: "",
       Name: "",
       numColumr: "",
-      numRow: ""
+      numRow: "",
+      name:'',
+      email:''
     };
   }
 
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
+  componentWillUnmount(){}
   static navigationOptions = {
     title: "AddShelfScreen",
     header: null
@@ -29,12 +45,12 @@ export default class AddShelfScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.topContainer}>
         <Appbar.Header>
             <Appbar.BackAction onPress={() => {
                 this.props.navigation.navigate("Home")
             }} />
-            <Appbar.Content title={this.state.Name} subtitle="Subtitle" />
+            <Appbar.Content title={this.state.name} subtitle={this.state.email} />
           </Appbar.Header>
 
         <View style={styles.headingView}>
@@ -157,5 +173,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 25,
     color: "#fff"
-  }
+  },
+  topContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#e6e7e8"
+  },
 });

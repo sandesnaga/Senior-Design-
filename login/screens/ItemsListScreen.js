@@ -32,7 +32,6 @@ export default class ItemsListScreen extends React.Component {
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-          dob: authenticate.born
         });
       } else {
         this.props.navigation.replace("SignIn");
@@ -53,7 +52,7 @@ export default class ItemsListScreen extends React.Component {
               this.props.navigation.navigate("Home");
             }}
           />
-          <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+          <Appbar.Content title={this.state.name} subtitle={this.state.email} />
         </Appbar.Header>
       </View>
     );

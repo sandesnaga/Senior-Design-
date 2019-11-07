@@ -24,7 +24,20 @@ export default class SettingScreen extends React.Component {
       email: ""
     };
   }
-
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(authenticate => {
+      if (authenticate) {
+        this.setState({
+          email: authenticate.email,
+          name: authenticate.displayName,
+          
+        });
+      } else {
+        this.props.navigation.replace("SignIn");
+      }
+    });
+  }
+  componentWillUnmount(){}
   static navigationOptions = {
     title: "Settings",
     header: null
@@ -39,7 +52,7 @@ export default class SettingScreen extends React.Component {
               this.props.navigation.navigate("Home");
             }}
           />
-          <Appbar.Content title= {this.state.name} subtitle="Subtitle" />
+          <Appbar.Content title= {this.state.name} subtitle={this.state.email} />
         </Appbar.Header>
         <View style={styles.logoconainer}>
           <Image

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Appbar } from "react-native-paper";
 import {
   StyleSheet, 
   Text, 
@@ -78,7 +79,15 @@ if (user != null) {
   componentWillUnmount(){}
   render(){
     return (
-      
+      <View style={styles.topContainer}>
+        <Appbar.Header>
+          <Appbar.Content title={this.state.name} subtitle={this.state.email} />
+          <Appbar.BackAction onPress={() => {
+                this.props.navigation.navigate("Home")
+            }} />
+          <Appbar.Action icon="logout" onPress={this.signOutUser} />
+        </Appbar.Header>
+
       <View style={styles.container}>
         <View style={styles.headingView}
         ><Text style={{fontSize: 20,
@@ -165,6 +174,7 @@ if (user != null) {
           
               
       </View>
+      </View>
     );
   }
   
@@ -192,6 +202,11 @@ const styles = StyleSheet.create({
     paddingRight: 25,
      paddingVertical: 5
 
+  },
+  topContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#e6e7e8"
   },
   caption:{
     fontSize: 15,
