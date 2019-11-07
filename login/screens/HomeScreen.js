@@ -76,7 +76,6 @@ export default class HomeScreen extends React.Component {
       }
     });
   }
-<<<<<<< HEAD
   componentWillUnmount(){}
 
   
@@ -84,9 +83,6 @@ export default class HomeScreen extends React.Component {
   this.setState({dob:dob});
  }
 
-=======
-  componentWillUnmount() {}
->>>>>>> ac909667a9dcf7b17941678426a0d68b7b0415c4
 
   updatedob = dob => {
     console.log(this.state.dob);
@@ -115,45 +111,9 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.topContainer}>
         <Appbar.Header>
-<<<<<<< HEAD
-        <Appbar.BackAction
-          onPress={this.signOutUser}
-        />
-        <Appbar.Content
-          title= {this.state.name}
-          subtitle={"Your DOB "+this.state.dob}
-        />
-      </Appbar.Header>
-        
-            {/*
-        <View style={styles.logoconainer}>
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
-          />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
-            <Search></Search>
-          </View>
-        </View>
-            */}
-
-        <Button
-          title="Logout"
-          style={styles.button}
-          full
-          rounded
-          success
-          onPress={() => {
-            this.signOutUser();
-          }}
-        ></Button>
-=======
           <Appbar.Content title={this.state.name} subtitle="Subtitle" />
           <Appbar.Action icon="logout" onPress={this.signOutUser} />
         </Appbar.Header>
->>>>>>> ac909667a9dcf7b17941678426a0d68b7b0415c4
 
         <View style={styles.bottomContainer}>
           <View style={styles.bottomContainerElements}>
