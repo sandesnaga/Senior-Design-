@@ -83,7 +83,7 @@ if (user != null) {
         <View style={styles.headingView}
         ><Text style={{fontSize: 20,
           fontWeight: "bold",
-          color: "grey" }}>Add Shelf</Text>
+          color: "grey" }}>Allocate Space</Text>
         </View> 
             <View style={{paddingVertical:15, flex: 1}}>
 
@@ -92,7 +92,7 @@ if (user != null) {
                 <Text style={styles.caption}>Location:</Text>
               </View>
               <View><TextInput style={styles.inputstyles}
-                            placeholder="where in house"
+                            placeholder="where in house (allocate space)"
                             onChangeText={location => this.setState({location})}/>
                              
               </View>

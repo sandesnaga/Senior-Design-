@@ -6,23 +6,22 @@ import {
   Image,
   Button,
   TouchableOpacity
-} from 'react-native';
-import * as firebase from 'firebase';
-import Search from './src/components/Search';
-import { SafeAreaView } from 'react-navigation';
-import {Appbar} from "react-native-paper"
+} from "react-native";
+import * as firebase from "firebase";
+import Search from "./src/components/Search";
+import { SafeAreaView } from "react-navigation";
+import { Appbar } from "react-native-paper";
 //import { storeUrl } from "expo/build/StoreReview/StoreReview";
 //import { wrap } from "bytebuffer";
-//import icons from 'react-native-vector-icons/Ionicons'
-
+import { Icon } from "react-native-elements";
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
       email: "",
-      dob:"00-00-0000",
-      uid:''
+      dob: "00-00-0000",
+      uid: ""
     };
   }
 
@@ -51,47 +50,39 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
-    var self=this;
+    var self = this;
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
           email: authenticate.email,
-          name: authenticate.displayName,
-
+          name: authenticate.displayName
         });
         var user = firebase.auth().currentUser;
-  var uid = user.uid;
- 
-  var doblist= firebase.database().ref('user_more_info');
-  doblist.on('value',dataSnapShot=>{
-    if(dataSnapShot.val()){
-      let dobobj = Object.values(dataSnapShot.val());
-      for(var i=0;i<dataSnapShot.numChildren();i++){
-      if(dobobj[i].uid==uid)
-      {
-        self.updatedob(dobobj[i].DOB);
- 
-      }
-    }
-    }
-  })
+        var uid = user.uid;
+
+        var doblist = firebase.database().ref("user_more_info");
+        doblist.on("value", dataSnapShot => {
+          if (dataSnapShot.val()) {
+            let dobobj = Object.values(dataSnapShot.val());
+            for (var i = 0; i < dataSnapShot.numChildren(); i++) {
+              if (dobobj[i].uid == uid) {
+                self.updatedob(dobobj[i].DOB);
+              }
+            }
+          }
+        });
       } else {
         this.props.navigation.replace("SignIn");
       }
     });
-    
   }
-  componentWillUnmount(){}
+  componentWillUnmount() {}
 
-  
- updatedob =(dob)=>{
-  console.log(this.state.dob);
-  this.setState({dob:dob});
-  console.log(this.state.dob);
-  
- }
-
-
+  updatedob = dob => {
+    console.log(this.state.dob);
+    this.setState({ dob: dob });
+    console.log(this.state.dob);
+  };
 
   signOutUser = () => {
     firebase
@@ -112,83 +103,89 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.topContainer}>
-
+      <View style={styles.topContainer}>
         <Appbar.Header>
-        <Appbar.BackAction
-          onPress={this.signOutUser}
-        />
-        <Appbar.Content
-          title= {this.state.name}
-          subtitle="Subtitle"
-        />
-      </Appbar.Header>
-        
-            {/*
-        <View style={styles.logoconainer}>
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
-          />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
-            <Search></Search>
-          </View>
-        </View>
-            */}
-
-        <Button
-          title="Logout"
-          style={styles.button}
-          full
-          rounded
-          success
-          onPress={() => {
-            this.signOutUser();
-          }}
-        ></Button>
+          <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+          <Appbar.Action icon="logout" onPress={this.signOutUser} />
+        </Appbar.Header>
 
         <View style={styles.bottomContainer}>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.gotoAddItem}>
-              <Image source={require("../assets/icons/addItem.png")} />
+              <Icon
+                raised
+                name="plus"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
+              {/* <Image source={require("../assets/icons/addItem.png")} /> */}
               <Text>Add Item</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.allocateSpace}>
-              <Image source={require("../assets/icons/allocateSpace.png")} />
+              <Icon
+                raised
+                name="columns"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
               <Text>Allocate Space</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.itemsList}>
-              <Image source={require("../assets/icons/itemsList.png")} />
+              <Icon
+                raised
+                name="database"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
               <Text>Items List</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.manualEntry}>
-              <Image source={require("../assets/icons/manualEntry.png")} />
+              <Icon
+                raised
+                name="edit"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
               <Text>Manual entry</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.scanInventory}>
-              <Image source={require("../assets/icons/scanItem.png")} />
+              <Icon
+                raised
+                name="qrcode"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
               <Text>Scan Item</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.settings}>
-              <Image source={require("../assets/icons/settings.png")} />
+              <Icon
+                raised
+                name="cogs"
+                type="font-awesome"
+                color="#6200ee"
+                size="60"
+              />
               <Text>Settings</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -196,7 +193,8 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: "#e6e7e8"
   },
   bottomContainer: {
     flex: 3,
@@ -209,6 +207,7 @@ const styles = StyleSheet.create({
     height: "30%",
     width: "45%",
     margin: 5,
+
     justifyContent: "center",
     alignItems: "center"
   },
