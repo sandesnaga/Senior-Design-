@@ -12,6 +12,7 @@ import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import QRgen from "./QRgen";
 import { SafeAreaView } from "react-navigation";
+import { Appbar } from "react-native-paper";
 
 //import icons from 'react-native-vector-icons/Ionicons'
 
@@ -29,16 +30,18 @@ export default class SettingScreen extends React.Component {
     header: null
   };
 
- 
-
-  
-  
-  
   render() {
     return (
-      <SafeAreaView style={styles.topContainer}>
+      <View style={styles.topContainer}>
+        <Appbar.Header>
+          <Appbar.BackAction
+            onPress={() => {
+              this.props.navigation.navigate("Home");
+            }}
+          />
+          <Appbar.Content title= {this.state.name} subtitle="Subtitle" />
+        </Appbar.Header>
         <View style={styles.logoconainer}>
-         
           <Image
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
@@ -56,23 +59,23 @@ export default class SettingScreen extends React.Component {
           style={styles.button}
           full
           rounded
-          success          
+          success
         ></Button>
 
-<Button style={styles.button}
+        <Button
+          style={styles.button}
           title="toHome"
           full
           rounded
-          onPress={()=> {
+          onPress={() => {
             this.props.navigation.navigate("Home");
           }}
-          ><Text style={styles.buttonText}>Back</Text></Button>
+        >
+          <Text style={styles.buttonText}>Back</Text>
+        </Button>
 
-<QRgen></QRgen>
-</SafeAreaView>
-
-          
-          
+        <QRgen></QRgen>
+      </View>
     );
   }
 }
@@ -96,8 +99,8 @@ const styles = StyleSheet.create({
     height: "30%",
     width: "45%",
     margin: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   logoContainer: {
     alignItems: "center",

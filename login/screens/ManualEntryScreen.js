@@ -65,7 +65,7 @@ export default class ManualEntryScreem extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.topContainer}>
+      <View style={styles.topContainer}>
         <View style={styles.logoconainer}>
           {/*
           <Image
@@ -169,7 +169,7 @@ export default class ManualEntryScreem extends React.Component {
         >
           <Text style={styles.buttonText}>Back</Text>
         </Button>
-      </SafeAreaView>
+      </View>
     );
   }
 }

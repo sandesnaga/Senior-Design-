@@ -14,14 +14,15 @@ import { SafeAreaView } from "react-navigation";
 import { storeUrl } from "expo/build/StoreReview/StoreReview";
 import { wrap } from "bytebuffer";
 //import icons from 'react-native-vector-icons/Ionicons'
+import { Appbar } from "react-native-paper";
 
 export default class ItemsListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:'',
-      email:'',
-      dob:'',
+      name: "",
+      email: "",
+      dob: ""
     };
   }
 
@@ -31,8 +32,7 @@ export default class ItemsListScreen extends React.Component {
         this.setState({
           email: authenticate.email,
           name: authenticate.displayName,
-          dob: authenticate.born,
-          
+          dob: authenticate.born
         });
       } else {
         this.props.navigation.replace("SignIn");
@@ -44,49 +44,18 @@ export default class ItemsListScreen extends React.Component {
     header: null
   };
 
- 
-
-  
-  
-  
   render() {
     return (
-      <SafeAreaView style={styles.topContainer}>
-        <View style={styles.logoconainer}>
-         
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
+      <View style={styles.topContainer}>
+        <Appbar.Header>
+          <Appbar.BackAction
+            onPress={() => {
+              this.props.navigation.navigate("Home");
+            }}
           />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
-
-            <Search></Search>
-          </View>
-        </View>
-
-        <Button
-          title="This is Items List"
-          style={styles.button}
-          full
-          rounded
-          success
-          
-        ></Button>
-
-<Button style={styles.button}
-          title="toHome"
-          full
-          rounded
-          onPress={()=> {
-            this.props.navigation.navigate("Home");
-          }}
-          ><Text style={styles.buttonText}>Back</Text></Button>
-</SafeAreaView>
-
-          
-          
+          <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+        </Appbar.Header>
+      </View>
     );
   }
 }
@@ -110,8 +79,8 @@ const styles = StyleSheet.create({
     height: "30%",
     width: "45%",
     margin: 5,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   logoContainer: {
     alignItems: "center",

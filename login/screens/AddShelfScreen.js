@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput
-} from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { Button } from "native-base";
 import * as firebase from "firebase";
-import { Appbar } from 'react-native-paper';
-
+import { Appbar } from "react-native-paper";
 
 export default class AddShelfScreen extends React.Component {
   constructor(props) {
@@ -42,34 +36,26 @@ export default class AddShelfScreen extends React.Component {
     });
   }
   render() {
-    return ( 
+    return (
       <View style={styles.container}>
-        <View style = {{flex:1, flexDirection: 'column'}}>
-        <Appbar.Header>
-        <Appbar.BackAction
-          onPress={this._goBack}
-        />
-        <Appbar.Content
-          title= {this.state.name}
-          subtitle="Subtitle"
-        />
-      </Appbar.Header>
-        </View>
-        
         <View style={styles.headingView}>
+          <Appbar.Header>
+            <Appbar.BackAction onPress={this._goBack} />
+            <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+          </Appbar.Header>
           <Text style={{ fontSize: 20, fontWeight: "bold", color: "grey" }}>
             Add Shelf
           </Text>
         </View>
         <View style={{ paddingVertical: 15, flex: 1 }}>
           <View style={styles.locationView}>
-            <View>
+            <View> 
               <Text style={styles.caption}>Location:</Text>
             </View>
             <View>
               <TextInput
                 style={styles.inputstyles}
-                placeholder="where in house"
+                placeholder="where in house(add shelf)"
               />
             </View>
           </View>
