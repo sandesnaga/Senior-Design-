@@ -120,7 +120,7 @@ export default class HomeScreen extends React.Component {
                 size="60"
               />
               {/* <Image source={require("../assets/icons/addItem.png")} /> */}
-              <Text>Add Item</Text>
+              <Text style={styles.textStyle}>Add Item</Text>
             </TouchableOpacity>
           </View>
 
@@ -133,7 +133,7 @@ export default class HomeScreen extends React.Component {
                 color="#6200ee"
                 size="60"
               />
-              <Text>Allocate Space</Text>
+              <Text style={styles.textStyle}>Allocate Space</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
@@ -145,7 +145,7 @@ export default class HomeScreen extends React.Component {
                 color="#6200ee"
                 size="60"
               />
-              <Text>Items List</Text>
+              <Text style={styles.textStyle}>Items List</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
@@ -157,7 +157,7 @@ export default class HomeScreen extends React.Component {
                 color="#6200ee"
                 size="60"
               />
-              <Text>Manual entry</Text>
+              <Text style={styles.textStyle}>Manual entry</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
@@ -169,7 +169,7 @@ export default class HomeScreen extends React.Component {
                 color="#6200ee"
                 size="60"
               />
-              <Text>Scan Item</Text>
+              <Text style={styles.textStyle}>Scan Item</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainerElements}>
@@ -181,7 +181,7 @@ export default class HomeScreen extends React.Component {
                 color="#6200ee"
                 size="60"
               />
-              <Text>Settings</Text>
+              <Text style={styles.textStyle}>Settings</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -225,5 +225,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#fff"
+  },
+  textStyle: {
+    alignSelf: "center",
+    color: "#6200ee",
+    fontWeight: "bold"
   }
 });
