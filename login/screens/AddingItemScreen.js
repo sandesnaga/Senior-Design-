@@ -113,7 +113,6 @@ export default class AddShelfScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30
   },
   headingView: {
     height: 40,

@@ -38,7 +38,7 @@ export default class ManualEntryScreem extends React.Component {
       itemDescription: "",
       itemQuantity: "",
       pin: "",
-      Date: "",
+      date: "",
       name: "",
       email: "",
       dob: ""
@@ -67,59 +67,74 @@ export default class ManualEntryScreem extends React.Component {
     return (
       <View style={styles.topContainer}>
         <View style={styles.logoconainer}>
-          {/*
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
-          />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
-            <Search></Search>
-          </View>
-          */}
         </View>
         <KeyboardAwareScrollView style={styles.form}>
-          <View style={{ flex: 1 }}>
-            
-            <Appbar.Header>
-              <Appbar.BackAction
-                onPress={() => {
-                  this.props.navigation.navigate("Home");
-                }}
-              />
-              <Appbar.Content title={this.state.name} subtitle="Subtitle" />
-            </Appbar.Header>
-        
-          </View>
-          <View>
-            <Text>Item Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Please enter your item Name"
-              onchangeText={() => "#"}
-            ></TextInput>
+          <Appbar.Header>
+            <Appbar.BackAction
+              onPress={() => {
+                this.props.navigation.navigate("Home");
+              }}
+            />
+            <Appbar.Content title={this.state.name} subtitle="Subtitle" />
+          </Appbar.Header>
 
-            <Text>Item description</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Please enter your item description"
-              onchangeText={() => "#"}
-            ></TextInput>
+          {/* second view for the input form of the lique*/}
+          <View style={{ paddingVertical: 15, flex: 1 }}>
+            <View >
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={styles.caption}>Item Name:</Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="Name of Item"
+                    onChangeText={itemName => this.setState({ itemName })}
 
-            <Text>Item Quantity</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Please enter your item Quantity"
-              onchangeText={() => "#"}
-            ></TextInput>
+                  />
+                </View>
+              </View>
+            </View>
 
-            <Text style={{ paddingBottom: 5 }}>
-              Please select the pre remainder time.
-            </Text>
+            <View >
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={styles.caption}>Item Description:</Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="Product Description"
+                    onChangeText={itemDescription => this.setState({ itemDescription })}
 
+                  />
+                </View>
+              </View>
+            </View>
+
+            <View >
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={styles.caption}>Product Quantity:</Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="# of Items"
+                    onChangeText={itemQuantity => this.setState({ itemQuantity })}
+
+                  />
+                </View>
+              </View>
+            </View>
+
+            <View >
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={styles.caption}>Product Quantity:</Text>
+                </View>
             <DatePicker
-              style={{ width: 200, justifyContent: "center" }}
+              style={{ width: 200, justifyContent: "center", alignSelf: "center" }}
               date={this.state.date}
               mode="date"
               placeholder="select date"
@@ -144,19 +159,32 @@ export default class ManualEntryScreem extends React.Component {
                 this.setState({ date: date });
               }}
             />
+          </View>
+          </View>
             <RadioForm
               style={styles.radioForm}
               radio_props={expirationChoices}
               onPress={value => {}}
               formHorizontal={true}
             ></RadioForm>
-            <Text>Secure your location with pin(Optional).</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Please enter pin for your item"
-              onchangeText={() => "#"}
-            ></TextInput>
+
+            <View >
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={styles.caption}>Product Pin:</Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="Pin for your product"
+                    onChangeText={pin => this.setState({ pin })}
+
+                  />
+                </View>
+              </View>
+            </View>
           </View>
+
         </KeyboardAwareScrollView>
         <Button
           style={styles.button}
@@ -237,5 +265,26 @@ const styles = StyleSheet.create({
     marginTop: 20,
     //padding: 7,
     justifyContent: "center"
-  }
+  },
+  locationView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingVertical: 5
+  },
+  caption: {
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+  },
+  inputstyles: {
+    borderColor: "grey",
+    borderWidth: 1.5,
+    borderRadius: 5,
+    minWidth: 200,
+    height: 40,
+    paddingLeft: 10
+  },
 });
