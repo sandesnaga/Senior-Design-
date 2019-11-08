@@ -1,5 +1,5 @@
 import React from 'React';
-import {StyleSheet, TextInput, Button,Text} from 'react-native';
+import {StyleSheet, TextInput, Button,Text, View} from 'react-native';
 
 export default class Search extends React.Component {
     constructor(props){
@@ -8,14 +8,18 @@ export default class Search extends React.Component {
             searchText : ""
         }
     };
-
+    static navigationOptions = {
+        title: "Search",
+        header: null
+    }
     render(){
         return(
+            <View>
             <TextInput 
             style = {styles.textInput}
             placeholder = "What do you want to drink today?"
             ></TextInput>
-            
+           <Button title={'Search'} onPress={() => {}} /></View>
         );
     };
 }

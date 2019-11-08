@@ -5,7 +5,8 @@ import {
   View,
   Image,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  YellowBox,
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
@@ -14,8 +15,10 @@ import { Appbar } from "react-native-paper";
 //import { storeUrl } from "expo/build/StoreReview/StoreReview";
 //import { wrap } from "bytebuffer";
 import { Icon } from "react-native-elements";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default class HomeScreen extends React.Component {
   constructor(props) {
+    YellowBox.ignoreWarnings(['Setting a timer']);
     super(props);
     this.state = {
       name: "",
@@ -51,6 +54,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     var self = this;
+    var ttt;
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
@@ -71,6 +75,7 @@ export default class HomeScreen extends React.Component {
             }
           }
         });
+       
       } else {
         this.props.navigation.replace("SignIn");
       }
@@ -112,7 +117,6 @@ export default class HomeScreen extends React.Component {
           <Appbar.Content title={this.state.name} subtitle={this.state.dob} />
           <Appbar.Action icon="logout" onPress={this.signOutUser} />
         </Appbar.Header>
-
         <View style={styles.bottomContainer}>
           <View style={styles.bottomContainerElements}>
             <TouchableOpacity onPress={this.gotoAddItem}>

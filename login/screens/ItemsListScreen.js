@@ -54,6 +54,7 @@ export default class ItemsListScreen extends React.Component {
           />
           <Appbar.Content title={this.state.name} subtitle={this.state.email} />
         </Appbar.Header>
+        <Search></Search>
       </View>
     );
   }
