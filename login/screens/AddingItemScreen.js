@@ -151,7 +151,7 @@ var j=0;
 
   render() {
     const { navigation } = this.props;
-    tempdata=navigation.getParam('Passeddata','0000000')
+    tempdata=navigation.getParam('Passeddata','')
     return (
       <View style={styles.topContainer}>
         <KeyboardAwareScrollView style={styles.form}>
