@@ -4,12 +4,12 @@ import {
   StyleSheet, 
   Text, 
   View,
-  Image,
-  TouchableOpacity,TextInput, Alert}
+  TextInput, Alert}
    from 'react-native';
    import {Button} from "native-base"
    import * as firebase from "firebase";
-   import { showMessage, hideMessage } from "react-native-flash-message";
+import { number } from 'prop-types';
+import { isNumber, isNull } from 'util';
    
    
 export default class AllocateSpaceScreen extends React.Component {
@@ -30,7 +30,10 @@ export default class AllocateSpaceScreen extends React.Component {
 allocatespace = (location, Name, numColumn, numRow)=>{
   var user = firebase.auth().currentUser;
   var uid;
-
+if(isNumber(numColumn) || isNumber(numRow)||location==""||Name==""){
+  Alert.alert("Empty Field/s");
+  return true;
+}
 if (user != null) {
   uid = user.uid;
 }
@@ -51,13 +54,7 @@ if (user != null) {
       })
     }
   }
-  this.setState({
-    location:'',
-    Name:'',
-    numColumn:'',
-    numRow:''
-  })
-  
+  Alert.alert("Shelf Status","Success");
 }
   static navigationOptions = {
     title: "AllocateSpace",
@@ -76,7 +73,8 @@ if (user != null) {
       }
     });
   }
-  componentWillUnmount(){}
+  componentWillUnmount(){
+  }
   render(){
     return (
       <View style={styles.topContainer}>
@@ -128,6 +126,7 @@ if (user != null) {
               </View>
               <View>
                 <TextInput style={styles.inputstyles}
+                              keyboardType = 'numeric'
                             placeholder="# of column"
                             onChangeText={numColumn => this.setState({numColumn})}/>
                              
@@ -141,6 +140,7 @@ if (user != null) {
                 <Text style={styles.caption}>No of Rows:</Text>
               </View>
               <View><TextInput style={styles.inputstyles}
+                              keyboardType = 'numeric'
                             placeholder="# of row"
                             onChangeText={numRow => this.setState({numRow})}/>
                             
@@ -158,8 +158,8 @@ if (user != null) {
                 this.state.numColumn,
                 this.state.numRow,
                 this.props.navigation.navigate("Home")
-                ),
-                Alert.alert("Shelf Status","Success");
+                )
+              
               }
                 
                 }><Text style={styles.buttonText}>create</Text></Button>

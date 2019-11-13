@@ -54,7 +54,6 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     var self = this;
-    var ttt;
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
@@ -65,33 +64,33 @@ export default class HomeScreen extends React.Component {
         var uid = user.uid;
 
         var doblist = firebase.database().ref("user_more_info");
-        doblist.on("value", dataSnapShot => {
+        doblist.once("value", dataSnapShot => {
           if (dataSnapShot.val()) {
             let dobobj = Object.values(dataSnapShot.val());
             for (var i = 0; i < dataSnapShot.numChildren(); i++) {
               if (dobobj[i].uid == uid) {
                 self.updatedob(dobobj[i].DOB);
+                return (true);
               }
             }
+            return (true);
           }
         });
        
       } else {
         this.props.navigation.replace("SignIn");
+        return (true);
       }
     });
+    return (true);
   }
-  componentWillUnmount(){}
-
+  componentWillUnmount(){
+    return true;
+  }
   
  updatedob =(dob)=>{
   this.setState({dob:dob});
  }
-
-
-  updatedob = dob => {
-    this.setState({ dob: dob });
-  };
 
   signOutUser = () => {
     firebase

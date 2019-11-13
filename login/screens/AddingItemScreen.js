@@ -1,30 +1,17 @@
 import React from "react";
-import QRCode from "react-native-qrcode";
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import {Form, Label, Input, Item, Button} from "native-base"
+import { Button} from "native-base"
 import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  StatusBar,
-  TouchableOpacity,
   Alert
 } from "react-native";
 import { Appbar } from "react-native-paper";
-import barcode from "./src/components/barcode";
 import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "react-native-datepicker";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel
-} from "react-native-simple-radio-button";
-import { date } from "yup";
+import RadioForm from "react-native-simple-radio-button";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 //import icons from 'react-native-vector-icons/Ionicons'
@@ -66,7 +53,7 @@ if (user != null) {
 var j=0;
   var itemref = firebase.database().ref("item_added");
   var locationref = firebase.database().ref("allocated_space");
-  locationref.on("value",dataSnapShot =>{
+  locationref.once("value",dataSnapShot =>{
     if (dataSnapShot.val()) {
       let dobobj = Object.values(dataSnapShot.val());
       let keyobj = Object.keys(dataSnapShot.val());
@@ -96,7 +83,7 @@ var j=0;
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);
       this.props.navigation.replace("Home");
-      break;
+      return true;
         }
        if(j>0){
          break;
@@ -105,17 +92,18 @@ var j=0;
       if(j==0){
       Alert.alert("Available Space","None");
       this.props.navigation.replace("AddingItem");
-      return true;
+      return (true);
       }
     }
     else{
       Alert.alert("Available Space","None");
       this.props.navigation.replace("AddingItem");
-      return false;
+      return (true);
     }
   })
-  
+  return (true);
 }
+return (true);
   }
 
   componentDidMount() {
@@ -143,7 +131,9 @@ var j=0;
         year + '-' + month + '-' + date,
     });
   }
-
+  componentWillUnmount(){
+    return true;
+  }
    static navigationOptions = {
     title: "AddingItem",
     header: null
@@ -204,6 +194,7 @@ var j=0;
             <Text>Item Quantity</Text>
             <TextInput
               style={styles.input}
+              keyboardType = 'numeric'
               placeholder="Please enter your item Quantity"
               onChangeText={itemQuantity => {this.setState({itemQuantity})}}
             ></TextInput>
@@ -243,6 +234,7 @@ var j=0;
             <Text>Secure your location with pin(Optional).</Text>
             <TextInput
               style={styles.input}
+              keyboardType = 'numeric'
               placeholder="Please enter pin for your item"
               onChangeText={pin => {this.setState({pin})}}
             ></TextInput>
