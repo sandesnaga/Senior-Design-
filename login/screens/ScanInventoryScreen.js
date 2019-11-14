@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import { Appbar } from "react-native-paper";
@@ -11,7 +11,10 @@ export default class ScanInventoryScreen extends React.Component {
     hasCameraPermission: null,
     scanned: false,
     email:'',
-    name:''
+    name:'',
+    itemname: '',
+    searchText:'',
+    temp:''
   };
 
   static navigationOptions = {
@@ -23,7 +26,7 @@ export default class ScanInventoryScreen extends React.Component {
       if (authenticate) {
         this.setState({
           email: authenticate.email,
-          name: authenticate.displayName
+          name: authenticate.displayName,
         });
       }
     })
@@ -37,7 +40,50 @@ export default class ScanInventoryScreen extends React.Component {
   goHome = ()=>{
 
   }
+  search=(searchText)=>{
+    var user = firebase.auth().currentUser;
+    var uid, j=0;
+    
+    if (user != null) {
+        uid = user.uid;
+    }
+    var itemref = firebase.database().ref("item_added");
+    var locationref = firebase.database().ref("allocated_space");
 
+    itemref.once("value",dataSnapShot=>{
+        if(dataSnapShot.val()){
+            let dobobj = Object.values(dataSnapShot.val());
+            let keyobj = Object.keys(dataSnapShot.val());
+            for (var i = 0; i < dataSnapShot.numChildren(); i++) {
+                if(keyobj[i]==searchText && dobobj[i].uid==uid)
+                {
+                    j++;
+                    this.setState({
+                      temp: dobobj[i].location,
+                      itemname:dobobj[i].itemName
+                    })
+                }
+                
+            }
+            if(j==0){
+                Alert.alert(" No Such item Found ");
+            }
+        }
+    })
+    locationref.once("value",dataSnapShot=>{
+        if(dataSnapShot.val()){
+            let dobobj = Object.values(dataSnapShot.val());
+            let keyobj = Object.keys(dataSnapShot.val());
+            for (var i = 0; i < dataSnapShot.numChildren(); i++){
+                if(keyobj[i]==this.state.temp)
+                {
+                   Alert.alert(this.state.itemname+" is on " , " Row = "+dobobj[i].Row +
+                    " and Column = "+ dobobj[i].Column + " at "+dobobj[i].location) 
+                }
+            }
+        }
+    })
+}
  
 
   
@@ -84,7 +130,8 @@ export default class ScanInventoryScreen extends React.Component {
 
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    this.search(data);
   };
 }
 
