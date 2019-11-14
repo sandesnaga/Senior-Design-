@@ -8,8 +8,8 @@ import {
    from 'react-native';
    import {Button} from "native-base"
    import * as firebase from "firebase";
-import { number } from 'prop-types';
-import { isNumber, isNull } from 'util';
+   import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { isNumber } from 'util';
    
    
 export default class AllocateSpaceScreen extends React.Component {
@@ -78,6 +78,7 @@ if (user != null) {
   render(){
     return (
       <View style={styles.topContainer}>
+        <KeyboardAwareScrollView style={styles.form}>
         <Appbar.Header>
           <Appbar.Content title={this.state.name} subtitle={this.state.email} />
           <Appbar.BackAction onPress={() => {
@@ -174,6 +175,7 @@ if (user != null) {
           
               
       </View>
+      </KeyboardAwareScrollView>
       </View>
     );
   }
@@ -192,21 +194,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
         
   },
-  
+  form: {
+    flex: 1
+  },
+
   locationView:{
-    
     flexDirection: "row",
     justifyContent: "space-between",  
     alignItems:"center",  
     paddingLeft: 25,
     paddingRight: 25,
      paddingVertical: 5
-
   },
+  
   topContainer: {
     flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#e6e7e8"
+    flexDirection: "column"
   },
   caption:{
     fontSize: 15,

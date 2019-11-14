@@ -85,7 +85,6 @@ export default class HomeScreen extends React.Component {
     return (true);
   }
   componentWillUnmount(){
-    return true;
   }
   
  updatedob =(dob)=>{

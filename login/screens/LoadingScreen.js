@@ -19,6 +19,8 @@ export default class LoadingScreen extends React.Component{
             }
         })
     }
+    componentWillUnmount(){
+    }
   render(){
     return (
       <View style={styles.container}>

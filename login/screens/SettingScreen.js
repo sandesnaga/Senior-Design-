@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
+import Addimage from "./src/components/Addimage";
 import QRgen from "./QRgen";
 import { SafeAreaView } from "react-navigation";
 import { Appbar } from "react-native-paper";
@@ -64,6 +65,7 @@ export default class SettingScreen extends React.Component {
             <Text> You are signed in as: {this.state.email}</Text>
 
             <Search></Search>
+         
           </View>
         </View>
 

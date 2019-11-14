@@ -50,6 +50,7 @@ export default class Search extends React.Component {
                     {
                        Alert.alert(searchText+" is on " , " Row = "+dobobj[i].Row +
                         " and Column = "+ dobobj[i].Column + " at "+dobobj[i].location) 
+                        
                     }
                 }
             }

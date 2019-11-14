@@ -12,17 +12,20 @@ import * as firebase from "firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-//import icons from 'react-native-vector-icons/Ionicons'
 
 var expirationChoices = [
   { label: "1 Week ", value: 0 },
   { label: "1 Month  ", value: 1 },
   { label: "1 Year", value: 2 }
 ];
+
+var type = [
+  { label: "Alcohol ", value: 0 },
+  { label: "Other  ", value: 1 },
+];
 var tempdata='';
 var templocation='', row, column;
+
 export default class ManualEntryScreem extends React.Component {
   constructor(props) {
     super(props);
@@ -39,11 +42,15 @@ export default class ManualEntryScreem extends React.Component {
       expchoice:'',
       uid:'',
       locationid:'',
-      location:''
+      location:'',
+      itemtype:'',
+      bplace:'',
+      bstyle:'',
+      format:''
     };
   }
 
-  additem=(itemName,barcode,itemDescription,itemQuantity,date,expchoice,pin)=>{
+  additem=(itemName,barcode,itemDescription,itemQuantity,date,expchoice,pin,itemtype,bstyle,format,bplace)=>{
     var user = firebase.auth().currentUser;
     var uid;
     var shelfname, shelflocation;
@@ -78,7 +85,10 @@ var j=0;
         uid: uid,
         location:templocation,
         time: Date.now(),
-        
+        itemtype:itemtype,
+        bplace:bplace,
+        bstyle:bstyle,
+        format:format,
       })
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);
@@ -105,6 +115,7 @@ var j=0;
 }
 return (true);
   }
+
 
   componentDidMount() {
     this.setState({
@@ -140,6 +151,8 @@ return (true);
   };
 
   render() {
+    const { navigation } = this.props;
+    tempdata=navigation.getParam('Passeddata','')
     return (
       <View style={styles.topContainer}>
         <KeyboardAwareScrollView style={styles.form}>
@@ -159,16 +172,51 @@ return (true);
           <Text>Item Barcode</Text>
             { <TextInput
               style={styles.input}
-              placeholder={"Enter Barcode"}
+              placeholder=" Bar Code"
               onChangeText={barcode => {this.setState({barcode})}}
             ></TextInput> }
+          <Text style={{ paddingBottom: 5 }}>
+              What type of Item is it?
+            </Text>
+            <RadioForm
+              style={styles.radioForm}
+              radio_props={type}
+              onPress={
+                (value) => {this.setState({itemtype:value}) 
+              }
+              }
+              formHorizontal={true}
+            ></RadioForm>
+              {this.state.itemtype? undefined:(<View>
+                  <Text>Alcohol</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder=" Brewery Style"
+                    onChangeText={bstyle => {this.setState({bstyle})}}
+                  ></TextInput>
+                  </View>)}
             <Text>Item Name</Text>
             { <TextInput
               style={styles.input}
               placeholder={"Name of Item"}
               onChangeText={itemName => {this.setState({itemName})}}
             ></TextInput> }
-            
+            {this.state.itemtype? undefined:(<View>
+                  <Text>Format</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder=" How it is Packed?"
+                    onChangeText={format => {this.setState({format})}}
+                  ></TextInput>
+
+                  <Text>Brewery Place</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder=" Where is it made?"
+                    onChangeText={bplace=> {this.setState({bplace})}}
+                  ></TextInput>
+                  </View>)}
+
             <Text>Item description</Text>
             <TextInput
               style={styles.input}
@@ -193,8 +241,7 @@ return (true);
         mode="date"
         placeholder="Expiration Date"
         format="YYYY-MM-DD"
-        minDate="1916-05-01"
-        maxDate= {this.state.today}
+        minDate={this.state.today}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -213,7 +260,10 @@ return (true);
             <RadioForm
               style={styles.radioForm}
               radio_props={expirationChoices}
-              onPress={(value) => {this.setState({expchoice:value})}}
+              onPress={
+                (value) => {this.setState({expchoice:value}) 
+              }
+              }
               formHorizontal={true}
             ></RadioForm>
             <Text>Secure your location with pin(Optional).</Text>
@@ -236,6 +286,10 @@ return (true);
                 this.state.date,
                 this.state.expchoice,
                 this.state.pin,
+                this.state.itemtype,
+                this.state.bplace,
+                this.state.bstyle,
+                this.state.format
             )}}
           ><Text style={styles.buttonText}>Add Item</Text></Button>
         </KeyboardAwareScrollView>

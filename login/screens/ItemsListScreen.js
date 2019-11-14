@@ -3,17 +3,11 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  Button,
-  ScrollView,
-  TouchableOpacity
+  TextInput
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
-import { storeUrl } from "expo/build/StoreReview/StoreReview";
-import { wrap } from "bytebuffer";
-//import icons from 'react-native-vector-icons/Ionicons'
 import { Appbar } from "react-native-paper";
 
 export default class ItemsListScreen extends React.Component {
@@ -22,7 +16,9 @@ export default class ItemsListScreen extends React.Component {
     this.state = {
       name: "",
       email: "",
-      dob: ""
+      dob: "",
+      itemname:'',
+      quantity:'1',
     };
   }
 
@@ -46,6 +42,7 @@ export default class ItemsListScreen extends React.Component {
   render() {
     return (
       <View style={styles.topContainer}>
+         <KeyboardAwareScrollView style={styles.form}>
         <Appbar.Header>
           <Appbar.BackAction
             onPress={() => {
@@ -55,6 +52,27 @@ export default class ItemsListScreen extends React.Component {
           <Appbar.Content title={this.state.name} subtitle={this.state.email} />
         </Appbar.Header>
         <Search></Search>
+        <View>
+        <Text>Item Name</Text>
+            { <TextInput
+              style={styles.input}
+              placeholder={"Item you Grab"}
+              onChangeText={itemname => {this.setState({itemname})}}
+            ></TextInput> 
+            }
+
+          <Text>Quantity </Text>
+            { <TextInput
+              style={styles.input}
+              keyboardType = 'numeric'
+              placeholder={"How many you took ?"}
+              onChangeText={quantity => {this.setState({quantity})}}
+            ></TextInput> 
+            }
+          
+         
+        </View>
+        </KeyboardAwareScrollView>
       </View>
     );
   }
@@ -91,6 +109,15 @@ const styles = StyleSheet.create({
   },
   userDetails: {},
 
+  input: {
+    marginBottom: 10,
+    height: 34,
+    paddingHorizontal: 10,
+    borderRadius: 4,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    fontSize: 16
+  },
   button: {
     marginTop: 20
   },
