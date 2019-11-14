@@ -7,7 +7,8 @@ export default class Search extends React.Component {
         super(props);
         this.state = {
             searchText : "",
-            uid: ""
+            uid: "",
+            temp:''
         }
     };
     static navigationOptions = {
@@ -30,15 +31,8 @@ export default class Search extends React.Component {
                 for (var i = 0; i < dataSnapShot.numChildren(); i++) {
                     if(dobobj[i].itemName==searchText && dobobj[i].uid==uid)
                     {
-                        locationref.once("value",dataSnapShot=>{
-                            if(dataSnapShot.val()){
-                            let locobj = Object.values(dataSnapShot.val());
-                            Alert.alert(searchText+ " is on ", "Row = "+locobj.child(dobobj[i].location).Row  +" and Column = "+ locobj.child(dobobj[i].location).Column + " at "+dobobj[i].location);
-                            }
-                        })
-                    
-                       
-                        j++
+                        j++;
+                        this.setState({temp:dobobj[i].location})
                     }
                     
                 }
@@ -46,8 +40,18 @@ export default class Search extends React.Component {
                     Alert.alert(searchText+ " is not on any of your shelf");
                 }
             }
-            if(j==0){
-                Alert.alert(searchText+ " is not on any of your shelf");
+        })
+        locationref.once("value",dataSnapShot=>{
+            if(dataSnapShot.val()){
+                let dobobj = Object.values(dataSnapShot.val());
+                let keyobj = Object.keys(dataSnapShot.val());
+                for (var i = 0; i < dataSnapShot.numChildren(); i++){
+                    if(keyobj[i]==this.state.temp)
+                    {
+                       Alert.alert(searchText+" is on " , " Row = "+dobobj[i].Row +
+                        " and Column = "+ dobobj[i].Column + " at "+dobobj[i].location) 
+                    }
+                }
             }
         })
     }
