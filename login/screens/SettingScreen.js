@@ -5,14 +5,9 @@ import {
   View,
   Image,
   Button,
-  ScrollView,
-  TouchableOpacity
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
-import Addimage from "./src/components/Addimage";
-import QRgen from "./QRgen";
-import { SafeAreaView } from "react-navigation";
 import { Appbar } from "react-native-paper";
 
 //import icons from 'react-native-vector-icons/Ionicons'
@@ -89,7 +84,6 @@ export default class SettingScreen extends React.Component {
           <Text style={styles.buttonText}>Back</Text>
         </Button>
 
-        <QRgen></QRgen>
       </View>
     );
   }

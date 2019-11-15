@@ -75,8 +75,10 @@ var j=0;
           shelfname=dobobj[i].Name,
           row=dobobj[i].Row,
           column=dobobj[i].Column
-         
+
+          
           var newitemref = itemref.push();
+          var Key = newitemref.getKey();
         newitemref.set({
         itemName:itemName,
         barcode:barcode,
@@ -95,7 +97,10 @@ var j=0;
       })
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);
-      this.props.navigation.replace("Home");
+      this.props.navigation.navigate('QRgen', {
+        Passeddata: Key,
+      })
+
       return true;
         }
        if(j>0){

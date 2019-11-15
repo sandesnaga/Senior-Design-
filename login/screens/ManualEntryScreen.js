@@ -12,6 +12,9 @@ import * as firebase from "firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+//import icons from 'react-native-vector-icons/Ionicons'
 
 var expirationChoices = [
   { label: "1 Week ", value: 0 },
@@ -72,8 +75,10 @@ var j=0;
           shelfname=dobobj[i].Name,
           row=dobobj[i].Row,
           column=dobobj[i].Column
-         
+
+          
           var newitemref = itemref.push();
+          var Key = newitemref.getKey();
         newitemref.set({
         itemName:itemName,
         barcode:barcode,
@@ -92,7 +97,10 @@ var j=0;
       })
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);
-      this.props.navigation.replace("Home");
+      this.props.navigation.navigate('QRgen', {
+        Passeddata: Key,
+      })
+      
       return true;
         }
        if(j>0){
@@ -118,9 +126,6 @@ return (true);
 
 
   componentDidMount() {
-    this.setState({
-      barcode:tempdata
-    })
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
@@ -151,8 +156,6 @@ return (true);
   };
 
   render() {
-    const { navigation } = this.props;
-    tempdata=navigation.getParam('Passeddata','')
     return (
       <View style={styles.topContainer}>
         <KeyboardAwareScrollView style={styles.form}>
@@ -172,9 +175,10 @@ return (true);
           <Text>Item Barcode</Text>
             { <TextInput
               style={styles.input}
-              placeholder=" Bar Code"
+              placeholder=" Enter Barcode"
               onChangeText={barcode => {this.setState({barcode})}}
             ></TextInput> }
+            
           <Text style={{ paddingBottom: 5 }}>
               What type of Item is it?
             </Text>

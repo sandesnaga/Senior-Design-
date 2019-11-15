@@ -15,6 +15,7 @@ import SettingScreen from "./screens/SettingScreen";
 import AddShelfScreen from "./screens/AddShelfScreen";
 import Search from "./screens/src/components/Search";
 import barcode from "./screens/src/components/barcode";
+import QRgen from "./screens/QRgen";
 
 
 import {createAppContainer } from "react-navigation";
@@ -46,7 +47,8 @@ const MainNavigator = createStackNavigator(
     Settings: {screen: SettingScreen},
     AddShelf : {screen: AddShelfScreen},
     Search: {screen: Search},
-    barcode: {screen: barcode}
+    barcode: {screen: barcode},
+    QRgen: {screen: QRgen}
 
   },
 
