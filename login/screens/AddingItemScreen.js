@@ -94,6 +94,7 @@ var j=0;
         bplace:bplace,
         bstyle:bstyle,
         format:format,
+        key: Key
       })
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);

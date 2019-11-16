@@ -12,7 +12,6 @@ import * as firebase from "firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 //import icons from 'react-native-vector-icons/Ionicons'
 
@@ -26,7 +25,7 @@ var type = [
   { label: "Alcohol ", value: 0 },
   { label: "Other  ", value: 1 },
 ];
-var tempdata='';
+
 var templocation='', row, column;
 
 export default class ManualEntryScreem extends React.Component {
@@ -49,7 +48,8 @@ export default class ManualEntryScreem extends React.Component {
       itemtype:'',
       bplace:'',
       bstyle:'',
-      format:''
+      format:'',
+
     };
   }
 
@@ -94,6 +94,7 @@ var j=0;
         bplace:bplace,
         bstyle:bstyle,
         format:format,
+        key: Key
       })
       locationref.child(keyobj[i]).update({isAvailable:'No'})
       Alert.alert(itemName+ " is added to", "row= "+row + " "+"column "+column + " in your " +shelfname);

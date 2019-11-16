@@ -8,6 +8,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
+import Listitemview from './src/components/Listitemview';
 import { Appbar } from "react-native-paper";
 
 export default class ItemsListScreen extends React.Component {
@@ -53,24 +54,7 @@ export default class ItemsListScreen extends React.Component {
         </Appbar.Header>
         <Search></Search>
         <View>
-        <Text>Item Name</Text>
-            { <TextInput
-              style={styles.input}
-              placeholder={"Item you Grab"}
-              onChangeText={itemname => {this.setState({itemname})}}
-            ></TextInput> 
-            }
-
-          <Text>Quantity </Text>
-            { <TextInput
-              style={styles.input}
-              keyboardType = 'numeric'
-              placeholder={"How many you took ?"}
-              onChangeText={quantity => {this.setState({quantity})}}
-            ></TextInput> 
-            }
-          
-         
+         <Listitemview></Listitemview>
         </View>
         </KeyboardAwareScrollView>
       </View>
