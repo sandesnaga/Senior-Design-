@@ -1,5 +1,6 @@
 import React from 'React';
-import {StyleSheet, TextInput, Button, View, Alert} from 'react-native';
+import {StyleSheet, TextInput, View, Alert, Text} from 'react-native';
+import {Button} from 'native-base';
 import * as firebase from "firebase";
 
 export default class Search extends React.Component {
@@ -62,13 +63,17 @@ export default class Search extends React.Component {
       }
     render(){
         return(
-            <View>
+            <View style ={styles.search}>
             <TextInput 
             style = {styles.textInput}
             placeholder = "What do you want to drink today?"
             onChangeText={searchText => {this.setState({searchText})}}
             ></TextInput>
-           <Button title={'Search'} onPress={() => this.search(this.state.searchText)} /></View>
+           <Button  
+           style= {styles.searchButton}        
+            onPress={() => this.search(this.state.searchText)}
+             ><Text style={{textAlign: "center",fontWeight: "bold"}}>Search</Text></Button>
+             </View>
         );
     };
 }
@@ -80,6 +85,20 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         borderWidth: 2,
         height : 40,
-        width: 400
+        width: "80%", 
+        borderRadius: 10,
+        alignItems: "center"
+    },
+    searchButton:{
+        alignItems: "center",      
+         width: 90, 
+         marginTop:5,
+         paddingLeft:20, 
+         borderRadius: 10
+    }, search:{
+        alignItems: "center",
+        marginTop: 5,
+        marginBottom : 5, 
+        
     }
 })

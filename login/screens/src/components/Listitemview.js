@@ -42,7 +42,7 @@ render(){
     return(
         <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Items you have</Text>
+                <Text style={styles.headerText}>Item(s) you have</Text>
             </View>
             <FlatList
             data={this.state.itemlist}
@@ -64,16 +64,20 @@ render(){
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-    },
+    
     header: {
         flex:1,
         alignItems: "center",
-        marginTop: 100,
-        marginBottom: 100
+        marginTop: 10,
+        marginBottom: 10,
+        height: 50,
+        backgroundColor:"#3C40C6"
       },
       headerText: {
-        color: "black"
+        color: "#fff", 
+        paddingTop: 10,
+        paddingBottom: 10,
+        fontWeight: "bold",
+        fontSize: 25
       },
 })
