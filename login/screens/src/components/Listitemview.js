@@ -36,9 +36,13 @@ export default class Listitemview extends React.Component{
         var user = firebase.auth().currentUser;
         if(user!=null)
         {
+            if(inputquantity===0){
+                Alert.alert("please enter quantity!");
+                return;
+            }
         if(listquantity<inputquantity){
             Alert.alert("You don't have Enough",name);
-            //return;
+            return;
         }
         else if(Number(listquantity)-Number(inputquantity)==0){
             itemref.child(itemid).remove();
@@ -93,9 +97,20 @@ render(){
             keyExtractor={(item, index)=> index.toString()}
             renderItem={({item})=>(
                 <Card >
-                <Text>{"Item Name: " +item.itemName }</Text>
-                <Text>{"Quantity: "+item.itemQuantity}</Text>
-                <View><TextInput style={styles.inputstyles}
+                    <View style={{marginLeft: 10, marginBottom: 7 }}>
+                    <Text style={{fontWeight:"bold", }}>{"Item Name: " +item.itemName }</Text>
+                    <Text style={{fontWeight:"bold", }}>{"Quantity: "+item.itemQuantity}</Text>
+                    </View>
+                
+                <View style={{ padding: 10,
+                        margin: 1,
+                        borderColor: 'grey',
+                        borderWidth: 2,
+                        height : 40,
+                        width: "80%", 
+                        borderRadius: 10,
+                        alignItems: "center" }}>
+                            <TextInput style={styles.inputstyles}
                             keyboardType = 'numeric'
                             placeholder="How many you want to get?"
                             onChangeText={quantity => this.setState({quantity})}
@@ -104,11 +119,27 @@ render(){
                              
                              
               </View>
-                <Button  onPress={()=>{
+              <View style={styles.buttonView}>
+              <Button 
+                 full                 
+                 style={styles.listButtons}
+                 onPress={()=>{
                     this.itemtaken(item.key,item.location,Number(this.state.quantity),Number(item.itemQuantity),item.itemName)}}
-                     >
-                <Text>Get</Text>
-                    </Button>
+                >
+                    <Text style = {{ color: "#fff"}}>Get</Text>
+                </Button>
+                
+                <Button 
+                    style={styles.listButtons}
+                    full                 
+                    onPress={()=>{
+                    }}
+                >
+                    <Text style = {{ color: "#fff"}}>Show Details</Text>
+                </Button>
+                    
+              </View>
+                
             </Card> 
             )}
             ></FlatList>
@@ -136,4 +167,18 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 25
       },
+      listButtons:{
+        width: 100, 
+        marginLeft: 10,
+        marginTop: 5,
+        marginBottom: 5, 
+        borderRadius: 10,
+        backgroundColor:"#4834DF",
+       
+
+      },
+        buttonView:{
+        flexDirection: "row",
+        flexWrap: "wrap"
+      }
 })
