@@ -4,8 +4,9 @@ import {
   Text,
   View,
   Image,
-  Button,
+
 } from "react-native";
+import {Button} from 'native-base';
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import { Appbar } from "react-native-paper";
@@ -55,26 +56,14 @@ export default class SettingScreen extends React.Component {
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
           />
-          <View style={styles.userDetails}>
-            <Text> Hey {this.state.name},</Text>
-            <Text> You are signed in as: {this.state.email}</Text>
-
-            <Search></Search>
-         
-          </View>
+          
         </View>
+        
+
+        
 
         <Button
-          title="This is Settings"
-          style={styles.button}
-          full
-          rounded
-          success
-        ></Button>
-
-        <Button
-          style={styles.button}
-          title="toHome"
+          style={styles.button}         
           full
           rounded
           onPress={() => {
@@ -83,6 +72,8 @@ export default class SettingScreen extends React.Component {
         >
           <Text style={styles.buttonText}>Back</Text>
         </Button>
+
+       
 
       </View>
     );
@@ -124,6 +115,6 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   buttonText: {
-    color: "#fff"
+    
   }
 });
