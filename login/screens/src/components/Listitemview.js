@@ -26,7 +26,7 @@ componentWillMount(){
         uid = user.uid;
     }
     var itemref = firebase.database().ref("item_added");
-    itemref.on("value",dataSnapShot=>{
+    itemref.once("value",dataSnapShot=>{
         if(dataSnapShot.val()){
             let dobobj = Object.values(dataSnapShot.val());
             for (var i = 0; i < dataSnapShot.numChildren(); i++) {

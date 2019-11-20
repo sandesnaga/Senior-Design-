@@ -38,6 +38,8 @@ export default class Search extends React.Component {
                 }
                 if(j==0){
                     Alert.alert(searchText+ " is not on any of your shelf");
+                    this.setState({temp:""})
+                    return;
                 }
             }
         })
