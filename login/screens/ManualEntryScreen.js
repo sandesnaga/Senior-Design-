@@ -28,7 +28,7 @@ var type = [
 
 var templocation='', row, column;
 
-export default class ManualEntryScreem extends React.Component {
+export default class ManualEntryScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

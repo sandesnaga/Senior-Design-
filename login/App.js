@@ -20,6 +20,7 @@ import QRgen from "./screens/QRgen";
 
 import {createAppContainer } from "react-navigation";
 import {createStackNavigator } from "react-navigation-stack"
+import Listitemview from "./screens/src/components/Listitemview";
 
 
 var firebaseConfig = {
@@ -48,8 +49,8 @@ const MainNavigator = createStackNavigator(
     AddShelf : {screen: AddShelfScreen},
     Search: {screen: Search},
     barcode: {screen: barcode},
-    QRgen: {screen: QRgen}
-
+    QRgen: {screen: QRgen},
+    Listitemview: {screen: Listitemview}
   },
 
   {

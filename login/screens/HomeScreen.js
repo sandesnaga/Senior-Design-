@@ -20,6 +20,7 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     YellowBox.ignoreWarnings(['Setting a timer']);
     super(props);
+    
     this.state = {
       name: "",
       email: "",
