@@ -6,8 +6,8 @@ import * as firebase from "firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DatePicker from "react-native-datepicker";
 import RadioForm from "react-native-simple-radio-button";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
 import {
   Menu,
   MenuProvider,
@@ -15,6 +15,9 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
+
+//import icons from 'react-native-vector-icons/Ionicons'
+var dropdownHeading = "Pre-Notification Dates";
 
 var expirationChoices = [
   { label: "1 Week ", value: 0 },
@@ -39,7 +42,6 @@ export default class AddingItemScreen extends React.Component {
       barcode: "",
       itemDescription: "",
       itemQuantity: "",
-      pin: "",
       date: "",
       name: "",
       email: "",
@@ -62,11 +64,10 @@ export default class AddingItemScreen extends React.Component {
     itemQuantity,
     date,
     expchoice,
-    pin,
     itemtype,
+    bplace,
     bstyle,
     format,
-    bplace
   ) => {
     var user = firebase.auth().currentUser;
     var uid;
@@ -97,7 +98,6 @@ export default class AddingItemScreen extends React.Component {
                 barcode: barcode,
                 itemDescription: itemDescription,
                 itemQuantity: itemQuantity,
-                pin: pin,
                 expdate: date,
                 expchoice: expchoice,
                 uid: uid,
@@ -171,7 +171,6 @@ export default class AddingItemScreen extends React.Component {
     });
   }
   componentWillUnmount() {
-    return true;
   }
   static navigationOptions = {
     title: "AddingItem",
@@ -197,8 +196,13 @@ export default class AddingItemScreen extends React.Component {
               />
             </Appbar.Header>
           </View>
-          <View>
-            
+          <View >
+          <View style={styles.headingView}>
+              <Text style={{ fontSize: 20, fontWeight: "bold", color: "grey", marginLeft: "40%", marginTop: 30, marginBottom: 10}}>
+                Add Item
+              </Text>
+            </View>
+            {/* Item barcode input */}
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Barcode:</Text>
@@ -208,6 +212,7 @@ export default class AddingItemScreen extends React.Component {
                 <TouchableOpacity
                   style={styles.inputstyles}
                   style={{ backgroundColor: "#6915cf" }}
+                  value= {tempdata}
                   onPress={
                     () => this.props.navigation.replace("barcode")
                     //this.itemName=tempdata
@@ -240,6 +245,7 @@ export default class AddingItemScreen extends React.Component {
                 ></RadioForm>
               </View>
             </View>
+
             {this.state.itemtype ? (
               undefined
             ) : (
@@ -261,7 +267,9 @@ export default class AddingItemScreen extends React.Component {
                 </View>
               </View>
             )}
-            
+
+            {/* Item Name*/}
+
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Name:</Text>
@@ -276,7 +284,7 @@ export default class AddingItemScreen extends React.Component {
                 />
               </View>
             </View>
-            
+
             {this.state.itemtype ? (
               undefined
             ) : (
@@ -297,11 +305,11 @@ export default class AddingItemScreen extends React.Component {
                     />
                   </View>
                 </View>
-                
+
                 {/* Brwerey location*/}
                 <View style={styles.locationView}>
                   <View>
-                    <Text style={styles.caption}>Brewery Location: </Text>
+                    <Text style={styles.caption}>Brewery Place: </Text>
                   </View>
                   <View>
                     <TextInput
@@ -315,7 +323,6 @@ export default class AddingItemScreen extends React.Component {
                 </View>
               </View>
             )}
-            
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Description:</Text>
@@ -330,8 +337,6 @@ export default class AddingItemScreen extends React.Component {
                 />
               </View>
             </View>
-            
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Quantity:</Text>
@@ -339,6 +344,7 @@ export default class AddingItemScreen extends React.Component {
               <View>
                 <TextInput
                   style={styles.inputstyles}
+                  keyboardType="numeric"
                   placeholder="Select your item's quantity"
                   onChangeText={itemQuantity => {
                     this.setState({ itemQuantity });
@@ -346,7 +352,6 @@ export default class AddingItemScreen extends React.Component {
                 />
               </View>
             </View>
-                  
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Expiry Date:</Text>
@@ -378,16 +383,37 @@ export default class AddingItemScreen extends React.Component {
                 />
               </View>
             </View>
+            <View style={styles.locationView}>
+              <View>
+                <Text style={styles.caption}>Notification time:</Text>
+              </View>
+              <View>
+                <MenuProvider style={{ flexDirection: "column", padding: 30 }}>
+                  <Menu
+                    onSelect={value => {
+                      dropdownHeading = value + " Weeks";
+                      this.setState({ expchoice: value });
+                    }}
+                  >
+                    <MenuTrigger>
+                      <Text style={styles.headerText}>{dropdownHeading}</Text>
+                    </MenuTrigger>
 
-            <Text>Secure your location with pin(Optional).</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder="Please enter pin for your item"
-              onChangeText={pin => {
-                this.setState({ pin });
-              }}
-            ></TextInput>
+                    <MenuOptions>
+                      <MenuOption value={"1"}>
+                        <Text style={styles.menuContent}>1 Week</Text>
+                      </MenuOption>
+                      <MenuOption value={"2"}>
+                        <Text style={styles.menuContent}>2 Week</Text>
+                      </MenuOption>
+                      <MenuOption value={"3"}>
+                        <Text style={styles.menuContent}>3 Week</Text>
+                      </MenuOption>
+                    </MenuOptions>
+                  </Menu>
+                </MenuProvider>
+              </View>
+            </View>
           </View>
           <Button
             style={styles.button}
@@ -401,7 +427,6 @@ export default class AddingItemScreen extends React.Component {
                 this.state.itemQuantity,
                 this.state.date,
                 this.state.expchoice,
-                this.state.pin,
                 this.state.itemtype,
                 this.state.bplace,
                 this.state.bstyle,
@@ -421,6 +446,32 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
     flexDirection: "column"
+  },
+  button: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20
+  },
+  locationView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingVertical: 5
+  },
+  caption: {
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+  },
+  inputstyles: {
+    borderColor: "grey",
+    borderWidth: 1.5,
+    borderRadius: 5,
+    minWidth: 200,
+    height: 40,
+    paddingLeft: 10
   },
   bottomContainer: {
     flex: 3,

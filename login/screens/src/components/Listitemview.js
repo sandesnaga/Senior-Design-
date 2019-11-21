@@ -47,7 +47,7 @@ export default class Listitemview extends React.Component{
         else if(Number(listquantity)-Number(inputquantity)==0){
             itemref.child(itemid).remove();
             locationref.child(locationid).update({isAvailable:'Yes'})
-            Alert.alert("No item Left");
+            Alert.alert("All item taken/ No item Left");
         }
         else{
                    
@@ -62,6 +62,33 @@ export default class Listitemview extends React.Component{
             
     }
 
+    }
+
+    iteminfo=itemid=>{
+        var itemref = firebase.database().ref("item_added");
+        var locationref = firebase.database().ref("allocated_space");
+        itemref.once("value", data=>{
+            var locationid= data.child(itemid).val().location;
+            const name= data.child(itemid).val().itemName;
+            var quantity= data.child(itemid).val().itemQuantity;
+            var type = data.child(itemid).val().itemtype;
+            var brewloc = data.child(itemid).val().bplace;
+            
+            locationref.once("value", loc=>{
+                var lname= loc.child(locationid).val().Name;
+                var llocate= loc.child(locationid).val().location;
+                var row= loc.child(locationid).val().Row;
+                var column= loc.child(locationid).val().Column;
+                if(type!=1){
+                Alert.alert(quantity+ " "+ name + " brewed on "+brewloc +" is at "+lname + " inside " + llocate +" at "+row+" X "+column+" position." )
+                }
+                else{
+                    Alert.alert(quantity+ " "+ name + " is at "+lname + " inside " + llocate +" at "+row+" X "+column+" position." )
+                }
+            })
+             
+        })
+        
     }
    
 componentDidMount(){
@@ -132,7 +159,7 @@ render(){
                 <Button 
                     style={styles.listButtons}
                     full                 
-                    onPress={()=>{
+                    onPress={()=>{ this.iteminfo(item.key)
                     }}
                 >
                     <Text style = {{ color: "#fff"}}>Show Details</Text>

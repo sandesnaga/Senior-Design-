@@ -13,8 +13,10 @@ import {
   MenuOption,
   MenuTrigger
 } from "react-native-popup-menu";
+
 //import icons from 'react-native-vector-icons/Ionicons'
 var dropdownHeading = "Pre-Notification Dates";
+
 var expirationChoices = [
   { label: "1 Week ", value: 0 },
   { label: "1 Month  ", value: 1 },
@@ -25,12 +27,12 @@ var type = [
   { label: "Alcohol ", value: 0 },
   { label: "Other  ", value: 1 }
 ];
-
+var tempdata = "";
 var templocation = "",
   row,
   column;
 
-export default class ManualEntryScreen extends React.Component {
+export default class ManualEntryScreem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +40,6 @@ export default class ManualEntryScreen extends React.Component {
       barcode: "",
       itemDescription: "",
       itemQuantity: "",
-      pin: "",
       date: "",
       name: "",
       email: "",
@@ -61,11 +62,10 @@ export default class ManualEntryScreen extends React.Component {
     itemQuantity,
     date,
     expchoice,
-    pin,
     itemtype,
+    bplace,
     bstyle,
     format,
-    bplace
   ) => {
     var user = firebase.auth().currentUser;
     var uid;
@@ -96,7 +96,6 @@ export default class ManualEntryScreen extends React.Component {
                 barcode: barcode,
                 itemDescription: itemDescription,
                 itemQuantity: itemQuantity,
-                pin: pin,
                 expdate: date,
                 expchoice: expchoice,
                 uid: uid,
@@ -159,7 +158,7 @@ export default class ManualEntryScreen extends React.Component {
 
     var that = this;
     var date = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
+    var month = new Date().getMonth()+1; //Current Month
     var year = new Date().getFullYear(); //Current Year
     that.setState({
       //Setting the value of the date time
@@ -167,7 +166,6 @@ export default class ManualEntryScreen extends React.Component {
     });
   }
   componentWillUnmount() {
-    return true;
   }
   static navigationOptions = {
     title: "AddingItem",
@@ -192,14 +190,6 @@ export default class ManualEntryScreen extends React.Component {
             </Appbar.Header>
           </View>
           <View>
-            {/*
-          <Text>Item Barcode</Text>
-            { <TextInput
-              style={styles.input}
-              placeholder=" Enter Barcode"
-              onChangeText={barcode => {this.setState({barcode})}}
-            ></TextInput> }
-            */}
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Barcode</Text>
@@ -214,31 +204,6 @@ export default class ManualEntryScreen extends React.Component {
                 ></TextInput>
               </View>
             </View>
-
-            {/*
-            
-          <Text style={{ paddingBottom: 5 }}>
-              What type of Item is it?
-            </Text>
-            <RadioForm
-              style={styles.radioForm}
-              radio_props={type}
-              onPress={
-                (value) => {this.setState({itemtype:value}) 
-              }
-              }
-              formHorizontal={true}
-            ></RadioForm>
-              {this.state.itemtype? undefined:(<View>
-                  <Text>Alcohol</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder=" Brewery Style"
-                    onChangeText={bstyle => {this.setState({bstyle})}}
-                  ></TextInput>
-                  </View>)}
-              */}
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Type</Text>
@@ -258,16 +223,6 @@ export default class ManualEntryScreen extends React.Component {
               undefined
             ) : (
               <View>
-                {/*
-                <Text>Alcohol</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" Brewery Style"
-                  onChangeText={bstyle => {
-                    this.setState({ bstyle });
-                  }}
-                ></TextInput>
-                */}
                 <View style={styles.locationView}>
                   <View>
                     <Text style={styles.caption}>Brewery Style:</Text>
@@ -284,20 +239,6 @@ export default class ManualEntryScreen extends React.Component {
                 </View>
               </View>
             )}
-
-            {/*
-            <Text>Item Name</Text>
-            {
-              <TextInput
-                style={styles.input}
-                placeholder={"Name of Item"}
-                onChangeText={itemName => {
-                  this.setState({ itemName });
-                }}
-              ></TextInput>
-            }
-          */}
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Name:</Text>
@@ -313,47 +254,10 @@ export default class ManualEntryScreen extends React.Component {
               </View>
             </View>
 
-            {/* {this.state.itemtype ? (
-              undefined
-            ) : (
-              <View>
-                <Text>Format</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" How it is Packed?"
-                  onChangeText={format => {
-                    this.setState({ format });
-                  }}
-                ></TextInput>
-
-                <Text>Brewery Place</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" Where is it made?"
-                  onChangeText={bplace => {
-                    this.setState({ bplace });
-                  }}
-                ></TextInput>
-              </View>
-            )} */}
-
             {this.state.itemtype ? (
               undefined
             ) : (
               <View>
-                {/*
-                <Text>Format</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" How it is Packed?"
-                  onChangeText={format => {
-                    this.setState({ format });
-                  }}
-                ></TextInput>
-                */}
-
-                {/* Packing format */}
-
                 <View style={styles.locationView}>
                   <View>
                     <Text style={styles.caption}>Packing:</Text>
@@ -368,19 +272,6 @@ export default class ManualEntryScreen extends React.Component {
                     />
                   </View>
                 </View>
-
-                {/*
-
-                <Text>Brewery Place</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" Where is it made?"
-                  onChangeText={bplace => {
-                    this.setState({ bplace });
-                  }}
-                ></TextInput>
-                */}
-                {/* Brwerey location*/}
                 <View style={styles.locationView}>
                   <View>
                     <Text style={styles.caption}>Brewery Place: </Text>
@@ -397,16 +288,6 @@ export default class ManualEntryScreen extends React.Component {
                 </View>
               </View>
             )}
-
-            {/*  <Text>Item description</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Please enter your item description"
-              onChangeText={itemDescription => {
-                this.setState({ itemDescription });
-              }}
-            ></TextInput> */}
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Description:</Text>
@@ -421,17 +302,6 @@ export default class ManualEntryScreen extends React.Component {
                 />
               </View>
             </View>
-
-            {/*  <Text>Item Quantity</Text>
-            <TextInput
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder="Please enter your item Quantity"
-              onChangeText={itemQuantity => {
-                this.setState({ itemQuantity });
-              }}
-            ></TextInput> */}
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Quantity:</Text>
@@ -439,6 +309,7 @@ export default class ManualEntryScreen extends React.Component {
               <View>
                 <TextInput
                   style={styles.inputstyles}
+                  keyboardType="numeric"
                   placeholder="Select your item's quantity"
                   onChangeText={itemQuantity => {
                     this.setState({ itemQuantity });
@@ -446,35 +317,6 @@ export default class ManualEntryScreen extends React.Component {
                 />
               </View>
             </View>
-
-            {/* <Text style={{ paddingBottom: 5 }}>
-              Please select the pre remainder time.
-            </Text>
-            <DatePicker
-              style={{ width: 200, justifyContent: "center", flex: 1 }}
-              date={this.state.date}
-              mode="date"
-              placeholder="Expiration Date"
-              format="YYYY-MM-DD"
-              minDate={this.state.today}
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateIcon: {
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  marginLeft: 0
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-              }}
-              onDateChange={date => {
-                this.setState({ date });
-              }}
-            /> */}
-
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Expiry Date:</Text>
@@ -506,15 +348,6 @@ export default class ManualEntryScreen extends React.Component {
                 />
               </View>
             </View>
-
-            {/* <RadioForm
-              style={styles.radioForm}
-              radio_props={expirationChoices}
-              onPress={value => {
-                this.setState({ expchoice: value });
-              }}
-              formHorizontal={true}
-            ></RadioForm> */}
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Notification time:</Text>
@@ -546,7 +379,6 @@ export default class ManualEntryScreen extends React.Component {
                 </MenuProvider>
               </View>
             </View>
-
           </View>
           <Button
             style={styles.button}
@@ -560,7 +392,6 @@ export default class ManualEntryScreen extends React.Component {
                 this.state.itemQuantity,
                 this.state.date,
                 this.state.expchoice,
-                this.state.pin,
                 this.state.itemtype,
                 this.state.bplace,
                 this.state.bstyle,
@@ -580,6 +411,27 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
     flexDirection: "column"
+  },
+  locationView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingVertical: 5
+  },
+  caption: {
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+  },
+  inputstyles: {
+    borderColor: "grey",
+    borderWidth: 1.5,
+    borderRadius: 5,
+    minWidth: 200,
+    height: 40,
+    paddingLeft: 10
   },
   bottomContainer: {
     flex: 3,

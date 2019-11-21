@@ -87,7 +87,7 @@ export default class SettingScreen extends React.Component {
           onChangeText={(text) => { this.setState({newPassword: text}) }}
         />
 
-        <Button title="Change Password" onPress={this.onChangePasswordPress} />
+        <Button onPress={this.onChangePasswordPress} ><Text>Change Password..</Text></Button>
 
         </View>
         
