@@ -53,6 +53,7 @@ export default class HomeScreen extends React.Component {
   };
 
   componentDidMount() {
+    console.disableYellowBox = true;
     var self = this;
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
