@@ -204,256 +204,296 @@ export default class AddingItemScreen extends React.Component {
             </Appbar.Header>
           </View>
 
-          <View>
-            <View style={styles.headingView}>
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: "grey",
-                  marginLeft: "40%",
-                  marginTop: 30,
-                  marginBottom: 10
+          <View style={{ backgroundColor: "#393636" }}>
+            <View
+              style={{ flex: 1, backgroundColor: "rgba(133, 126, 237, .4)" }}
+            >
+              <View style={styles.headingView}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    color: "grey",
+                    marginLeft: "40%",
+                    marginTop: 30,
+                    marginBottom: 10
+                  }}
+                >
+                  Add Item
+                </Text>
+              </View>
+              {/* Item barcode input */}
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Item Barcode:
+                  </Text>
+                </View>
+                <View>
+                  {/* <TextInput style={styles.inputstyles} value={tempdata} /> */}
+                  <TouchableOpacity
+                    style={styles.inputstyles}
+                    style={{ backgroundColor: "#6915cf" }}
+                    value={tempdata}
+                    onPress={
+                      () => this.props.navigation.replace("barcode")
+                      //this.itemName=tempdata
+                    }
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        marginLeft: "35%",
+                        marginTop: "3%"
+                      }}
+                    >
+                      {tempdata}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Item Type
+                  </Text>
+                </View>
+                <View>
+                  <RadioForm
+                    style={[styles.radioForm]}
+                    radio_props={type}
+                    
+                    onPress={value => {
+                      this.setState({ itemtype: value });
+                    }}
+                    formHorizontal={true}
+                  ></RadioForm>
+                </View>
+              </View>
+
+              {this.state.itemtype ? (
+                undefined
+              ) : (
+                <View>
+                  {/* Brewery style*/}
+                  <View style={styles.locationView}>
+                    <View>
+                      <Text style={[styles.caption, styles.textColor]}>
+                        Brewery Style:
+                      </Text>
+                    </View>
+                    <View>
+                      <TextInput
+                        style={styles.inputstyles}
+                        placeholder="Brewing style"
+                        placeholderTextColor="#758AA2"
+                        onChangeText={bstyle => {
+                          this.setState({ bstyle });
+                        }}
+                      />
+                    </View>
+                  </View>
+                </View>
+              )}
+
+              {/* Item Name*/}
+
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Item Name:
+                  </Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="Items Name."
+                    placeholderTextColor="#758AA2"
+                    onChangeText={itemName => {
+                      this.setState({ itemName });
+                    }}
+                  />
+                </View>
+              </View>
+
+              {this.state.itemtype ? (
+                undefined
+              ) : (
+                <View>
+                  {/* Packing format */}
+
+                  <View style={styles.locationView}>
+                    <View>
+                      <Text style={[styles.caption, styles.textColor]}>
+                        Packing:
+                      </Text>
+                    </View>
+                    <View>
+                      <TextInput
+                        style={styles.inputstyles}
+                        placeholder="How is it packed ?"
+                        placeholderTextColor="#758AA2"
+                        onChangeText={format => {
+                          this.setState({ format });
+                        }}
+                      />
+                    </View>
+                  </View>
+
+                  {/* Brwerey location*/}
+                  <View style={styles.locationView}>
+                    <View>
+                      <Text style={[styles.caption, styles.textColor]}>
+                        Brewery Place:{" "}
+                      </Text>
+                    </View>
+                    <View>
+                      <TextInput
+                        style={styles.inputstyles}
+                        placeholder="Where was it brewed?"
+                        placeholderTextColor="#758AA2"
+                        onChangeText={bplace => {
+                          this.setState({ bplace });
+                        }}
+                      />
+                    </View>
+                  </View>
+                </View>
+              )}
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Item Description:
+                  </Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={styles.inputstyles}
+                    placeholder="Describe your item."
+                    placeholderTextColor="#758AA2"
+                    onChangeText={itemDescription => {
+                      this.setState({ itemDescription });
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Item Quantity:
+                  </Text>
+                </View>
+                <View>
+                  <TextInput
+                    style={[styles.inputstyles, styles.textColor]}
+                    keyboardType="numeric"
+                    placeholder="Select your item's quantity"
+                    placeholderTextColor="#758AA2"
+                    onChangeText={itemQuantity => {
+                      this.setState({ itemQuantity });
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Expiry Date:
+                  </Text>
+                </View>
+                <View>
+                  <DatePicker
+                    style={{
+                      width: 200,
+                      justifyContent: "center",
+                      flex: 1,
+                      borderRadius: 5
+                    }}
+                    date={this.state.date}
+                    mode="date"
+                    placeholder="Expiration Date"
+                    format="YYYY-MM-DD"
+                    minDate={this.state.today}
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                      dateIcon: {
+                        position: "absolute",
+                        left: 0,
+                        top: 4,
+                        marginLeft: 0
+                      },
+                      dateInput: {
+                        marginLeft: 36
+                      }
+                    }}
+                    onDateChange={date => {
+                      this.setState({ date });
+                    }}
+                  />
+                </View>
+              </View>
+              <View style={styles.locationView}>
+                <View>
+                  <Text style={[styles.caption, styles.textColor]}>
+                    Notification time:
+                  </Text>
+                </View>
+                <View>
+                  <MenuProvider
+                    style={{ flexDirection: "column", padding: 30 }}
+                  >
+                    <Menu
+                      style={{ color: "#F1F0FF" }}
+                      onSelect={value => {
+                        dropdownHeading = value + " Weeks";
+                        this.setState({ expchoice: value });
+                      }}
+                    >
+                      <MenuTrigger>
+                        <Text style={styles.headerText}>{dropdownHeading}</Text>
+                      </MenuTrigger>
+
+                      <MenuOptions>
+                        <MenuOption value={"1"}>
+                          <Text style={styles.menuContent}>1 Week</Text>
+                        </MenuOption>
+                        <MenuOption value={"2"}>
+                          <Text style={styles.menuContent}>2 Week</Text>
+                        </MenuOption>
+                        <MenuOption value={"3"}>
+                          <Text style={styles.menuContent}>3 Week</Text>
+                        </MenuOption>
+                      </MenuOptions>
+                    </Menu>
+                  </MenuProvider>
+                </View>
+              </View>
+            </View>
+            <View style={{ backgroundColor: "#393636", marginBottom: 30 }}>
+            <Button 
+                style={styles.button}
+                full
+                rounded
+                onPress={() => {
+                  this.additem(
+                    this.state.itemName,
+                    this.state.barcode,
+                    this.state.itemDescription,
+                    this.state.itemQuantity,
+                    this.state.date,
+                    this.state.expchoice,
+                    this.state.itemtype,
+                    this.state.bplace,
+                    this.state.bstyle,
+                    this.state.format
+                  );
                 }}
               >
-                Add Item
-              </Text>
-            </View>
-            {/* Item barcode input */}
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Item Barcode:</Text>
-              </View>
-              <View>
-                {/* <TextInput style={styles.inputstyles} value={tempdata} /> */}
-                <TouchableOpacity
-                  style={styles.inputstyles}
-                  style={{ backgroundColor: "#6915cf" }}
-                  value={tempdata}
-                  onPress={
-                    () => this.props.navigation.replace("barcode")
-                    //this.itemName=tempdata
-                  }
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      marginLeft: "35%",
-                      marginTop: "3%"
-                    }}
-                  >
-                    {tempdata}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Item Type</Text>
-              </View>
-              <View>
-                <RadioForm
-                  style={styles.radioForm}
-                  radio_props={type}
-                  onPress={value => {
-                    this.setState({ itemtype: value });
-                  }}
-                  formHorizontal={true}
-                ></RadioForm>
-              </View>
-            </View>
-
-            {this.state.itemtype ? (
-              undefined
-            ) : (
-              <View>
-                {/* Brewery style*/}
-                <View style={styles.locationView}>
-                  <View>
-                    <Text style={styles.caption}>Brewery Style:</Text>
-                  </View>
-                  <View>
-                    <TextInput
-                      style={styles.inputstyles}
-                      placeholder="Brewing style"
-                      onChangeText={bstyle => {
-                        this.setState({ bstyle });
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-            )}
-
-            {/* Item Name*/}
-
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Item Name:</Text>
-              </View>
-              <View>
-                <TextInput
-                  style={styles.inputstyles}
-                  placeholder="Items Name."
-                  onChangeText={itemName => {
-                    this.setState({ itemName });
-                  }}
-                />
-              </View>
-            </View>
-
-            {this.state.itemtype ? (
-              undefined
-            ) : (
-              <View>
-                {/* Packing format */}
-
-                <View style={styles.locationView}>
-                  <View>
-                    <Text style={styles.caption}>Packing:</Text>
-                  </View>
-                  <View>
-                    <TextInput
-                      style={styles.inputstyles}
-                      placeholder="How is it packed ?"
-                      onChangeText={format => {
-                        this.setState({ format });
-                      }}
-                    />
-                  </View>
-                </View>
-
-                {/* Brwerey location*/}
-                <View style={styles.locationView}>
-                  <View>
-                    <Text style={styles.caption}>Brewery Place: </Text>
-                  </View>
-                  <View>
-                    <TextInput
-                      style={styles.inputstyles}
-                      placeholder="Where was it brewed?"
-                      onChangeText={bplace => {
-                        this.setState({ bplace });
-                      }}
-                    />
-                  </View>
-                </View>
-              </View>
-            )}
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Item Description:</Text>
-              </View>
-              <View>
-                <TextInput
-                  style={styles.inputstyles}
-                  placeholder="Describe your item."
-                  onChangeText={itemDescription => {
-                    this.setState({ itemDescription });
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Item Quantity:</Text>
-              </View>
-              <View>
-                <TextInput
-                  style={styles.inputstyles}
-                  keyboardType="numeric"
-                  placeholder="Select your item's quantity"
-                  onChangeText={itemQuantity => {
-                    this.setState({ itemQuantity });
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Expiry Date:</Text>
-              </View>
-              <View>
-                <DatePicker
-                  style={{ width: 200, justifyContent: "center", flex: 1 }}
-                  date={this.state.date}
-                  mode="date"
-                  placeholder="Expiration Date"
-                  format="YYYY-MM-DD"
-                  minDate={this.state.today}
-                  confirmBtnText="Confirm"
-                  cancelBtnText="Cancel"
-                  customStyles={{
-                    dateIcon: {
-                      position: "absolute",
-                      left: 0,
-                      top: 4,
-                      marginLeft: 0
-                    },
-                    dateInput: {
-                      marginLeft: 36
-                    }
-                  }}
-                  onDateChange={date => {
-                    this.setState({ date });
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.locationView}>
-              <View>
-                <Text style={styles.caption}>Notification time:</Text>
-              </View>
-              <View>
-                <MenuProvider style={{ flexDirection: "column", padding: 30 }}>
-                  <Menu
-                    onSelect={value => {
-                      dropdownHeading = value + " Weeks";
-                      this.setState({ expchoice: value });
-                    }}
-                  >
-                    <MenuTrigger>
-                      <Text style={styles.headerText}>{dropdownHeading}</Text>
-                    </MenuTrigger>
-
-                    <MenuOptions>
-                      <MenuOption value={"1"}>
-                        <Text style={styles.menuContent}>1 Week</Text>
-                      </MenuOption>
-                      <MenuOption value={"2"}>
-                        <Text style={styles.menuContent}>2 Week</Text>
-                      </MenuOption>
-                      <MenuOption value={"3"}>
-                        <Text style={styles.menuContent}>3 Week</Text>
-                      </MenuOption>
-                    </MenuOptions>
-                  </Menu>
-                </MenuProvider>
-              </View>
+                <Text style={styles.buttonText}>Add Item</Text>
+              </Button>
             </View>
           </View>
-
-          <Button
-            style={styles.button}
-            full
-            rounded
-            onPress={() => {
-              this.additem(
-                this.state.itemName,
-                this.state.barcode,
-                this.state.itemDescription,
-                this.state.itemQuantity,
-                this.state.date,
-                this.state.expchoice,
-                this.state.itemtype,
-                this.state.bplace,
-                this.state.bstyle,
-                this.state.format
-              );
-            }}
-          >
-            <Text style={styles.buttonText}>Add Item</Text>
-          </Button>
         </KeyboardAwareScrollView>
       </View>
     );
@@ -463,7 +503,8 @@ export default class AddingItemScreen extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: "#393636"
   },
   button: {
     justifyContent: "center",
@@ -478,8 +519,12 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     paddingVertical: 5
   },
+  textColor: {
+    color: "#F1F0FF"
+  },
   caption: {
     fontSize: 15,
+    color: "red",
     fontWeight: "bold",
     paddingLeft: 10
   },
@@ -567,6 +612,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   radioForm: {
+    color: "#F1F0FF",
     marginTop: 20,
     //padding: 7,
     justifyContent: "center"
