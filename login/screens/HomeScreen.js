@@ -3,10 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
-  Button,
+  ImageBackground,
   TouchableOpacity,
-  YellowBox,
+  YellowBox
 } from "react-native";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
@@ -18,9 +17,9 @@ import { Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default class HomeScreen extends React.Component {
   constructor(props) {
-    YellowBox.ignoreWarnings(['Setting a timer']);
+    YellowBox.ignoreWarnings(["Setting a timer"]);
     super(props);
-    
+
     this.state = {
       name: "",
       email: "",
@@ -71,26 +70,24 @@ export default class HomeScreen extends React.Component {
             for (var i = 0; i < dataSnapShot.numChildren(); i++) {
               if (dobobj[i].uid == uid) {
                 self.updatedob(dobobj[i].DOB);
-                return (true);
+                return true;
               }
             }
-            return (true);
+            return true;
           }
         });
-       
       } else {
         this.props.navigation.replace("SignIn");
-        return (true);
+        return true;
       }
     });
-    return (true);
+    return true;
   }
-  componentWillUnmount(){
-  }
-  
- updatedob =(dob)=>{
-  this.setState({dob:dob});
- }
+  componentWillUnmount() {}
+
+  updatedob = dob => {
+    this.setState({ dob: dob });
+  };
 
   signOutUser = () => {
     firebase
@@ -116,81 +113,177 @@ export default class HomeScreen extends React.Component {
           <Appbar.Content title={this.state.name} subtitle={this.state.dob} />
           <Appbar.Action icon="logout" onPress={this.signOutUser} />
         </Appbar.Header>
-        <View style={styles.bottomContainer}>
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.gotoAddItem}>
-              <Icon
-                raised
-                name="plus"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              {/* <Image source={require("../assets/icons/addItem.png")} /> */}
-              <Text style={styles.textStyle}>Add Item</Text>
-            </TouchableOpacity>
-          </View>
 
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.allocateSpace}>
-              <Icon
-                raised
-                name="columns"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              <Text style={styles.textStyle}>Allocate Space</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.itemsList}>
-              <Icon
-                raised
-                name="database"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              <Text style={styles.textStyle}>Items List</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.manualEntry}>
-              <Icon
-                raised
-                name="edit"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              <Text style={styles.textStyle}>Manual entry</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.scanInventory}>
-              <Icon
-                raised
-                name="qrcode"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              <Text style={styles.textStyle}>Scan Item</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.bottomContainerElements}>
-            <TouchableOpacity onPress={this.settings}>
-              <Icon
-                raised
-                name="cogs"
-                type="font-awesome"
-                color="#6200ee"
-                size= {60}
-              />
-              <Text style={styles.textStyle}>Settings</Text>
-            </TouchableOpacity>
-          </View>
+        <View>
+          <ImageBackground
+            style={{ height: "100%", width: "100%", resizeMode: "cover" }}
+            source={require("../assets/images/background.png")}
+          >
+            <View
+              style={{ flex: 1, backgroundColor: "rgba(133, 126, 237, .4)" }}
+            >
+              <View style={styles.bottomContainer}>
+
+                <View style={styles.bottomContainerElements}>
+                  <TouchableOpacity onPress={this.gotoAddItem}>
+                    <Icon
+                      raised
+                      reverse
+                      name="plus"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      size={40}
+                    ></Icon>
+                    <Text style={styles.textStyle}>Add Item</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.bottomContainerElements}>
+
+                  <TouchableOpacity onPress={this.allocateSpace}>
+                    <Icon
+                      raised
+                      reverse
+                      name="columns"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      size={40}
+                    />
+                    <Text style={styles.textStyle}>Allocate Space</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.bottomContainerElements}>
+                  <TouchableOpacity onPress={this.itemsList}>
+                    <Icon
+                      raised
+                      reverse
+                      name="database"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      size={40}
+                    />
+                    <Text style={styles.textStyle}>Items List</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.bottomContainerElements}>
+                  <TouchableOpacity onPress={this.manualEntry}>
+                    <Icon
+                      raised
+                      reverse
+                      name="edit"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      size={40}
+                    />
+                    <Text style={styles.textStyle}>Manual entry</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.bottomContainerElements}>
+                  <TouchableOpacity onPress={this.scanInventory}>
+                    <Icon
+                      raised
+                      reverse
+                      name="qrcode"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      reverse
+                      size={40}
+                    />
+                    <Text style={styles.textStyle}>Scan Item</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.bottomContainerElements}>
+                  <TouchableOpacity onPress={this.settings}>
+                    <Icon
+                      raised
+                      reverse
+                      name="cogs"
+                      type="font-awesome"
+                      color="#C3C3E5"
+                      size={40}
+                    />
+                    <Text style={styles.textStyle}>Settings</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </ImageBackground>
+
+          {/* <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.gotoAddItem}>
+                <Icon
+                  raised
+                  name="plus"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Add Item</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.allocateSpace}>
+                <Icon
+                  raised
+                  name="columns"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Allocate Space</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.itemsList}>
+                <Icon
+                  raised
+                  name="database"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Items List</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.manualEntry}>
+                <Icon
+                  raised
+                  name="edit"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Manual entry</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.scanInventory}>
+                <Icon
+                  raised
+                  name="qrcode"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Scan Item</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomContainerElements}>
+              <TouchableOpacity onPress={this.settings}>
+                <Icon
+                  raised
+                  name="cogs"
+                  type="font-awesome"
+                  color="#6200ee"
+                  size={40}
+                />
+                <Text style={styles.textStyle}>Settings</Text>
+              </TouchableOpacity>
+
+            </View> */}
         </View>
       </View>
     );
@@ -208,13 +301,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     //alignItems: 'center',
     justifyContent: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    marginTop: 250
   },
   bottomContainerElements: {
     height: "30%",
-    width: "45%",
+    width: "30%",
     margin: 5,
-
     justifyContent: "center",
     alignItems: "center"
   },
@@ -222,8 +315,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "10%",
     backgroundColor: "blue",
-    marginTop: 100,
-    marginBottom: 100
+    marginTop: "5%",
+    marginBottom: "5%"
   },
   userDetails: {},
 
@@ -234,8 +327,9 @@ const styles = StyleSheet.create({
     color: "#fff"
   },
   textStyle: {
+    alignContent: "center",
     alignSelf: "center",
-    color: "#6200ee",
+    color: "#F1F0FF",
     fontWeight: "bold"
   }
 });

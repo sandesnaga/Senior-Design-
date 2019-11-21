@@ -99,10 +99,10 @@ export default class ScanInventoryScreen extends React.Component {
     return (
       <View style={styles.topContainer}>
       <Appbar.Header>
-        <Appbar.Content title={this.state.name} subtitle={this.state.email} />
-        <Appbar.BackAction onPress={() => {
+      <Appbar.BackAction onPress={() => {
                 this.props.navigation.navigate("Home")
             }} />
+        <Appbar.Content title={this.state.name} subtitle={this.state.email} />
         <Appbar.Action icon="logout" onPress={this.signOutUser} />
       </Appbar.Header>
       <View

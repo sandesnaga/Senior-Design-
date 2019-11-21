@@ -80,11 +80,10 @@ if (user != null) {
       <View style={styles.topContainer}>
         <KeyboardAwareScrollView style={styles.form}>
         <Appbar.Header>
-          <Appbar.Content title={this.state.name} subtitle={this.state.email} />
-          <Appbar.BackAction onPress={() => {
+        <Appbar.BackAction onPress={() => {
                 this.props.navigation.navigate("Home")
             }} />
-          <Appbar.Action icon="logout" onPress={this.signOutUser} />
+          <Appbar.Content title={this.state.name} subtitle={this.state.email} />          
         </Appbar.Header>
 
       <View style={styles.container}>
