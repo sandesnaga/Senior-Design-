@@ -440,6 +440,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexWrap: "wrap"
   },
+  locationView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingVertical: 5
+  },
+  caption: {
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingLeft: 10
+  },
+  inputstyles: {
+    borderColor: "grey",
+    borderWidth: 1.5,
+    borderRadius: 5,
+    minWidth: 200,
+    height: 40,
+    paddingLeft: 10
+  },
   bottomContainerElements: {
     height: "30%",
     width: "45%",
