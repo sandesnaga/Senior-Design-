@@ -21,7 +21,8 @@ import ForgotPassword from './screens/ForgotPassword';
 import {createAppContainer } from "react-navigation";
 import {createStackNavigator } from "react-navigation-stack"
 import Listitemview from "./screens/src/components/Listitemview";
-
+import ChangePassword from './screens/ChangePassword';
+import EditInfo from './screens/EditInfo';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDA4EsnzczJGTe9LFD07CJ_ioLiKuYEwP8",
@@ -51,7 +52,9 @@ const MainNavigator = createStackNavigator(
     barcode: {screen: barcode},
     QRgen: {screen: QRgen},
     Listitemview: {screen: Listitemview},
-    ForgotPassword: { screen: ForgotPassword }
+    ForgotPassword: { screen: ForgotPassword },
+    ChangePassword: { screen: ChangePassword },
+    EditInfo: { screen: EditInfo }
   },
 
   {

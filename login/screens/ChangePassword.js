@@ -21,19 +21,25 @@ export default class SettingScreen extends React.Component {
     this.state = {
       name: "",
       email: "",
+      currentPassword: "",
+      newPassword: "",
     };
   }
 
-  
+  reauthenticate = (currentPassword) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+  }
 
   // Changes user's password...
   onChangePasswordPress = () => {
-    this.props.navigation.replace("ChangePassword");
-  }
-
-   // Changes user's Info...
-   onEditInfoPress = () => {
-    this.props.navigation.replace("EditInfo");
+    this.reauthenticate(this.state.currentPassword).then(() => {
+      var user = firebase.auth().currentUser;
+      user.updatePassword(this.state.newPassword).then(() => {
+        Alert.alert("Password was changed");
+      }).catch((error) => { Alert.alert(error.message); });
+    }).catch((error) => { Alert.alert(error.message) });
   }
 
   componentDidMount() {
@@ -51,7 +57,7 @@ export default class SettingScreen extends React.Component {
   }
   componentWillUnmount(){}
   static navigationOptions = {
-    title: "Settings",
+    title: "ChangePassword",
     header: null
   };
 
@@ -71,11 +77,35 @@ export default class SettingScreen extends React.Component {
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
           />
-           
+            <TextInput style={styles.textInput} value={this.state.currentPassword}
+          placeholder="Current Password" autoCapitalize="none" secureTextEntry={true}
+          onChangeText={(text) => { this.setState({currentPassword: text}) }}
+        />
+
+        <TextInput style={styles.textInput} value={this.state.newPassword}
+          placeholder="New Password" autoCapitalize="none" secureTextEntry={true}
+          onChangeText={(text) => { this.setState({newPassword: text}) }}
+        />
 
         <Button onPress={this.onChangePasswordPress} ><Text>Change Password..</Text></Button>
-        <Button onPress={this.onEditInfoPress} ><Text>Change Info..</Text></Button>
+
         </View>
+        
+
+        
+
+        <Button
+          style={styles.button}         
+          full
+          rounded
+          onPress={() => {
+            this.props.navigation.navigate("Home");
+          }}
+        >
+          <Text style={styles.buttonText}>Back</Text>
+        </Button>
+
+       
 
       </View>
     );
