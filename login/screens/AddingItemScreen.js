@@ -47,7 +47,7 @@ export default class AddingItemScreen extends React.Component {
     this.state = {
       itemName: "",
       barcode: "",
-      itemDescription: "",
+      itemDescription: "N/A",
       itemQuantity: "",
       date: "",
       name: "",
@@ -58,9 +58,9 @@ export default class AddingItemScreen extends React.Component {
       locationid: "",
       location: "",
       itemtype: "",
-      bplace: "",
-      bstyle: "",
-      format: ""
+      bplace: "Unknown Place",
+      bstyle: "Unknown",
+      format: "N/A"
     };
   }
 
@@ -79,7 +79,7 @@ export default class AddingItemScreen extends React.Component {
     var user = firebase.auth().currentUser;
     var uid;
     var shelfname, shelflocation;
-
+if(itemName!=""&&itemQuantity!=""){
     if (user != null) {
       uid = user.uid;
       var j = 0;
@@ -151,9 +151,14 @@ export default class AddingItemScreen extends React.Component {
       return true;
     }
     return true;
+  }
+  else{
+    Alert.alert("Item Name and Item Quantity should be provided");
+  }
   };
 
   componentDidMount() {
+    console.disableYellowBox = true;
     this.setState({
       barcode: tempdata
     });
