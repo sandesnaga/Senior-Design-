@@ -70,7 +70,7 @@ export default class SettingScreen extends React.Component {
         <Appbar.Header>
           <Appbar.BackAction
             onPress={() => {
-              this.props.navigation.navigate("Home");
+              this.props.navigation.navigate("Settings");
             }}
           />
           <Appbar.Content title={this.state.name} subtitle={this.state.email} />

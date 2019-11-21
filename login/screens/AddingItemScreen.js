@@ -79,7 +79,7 @@ export default class AddingItemScreen extends React.Component {
     var user = firebase.auth().currentUser;
     var uid;
     var shelfname, shelflocation;
-if(itemName!=""&&itemQuantity!=""){
+if(itemName!="" &&itemQuantity!=""){
     if (user != null) {
       uid = user.uid;
       var j = 0;
@@ -152,9 +152,7 @@ if(itemName!=""&&itemQuantity!=""){
     }
     return true;
   }
-  else{
-    Alert.alert("Item Name and Item Quantity should be provided");
-  }
+  
   };
 
   componentDidMount() {

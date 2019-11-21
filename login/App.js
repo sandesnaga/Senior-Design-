@@ -18,8 +18,8 @@ import barcode from "./screens/src/components/barcode";
 import QRgen from "./screens/QRgen";
 import ForgotPassword from './screens/ForgotPassword';
 
-import {createAppContainer } from "react-navigation";
-import {createStackNavigator } from "react-navigation-stack"
+import {createAppContainer} from "react-navigation";
+import {createStackNavigator} from "react-navigation-stack"
 import Listitemview from "./screens/src/components/Listitemview";
 import ChangePassword from './screens/ChangePassword';
 import EditInfo from './screens/EditInfo';
@@ -55,6 +55,32 @@ const MainNavigator = createStackNavigator(
     ForgotPassword: { screen: ForgotPassword },
     ChangePassword: { screen: ChangePassword },
     EditInfo: { screen: EditInfo }
+  },
+  {
+    headerMode: 'none',
+    mode: 'modal',
+    defaultNavigationOptions: {
+      gesturesEnabled: false,
+    },
+    
+      screenInterpolator: sceneProps => {
+        const { layout, position, scene } = sceneProps;
+        const { index } = scene;
+
+        const height = layout.initHeight;
+        const translateY = position.interpolate({
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [height, 0, 0],
+        });
+
+        const opacity = position.interpolate({
+          inputRange: [index - 1, index - 0.99, index],
+          outputRange: [0, 1, 1],
+        });
+
+        return { opacity, transform: [{ translateY }] };
+      },
+ 
   },
 
   {
