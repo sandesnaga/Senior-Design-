@@ -1,6 +1,13 @@
 import React from "react";
 import { Button } from "native-base";
-import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Alert,
+  ImageBackground
+} from "react-native";
 import { Appbar } from "react-native-paper";
 import * as firebase from "firebase";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -29,7 +36,7 @@ var type = [
   { label: "Alcohol ", value: 0 },
   { label: "Other  ", value: 1 }
 ];
-var tempdata = "";
+var tempdata = "Scan";
 var templocation = "",
   row,
   column;
@@ -67,7 +74,7 @@ export default class AddingItemScreen extends React.Component {
     itemtype,
     bplace,
     bstyle,
-    format,
+    format
   ) => {
     var user = firebase.auth().currentUser;
     var uid;
@@ -170,8 +177,8 @@ export default class AddingItemScreen extends React.Component {
       today: year + "-" + month + "-" + date
     });
   }
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
+
   static navigationOptions = {
     title: "AddingItem",
     header: null
@@ -179,7 +186,7 @@ export default class AddingItemScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    tempdata = navigation.getParam("Passeddata", "");
+    tempdata = navigation.getParam("Passeddata", "Scan");
     return (
       <View style={styles.topContainer}>
         <KeyboardAwareScrollView style={styles.form}>
@@ -196,9 +203,19 @@ export default class AddingItemScreen extends React.Component {
               />
             </Appbar.Header>
           </View>
-          <View >
-          <View style={styles.headingView}>
-              <Text style={{ fontSize: 20, fontWeight: "bold", color: "grey", marginLeft: "40%", marginTop: 30, marginBottom: 10}}>
+
+          <View>
+            <View style={styles.headingView}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "grey",
+                  marginLeft: "40%",
+                  marginTop: 30,
+                  marginBottom: 10
+                }}
+              >
                 Add Item
               </Text>
             </View>
@@ -212,7 +229,7 @@ export default class AddingItemScreen extends React.Component {
                 <TouchableOpacity
                   style={styles.inputstyles}
                   style={{ backgroundColor: "#6915cf" }}
-                  value= {tempdata}
+                  value={tempdata}
                   onPress={
                     () => this.props.navigation.replace("barcode")
                     //this.itemName=tempdata
@@ -225,7 +242,7 @@ export default class AddingItemScreen extends React.Component {
                       marginTop: "3%"
                     }}
                   >
-                    Scan
+                    {tempdata}
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -415,6 +432,7 @@ export default class AddingItemScreen extends React.Component {
               </View>
             </View>
           </View>
+
           <Button
             style={styles.button}
             full
