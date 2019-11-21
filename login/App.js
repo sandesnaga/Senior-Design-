@@ -16,7 +16,7 @@ import AddShelfScreen from "./screens/AddShelfScreen";
 import Search from "./screens/src/components/Search";
 import barcode from "./screens/src/components/barcode";
 import QRgen from "./screens/QRgen";
-
+import ForgotPassword from './screens/ForgotPassword';
 
 import {createAppContainer } from "react-navigation";
 import {createStackNavigator } from "react-navigation-stack"
@@ -50,7 +50,8 @@ const MainNavigator = createStackNavigator(
     Search: {screen: Search},
     barcode: {screen: barcode},
     QRgen: {screen: QRgen},
-    Listitemview: {screen: Listitemview}
+    Listitemview: {screen: Listitemview},
+    ForgotPassword: { screen: ForgotPassword }
   },
 
   {

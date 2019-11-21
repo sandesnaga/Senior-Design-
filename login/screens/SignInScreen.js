@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
 import * as firebase from "firebase";
-import {Form, Item, Input, Label, Button, Icon} from "native-base"
+import {Form, Item, Input, Label, Button, Icon} from "native-base";
+import { NavigationActions } from 'react-navigation';
 
 
 
@@ -44,6 +45,11 @@ sighInUser = (email, password)=>{
     alert(error.message)
   })
 }
+
+onForgotPasswordPress = () => {
+  this.props.navigation.replace("ForgotPassword");
+}
+
   render(){
     return (
       <KeyboardAvoidingView style={styles.container}
@@ -101,8 +107,20 @@ sighInUser = (email, password)=>{
           }}>
             <Text style={styles.buttonText}>Sign In</Text></Button>
 
+          <View>
+            <Button style={styles.button}
+          full
+          rounded
+          onPress={()=>{
+            this.onForgotPasswordPress();
+            }}>
+            <Text style={styles.buttonText}>Forgot Password...</Text></Button>
+
+            </View>
         </Form>
+
         <View style={styles.footer}>
+        
           <Text>OR</Text>
           <TouchableOpacity
           onPress={()=> {

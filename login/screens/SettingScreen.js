@@ -4,6 +4,8 @@ import {
   Text,
   View,
   Image,
+  TextInput,
+  Alert
 
 } from "react-native";
 import {Button} from 'native-base';
@@ -18,9 +20,28 @@ export default class SettingScreen extends React.Component {
     super(props);
     this.state = {
       name: "",
-      email: ""
+      email: "",
+      currentPassword: "",
+      newPassword: "",
     };
   }
+
+  reauthenticate = (currentPassword) => {
+    var user = firebase.auth().currentUser;
+    var cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
+    return user.reauthenticateWithCredential(cred);
+  }
+
+  // Changes user's password...
+  onChangePasswordPress = () => {
+    this.reauthenticate(this.state.currentPassword).then(() => {
+      var user = firebase.auth().currentUser;
+      user.updatePassword(this.state.newPassword).then(() => {
+        Alert.alert("Password was changed");
+      }).catch((error) => { Alert.alert(error.message); });
+    }).catch((error) => { Alert.alert(error.message) });
+  }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
@@ -56,7 +77,18 @@ export default class SettingScreen extends React.Component {
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
           />
-          
+            <TextInput style={styles.textInput} value={this.state.currentPassword}
+          placeholder="Current Password" autoCapitalize="none" secureTextEntry={true}
+          onChangeText={(text) => { this.setState({currentPassword: text}) }}
+        />
+
+        <TextInput style={styles.textInput} value={this.state.newPassword}
+          placeholder="New Password" autoCapitalize="none" secureTextEntry={true}
+          onChangeText={(text) => { this.setState({newPassword: text}) }}
+        />
+
+        <Button title="Change Password" onPress={this.onChangePasswordPress} />
+
         </View>
         
 
@@ -116,5 +148,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     
-  }
+  },
+  text: { color: "white", fontWeight: "bold", textAlign: "center", fontSize: 20, },
+  textInput: { borderWidth:1, borderColor:"gray", marginVertical: 20, padding:10, height:40, alignSelf: "stretch", fontSize: 18, },
 });
