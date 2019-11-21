@@ -114,6 +114,7 @@ componentDidMount(){
 render(){
     return(
         <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+            <View style ={{backgroundColor:'#393636'}}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Item(s) you have</Text>
             </View>
@@ -123,10 +124,10 @@ render(){
             inverted
             keyExtractor={(item, index)=> index.toString()}
             renderItem={({item})=>(
-                <Card >
+                <Card style={{backgroundColor:'#393636'}} >
                     <View style={{marginLeft: 10, marginBottom: 7 }}>
-                    <Text style={{fontWeight:"bold", }}>{"Item Name: " +item.itemName }</Text>
-                    <Text style={{fontWeight:"bold", }}>{"Quantity: "+item.itemQuantity}</Text>
+                    <Text style={{fontWeight:"bold", backgroundColor:'#393636',color:'#F1F0FF' }}>{"Item Name: " +item.itemName }</Text>
+                    <Text style={{fontWeight:"bold", backgroundColor:'#393636',color:'#F1F0FF' }}>{"Quantity: "+item.itemQuantity}</Text>
                     </View>
                 
                 <View style={{ padding: 10,
@@ -139,6 +140,7 @@ render(){
                         alignItems: "center" }}>
                             <TextInput style={styles.inputstyles}
                             keyboardType = 'numeric'
+                            placeholderTextColor = '#758AA2'
                             placeholder="How many you want to get?"
                             onChangeText={quantity => this.setState({quantity})}
                           
@@ -170,6 +172,7 @@ render(){
             </Card> 
             )}
             ></FlatList>
+            </View>
         </KeyboardAvoidingView>
     )
 }
@@ -185,10 +188,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         height: 50,
-        backgroundColor:"#3C40C6"
+        backgroundColor:'#393636'
       },
       headerText: {
-        color: "#fff", 
+        color: "#758AA2", 
         paddingTop: 10,
         paddingBottom: 10,
         fontWeight: "bold",
@@ -204,7 +207,11 @@ const styles = StyleSheet.create({
        
 
       },
+      inputstyles:{
+        paddingLeft:5
+      },
         buttonView:{
+            backgroundColor:'#393636',
         flexDirection: "row",
         flexWrap: "wrap"
       }

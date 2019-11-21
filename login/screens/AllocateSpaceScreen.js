@@ -84,8 +84,9 @@ export default class AllocateSpaceScreen extends React.Component {
               subtitle={this.state.email}
             />
           </Appbar.Header>
-
+          
           <View style={styles.container}>
+          
             <View style={styles.headingView}>
               <Text style={{ fontSize: 20, fontWeight: "bold", color: "grey" }}>
                 Allocate Space
@@ -175,6 +176,7 @@ export default class AllocateSpaceScreen extends React.Component {
               </Button>
             </View>
           </View>
+          
         </KeyboardAwareScrollView>
       </View>
     );

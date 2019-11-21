@@ -194,7 +194,7 @@ export default class ManualEntryScreem extends React.Component {
               />
             </Appbar.Header>
           </View>
-          <View>
+          <View style={{marginTop:10}}>
             <View style={styles.locationView}>
               <View>
                 <Text style={styles.caption}>Item Barcode</Text>
@@ -415,7 +415,8 @@ export default class ManualEntryScreem extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    backgroundColor: "#393636"
   },
   locationView: {
     flexDirection: "row",

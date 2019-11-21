@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput
-} from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
-import Listitemview from './src/components/Listitemview';
+import Listitemview from "./src/components/Listitemview";
 import { Appbar } from "react-native-paper";
 
 export default class ItemsListScreen extends React.Component {
@@ -18,8 +13,8 @@ export default class ItemsListScreen extends React.Component {
       name: "",
       email: "",
       dob: "",
-      itemname:'',
-      quantity:'1',
+      itemname: "",
+      quantity: "1"
     };
   }
 
@@ -28,7 +23,7 @@ export default class ItemsListScreen extends React.Component {
       if (authenticate) {
         this.setState({
           email: authenticate.email,
-          name: authenticate.displayName,
+          name: authenticate.displayName
         });
       } else {
         this.props.navigation.replace("SignIn");
@@ -43,19 +38,22 @@ export default class ItemsListScreen extends React.Component {
   render() {
     return (
       <View style={styles.topContainer}>
-         <KeyboardAwareScrollView style={styles.form}>
-        <Appbar.Header>
-          <Appbar.BackAction
-            onPress={() => {
-              this.props.navigation.navigate("Home");
-            }}
-          />
-          <Appbar.Content title={this.state.name} subtitle={this.state.email} />
-        </Appbar.Header>
-        <Search></Search>
-        <View>
-         <Listitemview></Listitemview>
-        </View>
+        <KeyboardAwareScrollView style={styles.form}>
+          <Appbar.Header>
+            <Appbar.BackAction
+              onPress={() => {
+                this.props.navigation.navigate("Home");
+              }}
+            />
+            <Appbar.Content
+              title={this.state.name}
+              subtitle={this.state.email}
+            />
+          </Appbar.Header>
+          <Search></Search>
+          <View>
+            <Listitemview></Listitemview>
+          </View>
         </KeyboardAwareScrollView>
       </View>
     );
@@ -65,9 +63,7 @@ export default class ItemsListScreen extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    //alignItems: "center",
-    // margin: 20,
-    //marginHorizontal: 20
+    backgroundColor: "#393636",
     flexDirection: "column"
   },
   bottomContainer: {

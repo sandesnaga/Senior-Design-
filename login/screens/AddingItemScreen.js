@@ -210,9 +210,6 @@ if(itemName!=""&&itemQuantity!=""){
           </View>
 
           <View style={{ backgroundColor: "#393636" }}>
-            <View
-              style={{ flex: 1, backgroundColor: "rgba(133, 126, 237, .4)" }}
-            >
               <View style={styles.headingView}>
                 <Text
                   style={{
@@ -498,7 +495,7 @@ if(itemName!=""&&itemQuantity!=""){
                 <Text style={styles.buttonText}>Add Item</Text>
               </Button>
             </View>
-          </View>
+          
         </KeyboardAwareScrollView>
       </View>
     );

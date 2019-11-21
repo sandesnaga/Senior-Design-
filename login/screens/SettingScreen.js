@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Alert
-
-} from "react-native";
-import {Button} from 'native-base';
+import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";
+import { Button } from "native-base";
 import * as firebase from "firebase";
 import Search from "./src/components/Search";
 import { Appbar } from "react-native-paper";
@@ -20,36 +12,33 @@ export default class SettingScreen extends React.Component {
     super(props);
     this.state = {
       name: "",
-      email: "",
+      email: ""
     };
   }
-
-  
 
   // Changes user's password...
   onChangePasswordPress = () => {
     this.props.navigation.replace("ChangePassword");
-  }
+  };
 
-   // Changes user's Info...
-   onEditInfoPress = () => {
+  // Changes user's Info...
+  onEditInfoPress = () => {
     this.props.navigation.replace("EditInfo");
-  }
+  };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticate => {
       if (authenticate) {
         this.setState({
           email: authenticate.email,
-          name: authenticate.displayName,
-          
+          name: authenticate.displayName
         });
       } else {
         this.props.navigation.replace("SignIn");
       }
     });
   }
-  componentWillUnmount(){}
+  componentWillUnmount() {}
   static navigationOptions = {
     title: "Settings",
     header: null
@@ -64,19 +53,16 @@ export default class SettingScreen extends React.Component {
               this.props.navigation.navigate("Home");
             }}
           />
-          <Appbar.Content title= {this.state.name} subtitle={this.state.email} />
+          <Appbar.Content title={this.state.name} subtitle={this.state.email} />
         </Appbar.Header>
-        <View style={styles.logoconainer}>
-          <Image
-            style={{ width: 160, height: 80 }}
-            source={require("../assets/logo.png")}
-          />
-           
-
-        <Button onPress={this.onChangePasswordPress} ><Text>Change Password..</Text></Button>
-        <Button onPress={this.onEditInfoPress} ><Text>Change Info..</Text></Button>
+        <View style={styles.logoContainer}>
+          <Button onPress={this.onChangePasswordPress} style={styles.button}>
+            <Text style={{alignContent:"center"}}>Change Password..</Text>
+          </Button>
+          <Button onPress={this.onEditInfoPress} style={styles.button}>
+            <Text>Change Info..</Text>
+          </Button>
         </View>
-
       </View>
     );
   }
@@ -85,11 +71,14 @@ export default class SettingScreen extends React.Component {
 const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
-    //alignItems: "center",
-    // margin: 20,
-    //marginHorizontal: 20
+    backgroundColor: "#393636",
     flexDirection: "column"
   },
+  button: {
+    padding: 5,
+    marginLeft: 5,
+    marginRight: 5
+  }, 
   bottomContainer: {
     flex: 3,
     flexDirection: "row",
@@ -107,18 +96,31 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     height: "10%",
-    backgroundColor: "blue",
     marginTop: 100,
     marginBottom: 100
   },
   userDetails: {},
 
   button: {
-    marginTop: 20
+    marginTop: 20,
+    width: "90%",
+    marginLeft: "6%",
+    paddingLeft:"30%"
   },
-  buttonText: {
-    
+  buttonText: {},
+  text: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 20
   },
-  text: { color: "white", fontWeight: "bold", textAlign: "center", fontSize: 20, },
-  textInput: { borderWidth:1, borderColor:"gray", marginVertical: 20, padding:10, height:40, alignSelf: "stretch", fontSize: 18, },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "gray",
+    marginVertical: 20,
+    padding: 10,
+    height: 40,
+    alignSelf: "stretch",
+    fontSize: 18
+  }
 });
