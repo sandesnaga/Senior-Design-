@@ -72,7 +72,7 @@ export default class Search extends React.Component {
            <Button  
            style= {styles.searchButton}        
             onPress={() => this.search(this.state.searchText)}
-             ><Text style={{textAlign: "center",fontWeight: "bold"}}>Search</Text></Button>
+             ><Text style={{textAlign: "center",fontWeight: "bold", color: "#fff"}}>Search</Text></Button>
              </View>
         );
     };
