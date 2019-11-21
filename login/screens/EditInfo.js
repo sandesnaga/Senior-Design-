@@ -21,8 +21,9 @@ export default class SettingScreen extends React.Component {
     this.state = {
       name: "",
       email: "",
-      currentPassword: "",
-      newPassword: "",
+      newName: "",
+      newEmail:"",
+      currentPassword:""
     };
   }
 
@@ -33,14 +34,43 @@ export default class SettingScreen extends React.Component {
   }
 
   // Changes user's password...
-  onChangePasswordPress = () => {
-    this.reauthenticate(this.state.currentPassword).then(() => {
-      var user = firebase.auth().currentUser;
-      user.updatePassword(this.state.newPassword).then(() => {
-        Alert.alert("Password was changed");
-      }).catch((error) => { Alert.alert(error.message); });
-    }).catch((error) => { Alert.alert(error.message) });
+  onEditInfoPress = () => {
+    var user = firebase.auth().currentUser;
+    if(this.state.newName!="" && this.state.newEmail!="" && this.state.currentPassword!="" )
+    {  
+        
+         
+        this.reauthenticate(this.state.currentPassword).then(() => {
+          
+          user.updateProfile({
+            displayName: this.state.newName, 
+          })
+          user.updateEmail(this.state.newEmail);
+          this.setState({
+              email:this.state.newEmail,
+          })
+          this.setState({
+            name: this.state.newName,
+            email: this.state.newEmail
+        })    
+          }).then(()=>{
+              this.state.newEmail="",
+              this.state.newName="",
+              this.state.currentPassword=""
+            Alert.alert("Update Sucessfull", "Check your email for detail");
+          }).catch((error) => { Alert.alert("Wrong Password!!"); })
+                
   }
+else{
+    Alert.alert("Some of the field are empty");
+    this.props.navigation.replace("EditInfo");
+}
+
+
+    }
+    
+      
+  
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(authenticate => {
@@ -76,18 +106,36 @@ export default class SettingScreen extends React.Component {
           <Image
             style={{ width: 160, height: 80 }}
             source={require("../assets/logo.png")}
-          />
-            <TextInput style={styles.textInput} value={this.state.currentPassword}
-          placeholder="Current Password" autoCapitalize="none" secureTextEntry={true}
-          onChangeText={(text) => { this.setState({currentPassword: text}) }}
+          /> 
+          <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "grey",
+            marginLeft: "10%",
+            marginTop: 30,
+            marginBottom: 10
+          }}
+        >
+          Change Profile Information 
+        </Text>
+        <Text>User Name:</Text>
+            <TextInput style={styles.textInput} 
+          placeholder={this.state.name} autoCapitalize="none"
+          onChangeText={(newName) => { this.setState({newName}) }}
         />
 
-        <TextInput style={styles.textInput} value={this.state.newPassword}
-          placeholder="New Password" autoCapitalize="none" secureTextEntry={true}
-          onChangeText={(text) => { this.setState({newPassword: text}) }}
+        <Text>Email:</Text>
+            <TextInput style={styles.textInput}
+          placeholder={this.state.email} autoCapitalize="none"
+          onChangeText={(newEmail) => { this.setState({newEmail}) }}
         />
-
-        <Button onPress={this.onChangePasswordPress} ><Text>Change Password..</Text></Button>
+         <Text>Current Password:</Text>
+            <TextInput style={styles.textInput}
+          placeholder="*********" secureTextEntry={true} autoCapitalize="none"
+          onChangeText={(currentPassword) => { this.setState({currentPassword}) }}
+        />
+        <Button onPress={this.onEditInfoPress} ><Text>Change Info</Text></Button>
 
         </View>
         
@@ -150,5 +198,5 @@ const styles = StyleSheet.create({
     
   },
   text: { color: "white", fontWeight: "bold", textAlign: "center", fontSize: 20, },
-  textInput: { borderWidth:1, borderColor:"gray", marginVertical: 20, padding:10, height:40, alignSelf: "stretch", fontSize: 18, },
+  textInput: { borderWidth:1, borderColor:"gray", marginVertical: 20, padding:10, height:40, alignSelf: "stretch", fontSize: 18, marginTop: 10 },
 });
