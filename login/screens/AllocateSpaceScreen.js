@@ -168,7 +168,6 @@ export default class AllocateSpaceScreen extends React.Component {
                 <Text style={styles.buttonText}>create</Text>
               </Button>
               <Button
-                danger
                 onPress={() => this.props.navigation.navigate("Home")}
                 style={styles.buttonitem}
               >

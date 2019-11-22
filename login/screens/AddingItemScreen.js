@@ -152,7 +152,9 @@ if(itemName!="" &&itemQuantity!=""){
     }
     return true;
   }
-  
+  else{
+    Alert.alert("Item Name and Item Quantity should be provided");
+  }
   };
 
   componentDidMount() {
@@ -207,7 +209,7 @@ if(itemName!="" &&itemQuantity!=""){
             </Appbar.Header>
           </View>
 
-          <View style={{ backgroundColor: "#393636" }}>
+          <View style={{  backgroundColor: "#47535E" }}>
               <View style={styles.headingView}>
                 <Text
                   style={{
@@ -244,7 +246,9 @@ if(itemName!="" &&itemQuantity!=""){
                       style={{
                         color: "white",
                         marginLeft: "35%",
-                        marginTop: "3%"
+                        marginTop: "3%",
+                        marginBottom: "3%"
+
                       }}
                     >
                       {tempdata}
@@ -397,7 +401,7 @@ if(itemName!="" &&itemQuantity!=""){
               </View>
               <View style={styles.locationView}>
                 <View>
-                  <Text style={[styles.caption, styles.textColor]}>
+                  <Text style={[styles.caption, styles.textColor] }>
                     Expiry Date:
                   </Text>
                 </View>
@@ -407,7 +411,8 @@ if(itemName!="" &&itemQuantity!=""){
                       width: 200,
                       justifyContent: "center",
                       flex: 1,
-                      borderRadius: 5
+                      borderRadius: 5,
+                      
                     }}
                     date={this.state.date}
                     mode="date"
@@ -424,7 +429,7 @@ if(itemName!="" &&itemQuantity!=""){
                         marginLeft: 0
                       },
                       dateInput: {
-                        marginLeft: 36
+                        marginLeft: 36,
                       }
                     }}
                     onDateChange={date => {
@@ -470,7 +475,7 @@ if(itemName!="" &&itemQuantity!=""){
                 </View>
               </View>
             </View>
-            <View style={{ backgroundColor: "#393636", marginBottom: 30 }}>
+            <View style={{  backgroundColor: "#47535E",marginBottom: 30 }}>
             <Button 
                 style={styles.button}
                 full
@@ -504,7 +509,8 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#393636"
+    backgroundColor: "#47535E"
+    
   },
   button: {
     justifyContent: "center",
@@ -517,7 +523,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 25,
     paddingRight: 25,
-    paddingVertical: 5
+    paddingVertical: 5,
+    color:"#fff"
   },
   textColor: {
     color: "#F1F0FF"

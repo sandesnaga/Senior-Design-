@@ -8,13 +8,8 @@ import {
   YellowBox
 } from "react-native";
 import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import { SafeAreaView } from "react-navigation";
 import { Appbar } from "react-native-paper";
-//import { storeUrl } from "expo/build/StoreReview/StoreReview";
-//import { wrap } from "bytebuffer";
 import { Icon } from "react-native-elements";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default class HomeScreen extends React.Component {
   constructor(props) {
     YellowBox.ignoreWarnings(["Setting a timer"]);
@@ -209,81 +204,6 @@ export default class HomeScreen extends React.Component {
               </View>
             </View>
           </ImageBackground>
-
-          {/* <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.gotoAddItem}>
-                <Icon
-                  raised
-                  name="plus"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Add Item</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.allocateSpace}>
-                <Icon
-                  raised
-                  name="columns"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Allocate Space</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.itemsList}>
-                <Icon
-                  raised
-                  name="database"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Items List</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.manualEntry}>
-                <Icon
-                  raised
-                  name="edit"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Manual entry</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.scanInventory}>
-                <Icon
-                  raised
-                  name="qrcode"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Scan Item</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.bottomContainerElements}>
-              <TouchableOpacity onPress={this.settings}>
-                <Icon
-                  raised
-                  name="cogs"
-                  type="font-awesome"
-                  color="#6200ee"
-                  size={40}
-                />
-                <Text style={styles.textStyle}>Settings</Text>
-              </TouchableOpacity>
-
-            </View> */}
         </View>
       </View>
     );
@@ -299,7 +219,6 @@ const styles = StyleSheet.create({
   bottomContainer: {
     flex: 3,
     flexDirection: "row",
-    //alignItems: 'center',
     justifyContent: "center",
     flexWrap: "wrap",
     marginTop: 250

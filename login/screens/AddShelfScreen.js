@@ -96,10 +96,10 @@ export default class AddShelfScreen extends React.Component {
           </View>
         </View>
         <View style={styles.button}>
-          <Button success style={styles.buttonitem}>
+          <Button style={styles.buttonitem}>
             <Text style={styles.buttonText}>create</Text>
           </Button>
-          <Button danger style={styles.buttonitem}>
+          <Button style={styles.buttonitem}>
             <Text style={styles.buttonText}>cancel</Text>
           </Button>
         </View>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     width: 200,
     justifyContent: "center",
     marginBottom: 20,
-    borderRadius: 10
+    borderRadius: 10,
   },
 
   buttonText: {

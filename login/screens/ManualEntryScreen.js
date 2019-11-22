@@ -203,6 +203,7 @@ export default class ManualEntryScreem extends React.Component {
                 <TextInput
                   style={styles.inputstyles}
                   placeholder="Item Barcode"
+                  placeholderTextColor="#758AA2"
                   onchangeText={barcode => {
                     this.setState({ barcode });
                   }}
@@ -236,6 +237,7 @@ export default class ManualEntryScreem extends React.Component {
                     <TextInput
                       style={styles.inputstyles}
                       placeholder="Brewing style"
+                      placeholderTextColor="#758AA2"
                       onChangeText={bstyle => {
                         this.setState({ bstyle });
                       }}
@@ -252,6 +254,7 @@ export default class ManualEntryScreem extends React.Component {
                 <TextInput
                   style={styles.inputstyles}
                   placeholder="Items Name."
+                  placeholderTextColor="#758AA2"
                   onChangeText={itemName => {
                     this.setState({ itemName });
                   }}
@@ -271,6 +274,7 @@ export default class ManualEntryScreem extends React.Component {
                     <TextInput
                       style={styles.inputstyles}
                       placeholder="How is it packed ?"
+                      placeholderTextColor="#758AA2"
                       onChangeText={format => {
                         this.setState({ format });
                       }}
@@ -285,6 +289,7 @@ export default class ManualEntryScreem extends React.Component {
                     <TextInput
                       style={styles.inputstyles}
                       placeholder="Where was it brewed?"
+                      placeholderTextColor="#758AA2"
                       onChangeText={bplace => {
                         this.setState({ bplace });
                       }}
@@ -301,6 +306,7 @@ export default class ManualEntryScreem extends React.Component {
                 <TextInput
                   style={styles.inputstyles}
                   placeholder="Describe your item."
+                  placeholderTextColor="#758AA2"
                   onChangeText={itemDescription => {
                     this.setState({ itemDescription });
                   }}
@@ -316,6 +322,7 @@ export default class ManualEntryScreem extends React.Component {
                   style={styles.inputstyles}
                   keyboardType="numeric"
                   placeholder="Select your item's quantity"
+                  placeholderTextColor="#758AA2"
                   onChangeText={itemQuantity => {
                     this.setState({ itemQuantity });
                   }}
@@ -326,12 +333,13 @@ export default class ManualEntryScreem extends React.Component {
               <View>
                 <Text style={styles.caption}>Expiry Date:</Text>
               </View>
-              <View>
+              <View style={{color:"#fff"}}>
                 <DatePicker
                   style={{ width: 200, justifyContent: "center", flex: 1 }}
                   date={this.state.date}
                   mode="date"
                   placeholder="Expiration Date"
+                  placeholderTextColor="#758AA2"
                   format="YYYY-MM-DD"
                   minDate={this.state.today}
                   confirmBtnText="Confirm"
@@ -344,8 +352,9 @@ export default class ManualEntryScreem extends React.Component {
                       marginLeft: 0
                     },
                     dateInput: {
-                      marginLeft: 36
-                    }
+                      marginLeft: 36,
+                      color:"#fff"
+                    },
                   }}
                   onDateChange={date => {
                     this.setState({ date });
@@ -416,7 +425,8 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#393636"
+    backgroundColor: "#47535E",
+    
   },
   locationView: {
     flexDirection: "row",
@@ -437,7 +447,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     minWidth: 200,
     height: 40,
-    paddingLeft: 10
+    paddingLeft: 10,
+    color:"#fff",
   },
   bottomContainer: {
     flex: 3,

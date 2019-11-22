@@ -27,10 +27,13 @@ render() {
             </Appbar.Header>
         
           </View>
+   
+    <View style={{alignItems: "center"}}>
     <Text style={styles.topContainer}>Save this QR for future</Text>
    <QRCode
       value={tempdata}
     />
+    </View>
     </View>
   )
 };
