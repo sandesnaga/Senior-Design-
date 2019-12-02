@@ -1,10 +1,13 @@
 
-import QRCode from 'react-native-qrcode-svg';
-import React, { Component } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import QRCode from 'react-native-qrcode-svg'; //!< Import QR generating api from react-native-qrcode-svg
+import React, { Component } from 'react'; //!< Import React component for all react native functionalities
+import {View, Text, StyleSheet} from 'react-native';//!< Import various designing tools from react-native mainly for Styling
 import { Appbar } from "react-native-paper";
 
-
+/*!
+ * \brief Generates the QR code base on item id
+ * \param tempdata holds the item ID
+ */
 export default class QRgen extends Component {
   
   static navigationOptions = {
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
       marginTop: 100,
       marginBottom: 10
     },
-  });
+  });//!< Controls various styling for the application
 
 
 

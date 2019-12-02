@@ -1,8 +1,13 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native';
+import React from 'react'; //!< Import React component for all react native functionalities
+import { StyleSheet, View, Text, TextInput, Button, Alert } from 'react-native'; //!< Import various designing tools from react-native mainly for Styling
 import { NavigationActions } from 'react-navigation';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase'; //!< Imports necessary component of Firebase
 
+
+/*!
+ * \brief User can reset their password when exixting user request for that
+ * \param email Email of the user
+ */
 export default class ForgotPassword extends React.Component {
 
     constructor(props) {
@@ -48,4 +53,4 @@ export default class ForgotPassword extends React.Component {
 
 const styles = StyleSheet.create({
 
-});
+});//!< Controls various styling for the application

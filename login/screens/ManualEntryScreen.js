@@ -1,11 +1,11 @@
-import React from "react";
-import { Button } from "native-base";
-import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
+import React from "react";  //!< Import React component for all react native functionalities
+import { Button } from "native-base"; //!< Importing button styling from native-base
+import { StyleSheet, Text, View, TextInput, Alert } from "react-native"; //!< Import various designing tools from react-native mainly for Styling
 import { Appbar } from "react-native-paper";
-import * as firebase from "firebase";
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DatePicker from "react-native-datepicker";
-import RadioForm from "react-native-simple-radio-button";
+import DatePicker from "react-native-datepicker"; //!< Importing date picker for date selcetion
+import RadioForm from "react-native-simple-radio-button";//!< Imports Radio button for selection option in the appication
 import {
   Menu,
   MenuProvider,
@@ -15,23 +15,41 @@ import {
 } from "react-native-popup-menu";
 
 //import icons from 'react-native-vector-icons/Ionicons'
-var dropdownHeading = "Pre-Notification Dates";
+var dropdownHeading = "Pre-Notification Dates"; //!< variable to store pre notification dates
 
 var expirationChoices = [
   { label: "1 Week ", value: 0 },
   { label: "1 Month  ", value: 1 },
   { label: "1 Year", value: 2 }
-];
+];  //!< variable to store experiation choices
 
 var type = [
   { label: "Alcohol ", value: 0 },
   { label: "Other  ", value: 1 }
-];
-var tempdata = "";
-var templocation = "",
-  row,
-  column;
+];  //!< variable to store types of item
+var tempdata = "";  //!< variable to store temporary data in QR Scanner
+var templocation = "",  //!< variable to store the location for the item temporarily
+  row, //!< variable to store rows, where the item is
+  column;  //!< variable to store column, wher the item is
 
+
+/*!
+ * \brief Adding item to the empty shelf if available
+ * \param name Name of the user
+ * \param date DOB of the user
+ * \param email Email of the user
+ * \param itemname Name of the item
+ * \param barcode Barcode of the item if any
+ * \param itemDescription Description of the item
+ * \param itemQuantity Number of item being added
+ * \param expchoice when to notify before expiration of the item
+ * \param locationid location that is being assigned to that item
+ * \param location name of the location
+ * \param itemtype type of item alcohol or other type.
+ * \param bplace if alcohol where it is brewed
+ * \param bstyle if alcohol what is its brewery style.
+ * \param format how it is packed
+ */
 export default class ManualEntryScreem extends React.Component {
   constructor(props) {
     super(props);
@@ -530,4 +548,4 @@ const styles = StyleSheet.create({
     //padding: 7,
     justifyContent: "center"
   }
-});
+});//!< Controls various styling for the application

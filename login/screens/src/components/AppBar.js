@@ -1,5 +1,5 @@
-import React from 'React';
-import {StyleSheet, TextInput, Button,Text} from 'react-native';
+import React from 'React';//!< Import React component for all react native functionalities
+import {StyleSheet, TextInput, Button,Text} from 'react-native';//!< Import various designing tools from react-native mainly for Styling
 import {AppBar } from "react-native-"
 
 export default class Search extends React.Component {

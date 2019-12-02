@@ -1,10 +1,18 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
+import * as React from "react";  //!< Import React component for all react native functionalities
+import { Text, View, StyleSheet, Button, Alert } from "react-native"; //!< Import various designing tools from react-native mainly for Styling
+import Constants from "expo-constants";  //!< Import special api to save qrcode to Special constant
+import * as Permissions from "expo-permissions"; //!< Importing permission certificate for camera access by application
 import { Appbar } from "react-native-paper";
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import * as firebase from "firebase";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import * as firebase from "firebase"; //!< Import React component for all react native functionalities
+
+
+/*!
+ * \brief User can scan the generated QR code to look up their item in their shelf
+ * \param name Name of the user
+ * \param itemname name of item in the shelf
+ * \param email Email of the user
+ */
 
 export default class ScanInventoryScreen extends React.Component {
   state = {

@@ -1,12 +1,19 @@
-import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
-import { StyleSheet, Text, View, Image,TextInput, KeyboardAvoidingView, TouchableOpacity, FlatList, Alert} from 'react-native';
-import * as firebase from "firebase";
-import {Form, Label, Input, Item, Button, Icon, Card} from "native-base"
+import React, { Component } from 'react'//!< Import React component for all react native functionalities
+import DatePicker from 'react-native-datepicker'//!< Import Date picker api for picking DOB
+import { StyleSheet, Text, View, Image,TextInput, KeyboardAvoidingView, TouchableOpacity, FlatList, Alert} from 'react-native';//!< Import various designing tools from react-native mainly for Styling
+import * as firebase from "firebase";//!< Import React component for all react native functionalities
+import {Form, Label, Input, Item, Button, Icon, Card} from "native-base"; //!< Import various designing tools from react-native mainly for Styling
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 
-
+/*!
+ * \brief Show the item available on the shelf
+ * \param name Name of the user
+ * \param email Email of the user
+ * \param temp search key word that user is looking for
+ * \param uid UID of current user
+ * \paam quantity Quantity of the item remaining in the shelf
+ */
 export default class Listitemview extends React.Component{
 
    

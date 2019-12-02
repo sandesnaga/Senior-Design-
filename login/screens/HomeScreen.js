@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; //!< Import React component for all react native functionalities
 import {
   StyleSheet,
   Text,
@@ -6,10 +6,17 @@ import {
   ImageBackground,
   TouchableOpacity,
   YellowBox
-} from "react-native";
-import * as firebase from "firebase";
+} from "react-native"; //!< Import various designing tools from react-native mainly for Styling
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
 import { Appbar } from "react-native-paper";
 import { Icon } from "react-native-elements";
+
+/*!
+ * \brief Show the initial screen when user login with valid user email and password
+ * \param name Name of the user
+ * \param date DOB of the user
+ * \param email Email of the user
+ */
 export default class HomeScreen extends React.Component {
   constructor(props) {
     YellowBox.ignoreWarnings(["Setting a timer"]);
@@ -251,4 +258,4 @@ const styles = StyleSheet.create({
     color: "#F1F0FF",
     fontWeight: "bold"
   }
-});
+});//!< Controls various styling for the application

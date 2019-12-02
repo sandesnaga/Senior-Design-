@@ -1,11 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
-import * as firebase from "firebase";
-import {Form, Item, Input, Label, Button, Icon} from "native-base";
+ 
+import React from 'react'; //!< Import React component for all react native functionalities
+import { StyleSheet, Text, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native'; //!< Import various designing tools from react-native mainly for Styling
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
+import {Form, Item, Input, Label, Button, Icon} from "native-base"; //!< Import various designing tools from react-native mainlt for Styling
 import { NavigationActions } from 'react-navigation';
 
-
-
+/*!
+ * \brief User can log in to their account with valid user Email and Pasword
+ * \param email Email of the user
+ * \param password Password of the user
+ */
 export default class SignInScreen extends React.Component{
   
   constructor(props){
@@ -135,6 +139,7 @@ onForgotPasswordPress = () => {
   
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -185,4 +190,4 @@ const styles = StyleSheet.create({
     color:'#00aeef',
     fontWeight:'bold',
   },
-});
+});//!< Controls various styling for the application

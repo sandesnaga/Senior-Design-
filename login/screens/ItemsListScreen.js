@@ -1,11 +1,21 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import React from "react";//!< Import React component for all react native functionalities
+import { StyleSheet, Text, View, TextInput } from "react-native"; //!< Import various designing tools from react-native mainly for Styling
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
-import Listitemview from "./src/components/Listitemview";
+import * as firebase from "firebase";//!< Imports necessary component of Firebase
+import Search from "./src/components/Search";//!< Imports search component in this screen
+import Listitemview from "./src/components/Listitemview";//!< Imports listitem component of this screen
 import { Appbar } from "react-native-paper";
 
+
+
+/*!
+ * \brief Show the item available on the shelf
+ * \param name Name of the user
+ * \param email Email of the user
+ * \param temp search key word that user is looking for
+ * \param uid UID of current user
+ * \paam quantity Quantity of the item remaining in the shelf
+ */
 export default class ItemsListScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -104,4 +114,4 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff"
   }
-});
+});//!< Controls various styling for the application

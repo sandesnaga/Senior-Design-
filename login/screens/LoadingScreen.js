@@ -1,8 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import * as firebase from "firebase";
+import React from 'react';//!< Import React component for all react native functionalities
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'; //!< Import various designing tools from react-native mainly for Styling
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
 
 
+/*!
+ * \brief Initial screen as soon as the application starts
+
+ */
 export default class LoadingScreen extends React.Component{
 
     static navigationOptions = {
@@ -40,4 +44,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+});//!< Controls various styling for the application

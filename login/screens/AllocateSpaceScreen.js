@@ -1,11 +1,22 @@
-import React from "react";
-import { Appbar } from "react-native-paper";
-import { StyleSheet, Text, View, TextInput, Alert } from "react-native";
+import React from "react"; //!< Import React component for all react native functionalities
+import { Appbar } from "react-native-paper"; //!< Imports app bar for back and home button in app
+import { StyleSheet, Text, View, TextInput, Alert } from "react-native";//!< Import various designing tools from react-native mainly for Styling
 import { Button } from "native-base";
-import * as firebase from "firebase";
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { isNumber } from "util";
 
+
+/*!
+ * \brief Creates the shelf with the description given by user
+ * \param location Location of the Shelf
+ * \param Name Name of the Shelf
+ * \param numColumr Number of Columns in shelf
+ * \param numRow Number of Rows in shelf
+ * \param isAvailable show the stat of the shelf
+ * \param name Name of the user
+ * \param email Email of the user
+ */
 export default class AllocateSpaceScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -243,4 +254,4 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#fff"
   }
-});
+}); //!< Controls various styling for the application

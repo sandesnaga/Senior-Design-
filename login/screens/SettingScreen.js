@@ -1,12 +1,20 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";
-import { Button } from "native-base";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
+import React from "react"; //!< Import React component for all react native functionalities
+import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native"; //!< Import various designing tools from react-native mainly for Styling
+import { Button } from "native-base"; //!< Import various designing tools from native-base mainly for Styling Buton
+import * as firebase from "firebase"; //!< Imports necessary component of Firebase
+import Search from "./src/components/Search"; //!< Imports search component to setting screen
 import { Appbar } from "react-native-paper";
 
 //import icons from 'react-native-vector-icons/Ionicons'
 
+
+/*!
+ * \brief User can change Their password Email or User Name
+ * \param name Name of the user
+ * \param date DOB of the user
+ * \param email Email of the user
+ * \param password Password of the user
+ */
 export default class SettingScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -123,4 +131,4 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     fontSize: 18
   }
-});
+});//!< Controls various styling for the application

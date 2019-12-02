@@ -1,8 +1,16 @@
-import React from "React";
-import { StyleSheet, TextInput, View, Alert, Text } from "react-native";
-import { Button } from "native-base";
-import * as firebase from "firebase";
+import React from "React"; //!< Import React component for all react native functionalities
+import { StyleSheet, TextInput, View, Alert, Text } from "react-native"; //!< Import various designing tools from react-native mainly for Styling
+import { Button } from "native-base"; //!< Import various designing tools from react-native mainly for Styling
 
+import * as firebase from "firebase"; //!< Import React component for all react native functionalities
+
+/*!
+ * \brief Search item available on the shelf and show the description
+ * \param name Name of the user
+ * \param email Email of the user
+ * \param temp search key word that user is looking for
+ * \param uid UID of current user
+ */
 export default class Search extends React.Component {
   constructor(props) {
     super(props);

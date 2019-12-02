@@ -1,11 +1,17 @@
-import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
-import { StyleSheet, Text, View, Image, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
-import * as firebase from "firebase";
-import {Form, Label, Input, Item, Button, Icon} from "native-base"
+import React, { Component } from 'react'; //!< Import React component for all react native functionalities
+import DatePicker from 'react-native-datepicker'; //!< Import Date picker api for picking DOB
+import { StyleSheet, Text, View, Image, KeyboardAvoidingView, TouchableOpacity} from 'react-native'; //!< Import various designing tools from react-native mainly for Styling
+import * as firebase from "firebase"; //!< Import React component for all react native functionalities
+import {Form, Label, Input, Item, Button, Icon} from "native-base";  //!< Import various designing tools from react-native mainly for Styling
 
 
-
+/*!
+ * \brief Creates the new User With unique email and qualified password
+ * \param name Name of the user
+ * \param date DOB of the user
+ * \param email Email of the user
+ * \param password Password of the user
+ */
 export default class SignUpScreen extends React.Component{
   constructor(props){
     super(props);
@@ -22,6 +28,10 @@ export default class SignUpScreen extends React.Component{
      
     }
   }
+/*!
+ * \brief User can hide or see their typed password
+ * \param password Password of the user
+ */
   showpass=()=>{
     if(this.state.press==false){
       this.setState({showpass:false, press:true})
@@ -47,6 +57,13 @@ export default class SignUpScreen extends React.Component{
     title: "SignUp",
     header: null
 };
+/*!
+ * \brief Creates the new User With unique email and qualified password
+ * \param name Name of the user
+ * \param date DOB of the user
+ * \param email Email of the user
+ * \param password Password of the user
+ */
 signupUser= (name, date,email, password) => {
   var userref = firebase.database().ref("user_more_info");
   firebase
@@ -244,4 +261,4 @@ const styles = StyleSheet.create({
       color:'#00aeef',
       fontWeight: 'bold'
     },
-});
+});//!< Controls various styling for the application

@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";
-import { Button } from "native-base";
-import * as firebase from "firebase";
-import Search from "./src/components/Search";
+import React from "react"; //!< Import React component for all react native functionalities
+import { StyleSheet, Text, View, Image, TextInput, Alert } from "react-native";//!< Import various designing tools from react-native mainly for Styling
+import { Button } from "native-base";//!< Importing button styling from native-base
+import * as firebase from "firebase";//!< Imports necessary component of Firebase
+import Search from "./src/components/Search";//!< Imports search component in this screen
 import { Appbar } from "react-native-paper";
 
 //import icons from 'react-native-vector-icons/Ionicons'
@@ -242,4 +242,4 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     fontSize: 18
   }
-});
+});//!< Controls various styling for the application
